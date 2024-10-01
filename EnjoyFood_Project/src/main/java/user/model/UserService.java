@@ -7,10 +7,10 @@ public interface UserService {
 
 	boolean siunup(User user);
 
-	boolean duplicateId(String id);
+	boolean isIdDuplicate(String id);
 
-	boolean duplicatePhoneNumber(String phoneNumber);
+	boolean isPhoneNumberDuplicate(String phoneNumber);
 
-	boolean duplicateOwnerNumber(String ownerNumber);
+	boolean isOwnerNumberDuplicate(String ownerNumber);
 
 }

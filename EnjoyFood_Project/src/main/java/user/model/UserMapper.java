@@ -15,11 +15,11 @@ public interface UserMapper {
 	int insert(User user);
 
 	@Select("SELECT count(*) FROM user WHERE user_ID=#{id}")
-	int isIdDuplicate(@Param("id") String id);
+	int countUserById(@Param("id") String id);
 
 	@Select("SELECT count(*) FROM user WHERE user_PhonNumber=#{phoneNumber}")
-	int checkDuplicatePhoneNumber(@Param("phoneNumber") String phoneNumber);
+	int countUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
 	@Select("SELECT count(*) FROM user WHERE user_OwnerNumber=#{ownerNumber}")
-	int checkDuplicateOwnerNumber(@Param("ownerNumber") String ownerNumber);
+	int countUserByOwnerNumber(@Param("ownerNumber") String ownerNumber);
 }
