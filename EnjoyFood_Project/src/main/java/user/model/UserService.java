@@ -1,3 +1,4 @@
+package user.model;
 import user.model.User;
 
 public interface UserService {
