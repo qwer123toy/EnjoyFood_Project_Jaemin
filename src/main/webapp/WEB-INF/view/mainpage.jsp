@@ -22,7 +22,7 @@
         </div>
         <div class="login">
             <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
-            <form action="login.jsp" method="get">
+            <form action="/login" method="get">
                 <button class="btn">로그인</button>
             </form>
         </div>
@@ -52,13 +52,13 @@
             <c:forEach var="store" items="${cafeteria}">
                 <div class="store-item">
                     <a href="/store-details/${cafeteria.id}">
-                        <div class="store-image">${cafeteria.image}</div>
+                        <div class="store-image">${cafeteria.pic}</div>
                     </a>
                     <ul>
                         <li>${cafeteria.name}</li>
-                        <li>평균 금액: ${cafeteria.averagePrice}</li>
-                        <li>전화번호: ${cafeteria.phone}</li>
-                        <li><a href="/map/${cafeteria.id}">주소: ${cafeteria.address}</a></li>
+                        <li>평균 금액: ${cafeteria.Price}</li>
+                        <li>전화번호: ${cafeteria.phoneNumber}</li>
+                        <li><a href="#">주소: ${cafeteria.address}</a></li>
                     </ul>
                 </div>
             </c:forEach>
