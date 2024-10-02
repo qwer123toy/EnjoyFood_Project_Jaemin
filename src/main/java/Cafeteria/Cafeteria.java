@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "cafe_num", "cafe_name", "cafe_openTime", "cafe_phoneNumber", "cafe_address", "cafe_price",
-		"cafe_owner" })
+@JsonPropertyOrder({ "cafe_num", "cafe_name", "cafe_openTime", "cafe_phoneNumber", "cafe_address"
+					, "cafe_price", "cafe_owner" })
 @Generated("jsonschema2pojo")
 public class Cafeteria {
 
