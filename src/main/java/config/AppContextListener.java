@@ -17,6 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
+import Cafeteria.CafeteriaMapper;
 import user.model.UserMapper;
 
 @WebListener
@@ -41,6 +42,7 @@ public class AppContextListener implements ServletContextListener {
 
 		Configuration configuration = new Configuration(environment);
 		configuration.addMapper(UserMapper.class);
+		configuration.addMapper(CafeteriaMapper.class);
 
 		sessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 	}
