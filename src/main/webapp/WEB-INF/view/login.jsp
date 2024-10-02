@@ -12,14 +12,12 @@
 <body>
 	<main class="main">
 		<h1>로그인</h1>
-		<form id="loginForm" action="#" method="post">
-			<label for="username">아이디:</label> <input type="text" id="username"
-				name="username" required> <label for="password">비밀번호:</label>
-			<input type="password" id="password" name="password" required>
-<!-- 			<div> -->
-				<button type="submit">로그인</button>
-				<button type="button">회원가입</button>
-<!-- 			</div> -->
+		<form id="loginForm" method="post">
+			<label for="userID">아이디:</label> <input type="text" id="userID" name="userID" required> 
+			<label for="userPW">비밀번호:</label> <input type="password" id="userPW" name="userPW" required>
+			<p class="error hidden">아이디나 비밀번호가 일치하지 않습니다.</p>
+			<input class="button" type="submit" id="login" value="로그인"></input>
+			<button class="button" type="button" id="signup">회원가입</button>
 		</form>
 	</main>
 </body>

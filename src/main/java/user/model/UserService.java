@@ -1,15 +1,16 @@
 package user.model;
-import user.model.User;
 
 public interface UserService {
 
-	boolean login(User user);
+	User login(User user);
 
 	boolean siunup(User user);
 
 	boolean isIdDuplicate(String id);
 
 	boolean isPhoneNumberDuplicate(String phoneNumber);
+
+	boolean isNicknameDuplicate(String nickname);
 
 	boolean isOwnerNumberDuplicate(String ownerNumber);
 
