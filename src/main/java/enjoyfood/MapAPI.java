@@ -22,7 +22,7 @@ public class MapAPI extends HttpServlet {
 		req.getRequestDispatcher(API_URL+"?apikey=" + API_KEY).forward(req, resp);
 	}
 
-	
+	//map 수정본
 	
 //	public static void main(String[] args) {
 //		try {
