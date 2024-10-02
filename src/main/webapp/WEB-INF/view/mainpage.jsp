@@ -9,6 +9,6 @@
 <script src="/static/js/mainpage.js"></script>
 </head>
 <body>
-	
+
 </body>
 </html>
