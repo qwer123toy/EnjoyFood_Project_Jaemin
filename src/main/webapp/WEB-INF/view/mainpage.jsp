@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 테스트</title>
+<title>메인 페이지</title>
+<link rel="stylesheet" type="text/css" href="/static/css/mainpage.css">
+<script src="/static/js/mainpage.js"></script>
 </head>
 <body>
-
+	
 </body>
 </html>
