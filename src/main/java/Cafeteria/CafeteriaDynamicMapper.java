@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.jdbc.SQL;
 
-// 검색 기능 - 최소가격과 최대가격
 public interface CafeteriaDynamicMapper {
 	@SelectProvider(type = CafeSQLProvider.class, method = "getCafeByPrice")
 	@Results({ @Result(column = "cafe_name", property = "cafeName"),
@@ -20,6 +19,7 @@ public interface CafeteriaDynamicMapper {
 }
 
 class CafeSQLProvider {
+// 검색 기능 - 최소가격과 최대가격
 	public static String getCafeByPrice(@Param("start") Integer start, @Param("end") Integer end) {
 		return new SQL() {
 			{

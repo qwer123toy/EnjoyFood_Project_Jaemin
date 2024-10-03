@@ -2,6 +2,7 @@ package Cafeteria;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -13,7 +14,6 @@ import org.apache.ibatis.type.JdbcType;
 public interface CafeteriaMapper {
 
 	@Select("SELECT cafe_num, cafe_name, cafe_openTime, cafe_phoneNumber, cafe_address, cafe_price, cafe_owner FROM Cafeteria")
-	
 	@Results(id = "cafeResults", value = {	
 			@Result(column = "cafe_num", property = "cafeNum", jdbcType = JdbcType.INTEGER),
 			@Result(column = "cafe_name", property = "cafeName", jdbcType = JdbcType.VARCHAR),
@@ -44,9 +44,10 @@ public interface CafeteriaMapper {
 			"cafe_address=#{cafe_address}, cafe_price=#{cafe_price}, cafe_owner=#{cafe_owner}" })
 	int update(Cafeteria cafeteria);
 
-	// 평균금액 조회
-//	@Select({ "SELECT cafe_name, cafe_price, cafe_address", "FROM cafeteria WHERE cafe_price=#{cafe_price}" })
-//	Cafeteria selectByPrice(@Param("cafe_price") int price);
+	// 삭제
+	@Delete("DELETE FROM Cafeteria WHERE cafeNum=#{cafeNum}")
+	int delete(int cafeNum);
+
 
 	// 가게 메뉴도 같이 확인, 태그, 카테고리를 같이 OR로 묶어서 찾기
 
