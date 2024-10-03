@@ -31,6 +31,7 @@ function tryLogin(e) {
 			if (status == 200) {
 				form.submit();
 			} else if (status == 400) {
+				error.classList.remove("hidden");
 				//				window.location.href = "https://www.daum.net";
 			}
 		})
