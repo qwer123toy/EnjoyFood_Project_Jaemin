@@ -68,4 +68,21 @@ public class UserAPI extends HttpServlet {
 			}
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String userID = req.getParameter("userID");
+		String userPW = req.getParameter("userPW");
+		String userPhoneNumber = req.getParameter("userPhoneNumber");
+		String userNickname = req.getParameter("userNickname");
+		int userType = 2;
+		// 한번 체크할껀데 또 체크해야하나?? 아니면 
+		User user = User.builder().userID(userID).userPW(userPW).userPhoneNumber(userPhoneNumber)
+				.userNickname(userNickname).userType(userType).build();
+		if (service.siunup(user)) {
+			webUtil.setCodeAndMimeType(resp, 200, "plain");
+		} else {
+			webUtil.setCodeAndMimeType(resp, 400, "plain");
+		}
+	}
 }

@@ -32,32 +32,48 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean siunup(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			int result = mapper.insert(user);
+			sqlSession.commit();
+			return result == 1;
+		}
 	}
 
 	@Override
 	public boolean isIdDuplicate(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			int result = mapper.countUserById(id);
+			return result == 1;
+		}
 	}
 
 	@Override
 	public boolean isPhoneNumberDuplicate(String phoneNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			int result = mapper.countUserByPhoneNumber(phoneNumber);
+			return result == 1;
+		}
 	}
 
 	@Override
 	public boolean isNicknameDuplicate(String nickname) {
-		// TODO Auto-generated method stub
-		return false;
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			int result = mapper.countUserByNickname(nickname);
+			return result == 1;
+		}
 	}
 
 	@Override
 	public boolean isOwnerNumberDuplicate(String ownerNumber) {
-
-		return false;
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			int result = mapper.countUserByOwnerNumber(ownerNumber);
+			return result == 1;
+		}
 	}
 
 }
