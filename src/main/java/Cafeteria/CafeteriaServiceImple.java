@@ -79,4 +79,14 @@ public class CafeteriaServiceImple implements CafeteriaService {
 		}
 	}
 
+	@Override
+	public List<Cafeteria> showByPic(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<Cafeteria> cafeteria = mapper.showByPic(cafeNum);
+
+			return cafeteria;
+		}
+	}
+
 }

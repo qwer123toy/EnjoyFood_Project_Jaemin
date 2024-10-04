@@ -14,4 +14,5 @@ public interface CafeteriaService {
 
 	Cafeteria selectByName(String cafeName);
 
+	List<Cafeteria> showByPic(int cafeNum);
 }
