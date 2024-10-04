@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -42,18 +43,21 @@
 				</div>
 				<button class="btn-more-images">이미지 더보기 →</button>
 			</div>
+	
+<!-- 가게 정보 -->
+<div class="store-details">
+    <div class="store-image">가게 이미지</div>
+    <ul class="store-info-list">
+        <li>맛집명: <strong>${cafeteria.cafeName}</strong></li>
+        <li>평균 금액: <strong>${cafeteria.cafePrice}</strong></li>
+        <li>전화번호: <strong>${cafeteria.cafePhoneNumber}</strong></li>
+        <li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
+    </ul>
+</div>
 
-			<!-- 가게 정보 -->
-			<div class="store-details">
-				<div class="store-image">가게 이미지</div>
-				<ul class="store-info-list">
-					<li>맛집명: <strong>맛집명</strong></li>
-					<li>평균 금액: <strong>평균 금액</strong></li>
-					<li>전화번호: <strong>전화번호</strong></li>
-					<li>주소: <strong>주소</strong></li>
-				</ul>
-			</div>
-
+	
+	
+	
 			<!-- 간단한 맛집 소개 -->
 			<div class="store-description">
 				<h2>간단한 맛집 소개</h2>
