@@ -28,22 +28,20 @@ public interface CafeteriaMapper {
 	@Insert({ "INSERT INTO cafeteria (cafe_num, cafe_name, cafe_openTime, cafe_phoneNumber,",
 			"cafe_address, cafe_price, cafe_owner)",
 			"VALUES (#{cafeNum}, #{cafeName}, #{cafeOpenTime}, #{cafePhoneNumber},",
-			"#{cafeAddress}, #{cafePrice}, #{cafeOwner})" 
-			})
+			"#{cafeAddress}, #{cafePrice}, #{cafeOwner})" })
 	int insert(Cafeteria cafeteria);
 
-	@Select("SELECT * FROM cafeteria WHERE cafe_num=#{cafeNum}")
+	@Select("SELECT * FROM cafeteria WHERE cafe_num=#{cafe_num}")
 	Cafeteria selectByNum(@Param("cafe_num") int cafeNum);
 
 	// 맛집명 조회
-	@Select("SELECT * FROM cafeteria WHERE cafe_name=#{cafeName}")
+	@Select("SELECT * FROM cafeteria WHERE cafe_name=#{cafe_name}")
 	Cafeteria selectByName(@Param("cafe_name") String cafeName);
 
 	// 맛집 정보 수정
 	@Update({ "UPDATE cafeteria SET cafe_num=#{cafeNum}, cafe_name=#{cafeName}, ",
 			"cafe_openTime=#{cafeOpenTime}, cafe_phoneNumber=#{cafePhoneNumber}, ",
-			"cafe_address=#{cafeAddress}, cafe_price=#{cafePrice}, cafe_owner=#{cafeOwner}" 
-			})
+			"cafe_address=#{cafeAddress}, cafe_price=#{cafePrice}, cafe_owner=#{cafeOwner}" })
 	int update(Cafeteria cafeteria);
 
 	// 삭제
