@@ -21,3 +21,4 @@ public interface CafeteriaMapper {
 	@Update("UPDATE cafeteria SET cafe_num=#{cafe_num}, cafe_name=#{cafe_name}, cafe_openTime=#{cafe_openTime}, cafe_phoneNumber=#{cafe_phoneNumber}, cafe_address=#{cafe_address}, cafe_price=#{cafe_price}, cafe_owner=#{cafe_owner}")
 	int update(Cafeteria cafeteria);
 }
+

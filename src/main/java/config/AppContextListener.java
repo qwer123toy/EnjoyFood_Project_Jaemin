@@ -17,6 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
+import enjoyfood.MapMapper;
 import user.model.UserMapper;
 
 @WebListener
@@ -25,7 +26,7 @@ public class AppContextListener implements ServletContextListener {
 	private static SqlSessionFactory sessionFactory;
 
 	private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-	private static final String url = "jdbc:mysql://192.168.0.3:3306/enjoyfood";
+	private static final String url = "jdbc:mysql://192.168.10.169:3306/enjoyfood";
 	private static final String username = "newuser";
 	private static final String password = "roott";
 
@@ -41,6 +42,7 @@ public class AppContextListener implements ServletContextListener {
 
 		Configuration configuration = new Configuration(environment);
 		configuration.addMapper(UserMapper.class);
+		configuration.addMapper(MapMapper.class);
 
 		sessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 	}

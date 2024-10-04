@@ -12,6 +12,7 @@
     <script src="/static/js/mainpage.js"></script>
 </head>
 <body>
+
     <!-- 상단 고정 바 -->
     <header>
         <div class="logo">TASTE GPT</div>
