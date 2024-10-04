@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -32,10 +33,12 @@ public interface CafeteriaMapper {
 	int insert(Cafeteria cafeteria);
 
 	@Select("SELECT * FROM cafeteria WHERE cafe_num=#{cafe_num}")
+	@ResultMap("cafeResults")
 	Cafeteria selectByNum(@Param("cafe_num") int cafeNum);
 
 	// 맛집명 조회
 	@Select("SELECT * FROM cafeteria WHERE cafe_name=#{cafe_name}")
+	@ResultMap("cafeResults")
 	Cafeteria selectByName(@Param("cafe_name") String cafeName);
 
 	// 맛집 정보 수정
@@ -53,6 +56,7 @@ public interface CafeteriaMapper {
 	// 가격 범위 - 해당 범위외 값 안나옴
 	@Select({ "SELECT cafe_name, cafe_openTime, cafe_phoneNumber, cafe_address, cafe_price", "FROM cafeteria",
 			"WHERE cafe_price BETWEEN #{start} AND #{end}" })
+	@ResultMap("cafeResults")
 	List<Cafeteria> searchByPrice(@Param("start") int start, @Param("end") int end);
 
 	// 가게 메뉴도 같이 확인, 태그, 카테고리를 같이 OR로 묶어서 찾기
