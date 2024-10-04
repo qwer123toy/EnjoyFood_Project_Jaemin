@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("")
+//@WebServlet("")
 public class LoginFilter implements Filter {
 
 	@Override

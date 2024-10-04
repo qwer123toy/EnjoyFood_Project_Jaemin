@@ -28,7 +28,7 @@ public interface UserMapper {
 	@Select("SELECT count(*) FROM user WHERE user_ID=#{id}")
 	int countUserById(@Param("id") String id);
 
-	@Select("SELECT count(*) FROM user WHERE user_PhonNumber=#{phoneNumber}")
+	@Select("SELECT count(*) FROM user WHERE user_PhoneNumber=#{phoneNumber}")
 	int countUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
 	@Select("SELECT count(*) FROM user WHERE user_Nickname=#{nickname}")

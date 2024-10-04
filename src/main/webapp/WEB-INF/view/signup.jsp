@@ -10,12 +10,13 @@
 <script src="/static/js/signup.js" defer></script>
 </head>
 <body>
-	<div class="container">
+	<main class="main">
 		<h1>회원가입</h1>
 		<form id="signupForm">
 			<div class="form-group">
 				<label for="userID">아이디</label> <input type="text" id="userID"
 					name="userID" required>
+				<p class="error hidden" id="errorID">ID 중복</p>
 			</div>
 			<div class="form-group">
 				<label for="userPW">비밀번호</label> <input type="password" id="userPW"
@@ -24,32 +25,36 @@
 			<div class="form-group">
 				<label for="confirmPW">비밀번호 확인</label> <input type="password"
 					id="confirmPW" name="confirmPW" required>
+				<p class="error hidden" id="errorPW">비밀번호 다름</p>
 			</div>
 			<div class="form-group">
-				<label for="nickname">닉네임</label> <input type="text" id="nickname"
-					name="nickname" required>
+				<label for="userNickname">닉네임</label> <input type="text" id="userNickname"
+					name="userNickname" required>
+				<p class="error hidden" id="errorNickname">닉네임 중복</p>
 			</div>
 			<div class="form-group">
-				<label for="phoneNumber">전화번호</label> <input type="text"
-					id="phoneNumber" name="phoneNumber" required>
+				<label for="userPhoneNumber">전화번호</label> <input type="text"
+					id="userPhoneNumber" name="userPhoneNumber" required>
+				<p class="error hidden" id="errorPhoneNumber">전화번호 중복</p>
 			</div>
 			<div class="form-group">
 				<button type="button" id="businessOwnerBtn">사업주</button>
 			</div>
 			<div id="businessOwnerFields" class="hidden">
 				<div class="form-group">
-					<label for="ownerNumber">사업주 번호</label> <input type="text"
-						id="ownerNumber" name="ownerNumber">
+					<label for="userOwnerNumber">사업주 번호</label> <input type="text"
+						id="userOwnerNumber" name="userOwnerNumber">
+					<p class="error hidden" id="errorOwnerNumber">사업주 번호 중복</p>
 				</div>
 				<div class="form-group">
-					<label for="ownerPicture">사업주 사진</label> <input type="file"
-						id="ownerPicture" name="ownerPicture">
+					<label for="userPicture">사업주 사진</label> <input type="file"
+						id="userPicture" name="userPicture">
 				</div>
 			</div>
 			<div class="form-group">
 				<button type="submit">가입하기</button>
 			</div>
 		</form>
-	</div>
+	</main>
 </body>
 </html>

@@ -11,18 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 public class WebUtil {
-	private static final WebUtil instance = new WebUtil();
 	private HashMap<String, String> mimeTypes;
 
-	private WebUtil() {
+	public WebUtil() {
 		mimeTypes = new HashMap<String, String>();
 		mimeTypes.put("html", "text/html; charset=utf-8");
 		mimeTypes.put("plain", "text/plain; charset=utf-8");
 		mimeTypes.put("json", "application/json; charset=utf-8");
-	}
-
-	public static WebUtil getInstance() {
-		return instance;
 	}
 
 	public String readBody(HttpServletRequest req) throws IOException {
