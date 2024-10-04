@@ -8,10 +8,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-
-import Cafeteria.Cafeteria;
 
 public class WebUtil {
 	private HashMap<String, String> mimeTypes;
@@ -24,27 +21,31 @@ public class WebUtil {
 	}
 
 	public String readBody(HttpServletRequest req) throws IOException {
-		StringBuilder sb = new StringBuilder();
-		BufferedReader reader = req.getReader();
+		StringBuilder stringBuilder = new StringBuilder();
+		BufferedReader bufferedReader = req.getReader();
 		String line;
-
-		while ((line = reader.readLine()) != null) {
-			sb.append(line);
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuilder.append(line);
 		}
-		return sb.toString();
+		return stringBuilder.toString();
 	}
 
-	// 바디 : 문자열 출력 - 출력된걸 톰캣이 클라이언트에 전달
-	public void writeBodyJson(HttpServletResponse resp, Object cafeteria) throws IOException {
+	public void writeBodyJson(HttpServletResponse resp, Object object) throws IOException {
 		PrintWriter pw = resp.getWriter();
 		JsonMapper mapper = new JsonMapper();
-		String json = mapper.writeValueAsString(cafeteria);
+		String json = mapper.writeValueAsString(object);
 		pw.print(json);
 		pw.flush();
 	}
 
-	public void setCodeAndMimeType(HttpServletResponse resp, int istatus, String mimeType) {
-		setStatus(resp, istatus);
+	public void writeBodyPlain(HttpServletResponse resp, String string) throws IOException {
+		PrintWriter pw = resp.getWriter();
+		pw.print(string);
+		pw.flush();
+	}
+
+	public void setCodeAndMimeType(HttpServletResponse resp, int status, String mimeType) {
+		setStatus(resp, status);
 		setMimeType(resp, mimeType);
 	}
 
@@ -55,5 +56,4 @@ public class WebUtil {
 	private void setMimeType(HttpServletResponse resp, String mimeType) {
 		resp.setHeader("Content-Type", mimeTypes.get(mimeType));
 	}
-
 }

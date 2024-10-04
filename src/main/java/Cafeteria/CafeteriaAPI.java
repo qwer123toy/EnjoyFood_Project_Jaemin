@@ -53,6 +53,7 @@ public class CafeteriaAPI extends HttpServlet {
 		webUtil.setCodeAndMimeType(resp, 201, "json");
 		webUtil.writeBodyJson(resp, updateCafe);
 	}
+
 	// 삭제
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

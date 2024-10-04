@@ -1,7 +1,10 @@
 package config;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -28,13 +31,16 @@ public class AppContextListener implements ServletContextListener {
 	private static DataSource dataSource;
 	private static SqlSessionFactory sessionFactory;
 
-	private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-	private static final String url = "jdbc:mysql://192.168.10.169:3306/enjoyfood";
-	private static final String username = "newuser";
-	private static final String password = "roott";
+	private static String driverClassName;
+	private static String url;
+	private static String schema;
+	private static String username;
+	private static String password;
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+//		loadProperties("localDB.properties"); // 로컬 DB
+		loadProperties("publicDB.properties"); // 외부 DB
 		initDataSource();
 		initSqlSessionFactory();
 	}
@@ -54,7 +60,7 @@ public class AppContextListener implements ServletContextListener {
 	private void initDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
+		dataSource.setUrl(url + schema);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
 		// object pool 크기
@@ -72,5 +78,20 @@ public class AppContextListener implements ServletContextListener {
 
 	public static SqlSession getSqlSession() {
 		return sessionFactory.openSession();
+	}
+
+	private static void loadProperties(String filename) {
+		try (InputStream resourceStream = AppContextListener.class.getResourceAsStream(filename);) {
+			Properties properties = new Properties();
+			properties.load(resourceStream);
+
+			driverClassName = properties.getProperty("driver");
+			url = properties.getProperty("url");
+			schema = properties.getProperty("schema");
+			username = properties.getProperty("user");
+			password = properties.getProperty("password");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
