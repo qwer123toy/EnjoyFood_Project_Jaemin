@@ -19,7 +19,7 @@ public interface CafeteriaDynamicMapper {
 }
 
 class CafeSQLProvider {
-// 검색 기능 - 최소가격과 최대가격
+// 가격 범위 해당 없으면 전부?
 	public static String getCafeByPrice(@Param("start") Integer start, @Param("end") Integer end) {
 		return new SQL() {
 			{
