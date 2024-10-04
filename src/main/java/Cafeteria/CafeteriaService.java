@@ -10,5 +10,8 @@ public interface CafeteriaService {
 
 	int delete(int cafeNum);
 
+	int insert(Cafeteria cafetria);
+
+	Cafeteria selectByName(String cafeName);
 
 }

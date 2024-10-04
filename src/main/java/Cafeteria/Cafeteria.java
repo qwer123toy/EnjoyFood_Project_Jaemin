@@ -5,9 +5,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "cafe_num", "cafe_name", "cafe_openTime", "cafe_phoneNumber", "cafe_address"
-					, "cafe_price", "cafe_owner" })
+@JsonPropertyOrder({ "cafe_num", "cafe_name", "cafe_openTime", "cafe_phoneNumber", "cafe_address", "cafe_price",
+		"cafe_owner" })
 @Generated("jsonschema2pojo")
 public class Cafeteria {
 

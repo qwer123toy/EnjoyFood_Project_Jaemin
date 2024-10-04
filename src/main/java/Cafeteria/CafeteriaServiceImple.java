@@ -30,6 +30,18 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
+	public int insert(Cafeteria cafetria) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			int pk = mapper.insert(cafetria);
+
+			sqlSession.commit();
+
+			return pk;
+		}
+	}
+
+	@Override
 	public Cafeteria update(Cafeteria cafeteria) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
@@ -48,7 +60,7 @@ public class CafeteriaServiceImple implements CafeteriaService {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
 			int rows = mapper.delete(cafeNum);
-			
+
 			if (rows == 1) {
 				sqlSession.commit();
 				return rows;
@@ -56,5 +68,15 @@ public class CafeteriaServiceImple implements CafeteriaService {
 		}
 		return 0;
 	}
-	
+
+	@Override
+	public Cafeteria selectByName(String cafeName) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			Cafeteria cafeteria = mapper.selectByName(cafeName);
+
+			return cafeteria;
+		}
+	}
+
 }
