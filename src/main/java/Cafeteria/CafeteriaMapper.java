@@ -44,7 +44,9 @@ public interface CafeteriaMapper {
 	// 맛집 정보 수정
 	@Update({ "UPDATE cafeteria SET cafe_num=#{cafeNum}, cafe_name=#{cafeName}, ",
 			"cafe_openTime=#{cafeOpenTime}, cafe_phoneNumber=#{cafePhoneNumber}, ",
-			"cafe_address=#{cafeAddress}, cafe_price=#{cafePrice}, cafe_owner=#{cafeOwner}" })
+			"cafe_address=#{cafeAddress}, cafe_price=#{cafePrice} ",
+		    "WHERE cafe_num=#{cafeNum}" 
+			})
 	int update(Cafeteria cafeteria);
 
 	// 삭제
