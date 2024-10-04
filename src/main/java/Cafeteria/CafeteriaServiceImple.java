@@ -1,0 +1,60 @@
+package Cafeteria;
+
+import java.awt.print.Book;
+import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import config.AppContextListener;
+
+public class CafeteriaServiceImple implements CafeteriaService {
+	// 싱글턴 패턴?
+	public static final CafeteriaServiceImple instance = new CafeteriaServiceImple();
+
+	private CafeteriaServiceImple() {
+
+	}
+
+	public static CafeteriaService getInstance() {
+
+		return instance;
+	}
+
+	@Override
+	public List<Cafeteria> selectAll() {
+		// SqlSession 사용 및 Mapper호출하여 list 반환
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<Cafeteria> list = mapper.selectAll();
+
+			return list;
+		}
+	}
+
+	@Override
+	public Cafeteria update(Cafeteria cafeteria) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			int rows = mapper.update(cafeteria);
+
+			if (rows == 1) {
+				sqlSession.commit();
+				return cafeteria;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public int delete(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			int rows = mapper.delete(cafeNum);
+			
+			if (rows == 1) {
+				sqlSession.commit();
+				return rows;
+			}
+		}
+		return 0;
+	}
+	
+}
