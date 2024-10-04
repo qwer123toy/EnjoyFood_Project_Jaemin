@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -42,10 +44,9 @@
 				<div class="review-inputs">
 					<label for="rating">평점:</label>
 					<div class="star-rating">
-						<span class="star" data-value="5">&#9733;</span>
-						 <span class="star" data-value="4">&#9733;</span> 
-						 <span class="star" data-value="3">&#9733;</span>
-						 <span class="star" data-value="2">&#9733;</span>
+						<span class="star" data-value="5">&#9733;</span> <span
+							class="star" data-value="4">&#9733;</span> <span class="star"
+							data-value="3">&#9733;</span> <span class="star" data-value="2">&#9733;</span>
 						<span class="star" data-value="1">&#9733;</span>
 					</div>
 					<!-- 실제 평점 값 -->
@@ -57,12 +58,20 @@
 						placeholder="리뷰 내용을 작성해주세요" rows="5"></textarea>
 
 					<label for="price">이용 금액:</label> <input type="number" id="price"
-						name="price" placeholder="이용 금액 입력">
+						name="price" placeholder="이용 금액 입력"> <label for="menu">이용
+						메뉴:</label>
+					<c:forEach var="cafeteria" items="${list}">
+						
+							<ul>
+								<li>${cafeteria.cafe_name}</li>
+							</ul>
+						
+					</c:forEach>
 				</div>
+			</div>
 
-
-				<!-- 작성 완료 버튼 -->
-				<button class="btn-submit">작성 완료</button>
+			<!-- 작성 완료 버튼 -->
+			<button class="btn-submit">작성 완료</button>
 		</section>
 	</main>
 
