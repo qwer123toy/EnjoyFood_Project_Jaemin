@@ -61,13 +61,27 @@ header {
 }
 
 main {
-	margin-left: 200px;
-	padding: 20px;
+    margin-left: 200px; /* 이 값을 필요에 따라 조정 */
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* 메인 컨텐츠 가로 가운데 정렬 */
+    align-items: center; /* 메인 컨텐츠 세로 가운데 정렬 */
+    flex-direction: column; /* 위아래로 쌓이게 설정 */
 }
 
 .store-info {
 	text-align: center;
 }
+
+.store-infoDetail {
+    width: 350px; /* 가게 이미지의 너비 */
+    height: 350px; /* 가게 이미지의 높이 */
+    margin: 0 auto; /* 가로 가운데 정렬 */
+    display: flex;
+    justify-content: center; /* 가로 정렬 */
+    align-items: center; /* 세로 정렬 */
+}
+
 
 .store-title {
 	font-size: 36px;
@@ -124,7 +138,7 @@ main {
 	align-items: center;
 	margin-top: 20px;
 }
-
+	
 .store-image {
 	width: 200px;
 	height: 200px;
@@ -134,6 +148,15 @@ main {
 	align-items: center;
 	font-size: 18px;
 	color: #0000ff;
+}
+.store-map {
+	width: 100px;
+	height: 100px;
+	margin: 0;
+	background-color: #f0f0f0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .store-info-list {
