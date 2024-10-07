@@ -6,7 +6,7 @@ let error;
 let form;
 const url = "/api/v1/user";
 
-function onload(e) {
+function onload() {
 	userID = document.querySelector("#userID");
 	userPW = document.querySelector("#userPW");
 	error = document.querySelector(".error");
@@ -15,7 +15,7 @@ function onload(e) {
 	form.addEventListener("submit", tryLogin);
 
 	let signup = document.querySelector("#signup");
-	signup.addEventListener("click", (e) => {
+	signup.addEventListener("click", () => {
 		location.href = "/signup";
 	});
 }
@@ -23,16 +23,22 @@ function onload(e) {
 
 function tryLogin(e) {
 	e.preventDefault();
-	let query = url + "?method=login&userID=" + userID.value + "&userPW=" + userPW.value;
-
-	fetch(query)
-		.then((resp) => { return resp.status; })
-		.then((status) => {
-			if (status == 200) {
-				form.submit();
-			} else if (status == 400) {
+	let authRequest = {
+		action: "login",
+		user: Object.fromEntries(new FormData(form))
+	};
+	let json = JSON.stringify(authRequest);
+	fetch(url, { method: "post", body: json })
+		.then((resp) => { return resp.json(); })
+		.then((authResponse) => {
+			if (authResponse.success) {
+				window.location.href = "\mainpage"
+			} else {
+				userID.value = "";
+				userPW.value = "";
+				userID.focus();
+				error.innerHTML = "아이디나 비밀번호가 일치하지 않습니다.";
 				error.classList.remove("hidden");
-				//				window.location.href = "https://www.daum.net";
 			}
-		})
+		});
 }

@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 public class WebUtil {
-	private static final WebUtil instance = new WebUtil();
 	private HashMap<String, String> mimeTypes;
 
-	private WebUtil() {
+	public WebUtil() {
 		mimeTypes = new HashMap<String, String>();
 		mimeTypes.put("html", "text/html; charset=utf-8");
 		mimeTypes.put("plain", "text/plain; charset=utf-8");
 		mimeTypes.put("json", "application/json; charset=utf-8");
 	}
 
-	public static WebUtil getInstance() {
-		return instance;
+	public <T> T readBodyJson(HttpServletRequest req, Class<T> valueType) throws IOException {
+		String body = readBody(req);
+		JsonMapper mapper = new JsonMapper();
+		T t = mapper.readValue(body, valueType);
+		return t;
 	}
 
 	public String readBody(HttpServletRequest req) throws IOException {
@@ -36,14 +38,12 @@ public class WebUtil {
 	}
 
 	public void writeBodyJson(HttpServletResponse resp, Object object) throws IOException {
-		PrintWriter pw = resp.getWriter();
 		JsonMapper mapper = new JsonMapper();
 		String json = mapper.writeValueAsString(object);
-		pw.print(json);
-		pw.flush();
+		writeBody(resp, json);
 	}
 
-	public void writeBodyPlain(HttpServletResponse resp, String string) throws IOException {
+	public void writeBody(HttpServletResponse resp, String string) throws IOException {
 		PrintWriter pw = resp.getWriter();
 		pw.print(string);
 		pw.flush();
