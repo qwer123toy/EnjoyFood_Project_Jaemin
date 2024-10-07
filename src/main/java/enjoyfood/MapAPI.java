@@ -19,40 +19,7 @@ public class MapAPI extends HttpServlet {
     private static final String API_URL = "/WEB-INF/view/map.jsp";
     private MapService service = MapServiceImple.getInstance();
 
-	//map 10/2일 수정본 
-	
-//	public static void main(String[] args) {
-//		try {
-//            // API 요청 URL 생성
-//            String requestUrl = API_URL + "?apikey=" + API_KEY;
-//
-//            // URL 객체 생성
-//            URL url = new URL(requestUrl);
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setRequestMethod("GET");
-//
-//            // 응답 코드 확인
-//            int responseCode = conn.getResponseCode();
-//            if (responseCode == HttpURLConnection.HTTP_OK) {
-//                // 응답 데이터 읽기
-//                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//                String inputLine;
-//                StringBuilder response = new StringBuilder();
-//
-//                while ((inputLine = in.readLine()) != null) {
-//                    response.append(inputLine);
-//                }
-//                in.close();
-//
-//                // 응답 출력
-//                System.out.println("Response: " + response.toString());
-//            } else {
-//                System.out.println("GET 요청 실패: " + responseCode);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //      String addr = ?    
