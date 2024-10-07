@@ -9,10 +9,10 @@ import org.apache.ibatis.jdbc.SQL;
 
 public interface CafeteriaDynamicMapper {
 	@SelectProvider(type = CafeSQLProvider.class, method = "getCafeByPrice")
-	@Results({ @Result(column = "cafe_name", property = "cafeName"),
-			@Result(column = "cafe_price", property = "cafePrice"),
-			@Result(column = "cafe_address", property = "cafeAddress"),
-			@Result(column = "cafe_phoneNumber", property = "cafePhoneNumber"),
+	@Results({ @Result(column = "cafeName", property = "cafeName"),
+			@Result(column = "cafePrice", property = "cafePrice"),
+			@Result(column = "cafeAddress", property = "cafeAddress"),
+			@Result(column = "cafePhoneNumber", property = "cafePhoneNumber"),
 			@Result(column = "cafeTag", property = "cafeTag"),
 			@Result(column = "cafeCategory", property = "cafeCategory") })
 	List<Cafeteria> getCafeByPrice(@Param("start") Integer start, @Param("end") Integer end);
@@ -23,14 +23,14 @@ class CafeSQLProvider {
 	public static String getCafeByPrice(@Param("start") Integer start, @Param("end") Integer end) {
 		return new SQL() {
 			{
-				SELECT("c.cafe_name, c.cafe_price, c.cafe_address, c.cafe_phoneNumber, t.cafe_tag, cat.cafe_category");
+				SELECT("c.cafeName, c.cafePrice, c.cafeAddress, c.cafePhoneNumber, t.cafeTag, cat.cafeCategory");
 				FROM("cafeteria c");
-				JOIN("menu m ON c.cafe_num = m.cafe_num");
-				JOIN("cafe_tag t ON c.cafe_num = t.cafe_num");
-				JOIN("cafe_category cat ON c.cafe_num = cat.cafe_num");
+				JOIN("menu m ON c.cafeNum = m.cafeNum");
+				JOIN("cafeTag t ON c.cafeNum = t.cafeNum");
+				JOIN("cafeCategory cat ON c.cafeNum = cat.cafeNum");
 
 				if (start != null && end != null) {
-					WHERE("c.cafe_price BETWEEN #{start} AND #{end}"); // 메뉴 가격을 기준으로 범위 설정
+					WHERE("c.cafePrice BETWEEN #{start} AND #{end}"); // 메뉴 가격을 기준으로 범위 설정
 				}
 			}
 		}.toString();

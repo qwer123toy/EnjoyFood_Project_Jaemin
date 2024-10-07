@@ -39,8 +39,8 @@ public class AppContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-//		loadProperties("localDB.properties"); // 로컬 DB
-		loadProperties("publicDB.properties"); // 외부 DB
+		loadProperties("localDB.properties"); // 로컬 DB
+//		loadProperties("publicDB.properties"); // 외부 DB
 		initDataSource();
 		initSqlSessionFactory();
 	}

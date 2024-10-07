@@ -19,11 +19,11 @@ import lombok.NoArgsConstructor;
 @Generated("jsonschema2pojo")
 public class Cafe_Pic {
 
-	@JsonProperty("pic_number")
+	@JsonProperty("picNumber")
 	private Integer picNumber;
-	@JsonProperty("cafe_pic")
+	@JsonProperty("cafePic")
 	private String cafePic;
-	@JsonProperty("cafe_num")
+	@JsonProperty("cafeNum")
 	private Integer cafeNum;
 
 }

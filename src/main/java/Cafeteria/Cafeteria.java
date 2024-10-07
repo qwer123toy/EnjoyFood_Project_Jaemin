@@ -15,23 +15,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "cafe_num", "cafe_name", "cafe_openTime", "cafe_phoneNumber", "cafe_address", "cafe_price",
-		"cafe_owner" })
+@JsonPropertyOrder({ "cafeNum", "cafeName", "cafeOpenTime", "cafePhoneNumber", "cafeAddress", "cafePrice",
+		"cafeOwner" })
 @Generated("jsonschema2pojo")
 public class Cafeteria {
 
-	@JsonProperty("cafe_num")
+	@JsonProperty("cafeNum")
 	private Integer cafeNum;
-	@JsonProperty("cafe_name")
+	@JsonProperty("cafeName")
 	private String cafeName;
-	@JsonProperty("cafe_openTime")
+	@JsonProperty("cafeOpenTime")
 	private String cafeOpenTime;
-	@JsonProperty("cafe_phoneNumber")
+	@JsonProperty("cafePhoneNumber")
 	private String cafePhoneNumber;
-	@JsonProperty("cafe_address")
+	@JsonProperty("cafeAddress")
 	private String cafeAddress;
-	@JsonProperty("cafe_price")
+	@JsonProperty("cafePrice")
 	private Integer cafePrice;
-	@JsonProperty("cafe_owner")
+	@JsonProperty("cafeOwner")
 	private String cafeOwner;
 }
