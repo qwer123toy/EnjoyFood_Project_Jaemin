@@ -1,175 +1,192 @@
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #FFDEE9, #B5FFFC);
+	font-family: Arial, sans-serif;
+	background: linear-gradient(to right, #FFDEE9, #B5FFFC);
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #FFCCF9;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: white; /* 상단바의 배경을 흰색으로 */
+	padding: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 1000;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#logo-container {
-    display: flex;
-    align-items: center;
+header .logo {
+	font-size: 24px;
+	color: #ff6f61;
+	font-weight: bold;
+	text-decoration: none !important; /* 밑줄 제거 */
+}
+
+header .btn {
+	background: none;
+	border: none;
+	font-size: 16px;
+	color: #5c5c5c;
+	cursor: pointer;
+}
+
+header .login {
+	margin-right: 20px;
 }
 
 .sidebar {
-    position: fixed;
-    top: 150px;
-    left: 0;
-    width: 120px;
-    background-color: white; /* 사이드바 배경 흰색 */
-    padding: 20px;
-    height: 100vh;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+	position: fixed;
+	top: 150px;
+	left: 0;
+	width: 120px;
+	background-color: white; /* 사이드바 배경 흰색 */
+	padding: 20px;
+	height: 100vh;
+	box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar button {
-    background: none;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    color: #5c5c5c;
-    cursor: pointer;
-    margin-bottom: 10px;
-    display: block;
+	background: none;
+	border: none;
+	padding: 10px;
+	font-size: 16px;
+	color: #5c5c5c;
+	cursor: pointer;
+	margin-bottom: 10px;
+	display: block;
 }
 
-
 .search-bar {
-    margin-top: 15px;
-    text-align: center;
+	margin-top: 15px;
+	text-align: center;
 }
 
 .search-bar input[type="number"] {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+	width: 50%;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 .search-bar button {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #ff6f61;
-    border: none;
-    color: white;
-    border-radius: 5px;
+	padding: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	background-color: #ff6f61;
+	border: none;
+	color: white;
+	border-radius: 5px;
 }
 
-#body_section{
+#body_section {
 	padding-left: 500px;
 	padding-right: 500px;
 }
 
 #logo {
-    font-size: 2rem;
-    cursor: pointer;
-    margin-right: 20px;
+	font-size: 2rem;
+	cursor: pointer;
+	margin-right: 20px;
 }
 
 #search-type {
-    padding: 10px 20px;
-    background-color: #ffccf9;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
+	padding: 10px 20px;
+	background-color: #ffccf9;
+	border: none;
+	font-size: 1rem;
+	cursor: pointer;
 }
 
-
 #max-price {
-    padding: 10px;
-    font-size: 1rem;
-    margin-right: 20px;
+	padding: 10px;
+	font-size: 1rem;
+	margin-right: 20px;
 }
 
 #people-select {
-    padding: 10px;
-    font-size: 1rem;
+	padding: 10px;
+	font-size: 1rem;
 }
 
 #people-combo {
-    padding: 10px;
-    font-size: 1rem;
-    margin-left: 10px;
+	padding: 10px;
+	font-size: 1rem;
+	margin-left: 10px;
 }
 
 #price-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
 }
 
 .price-btn {
-    padding: 10px;
-    font-size: 1rem;
-    background-color: #FFFFFF;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
+	padding: 10px;
+	font-size: 1rem;
+	background-color: #FFFFFF;
+	border-radius: 20px;
+	border: none;
+	cursor: pointer;
 }
 
 .price-btn:hover {
-    background-color: #F0F0F0;
+	background-color: #F0F0F0;
 }
 
 #categories {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
 }
 /* 체크박스 숨기기 */
 input[type="checkbox"] {
-    display: none;
+	display: none;
 }
 
 /* 체크되지 않았을 때 기본 스타일 */
 .category {
-    display: inline-block;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #cccccc; /* 기본 색상 */
-    cursor: pointer;
+	display: inline-block;
+	padding: 10px;
+	border-radius: 15px;
+	background-color: #cccccc; /* 기본 색상 */
+	cursor: pointer;
 }
 
 /* 체크박스가 체크되었을 때 배경색 변경 */
-input[type="checkbox"]:checked + label {
-    background-color: #a8d5ff; /* 체크 시 배경색 */
+input[type="checkbox"]:checked+label {
+	background-color: #a8d5ff; /* 체크 시 배경색 */
 }
 
-input[type="checkbox"]:checked + label .category {
-    background-color: #a8d5ff; /* 체크 시 배경색 */
+input[type="checkbox"]:checked+label .category {
+	background-color: #a8d5ff; /* 체크 시 배경색 */
 }
 
 .category input {
-    display: none;
+	display: none;
 }
 
 .category.active {
-    background-color: #4A90E2;
+	background-color: #4A90E2;
 }
 
 #recommendations {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 30px;
 }
 
 .recommendation-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #FFF5BA;
-    border: 1px solid #F3D250;
-    text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	background-color: #FFF5BA;
+	border: 1px solid #F3D250;
+	text-align: center;
 }
 
 .store-info {
-    margin-top: 10px;
+	margin-top: 10px;
 }

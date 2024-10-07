@@ -44,9 +44,7 @@ public interface CafeteriaMapper {
 	// 맛집 정보 수정
 	@Update({ "UPDATE cafeteria SET cafe_num=#{cafeNum}, cafe_name=#{cafeName}, ",
 			"cafe_openTime=#{cafeOpenTime}, cafe_phoneNumber=#{cafePhoneNumber}, ",
-			"cafe_address=#{cafeAddress}, cafe_price=#{cafePrice} ",
-		    "WHERE cafe_num=#{cafeNum}" 
-			})
+			"cafe_address=#{cafeAddress}, cafe_price=#{cafePrice} ", "WHERE cafe_num=#{cafeNum}" })
 	int update(Cafeteria cafeteria);
 
 	// 삭제
@@ -59,6 +57,10 @@ public interface CafeteriaMapper {
 	@ResultMap("cafeResults")
 	List<Cafeteria> searchByPrice(@Param("start") int start, @Param("end") int end);
 
-	// 가게 메뉴도 같이 확인, 태그, 카테고리를 같이 OR로 묶어서 찾기
+	// 가게 번호와 해당 이미지 조회
+	@Select({ "SELECT cp.pic_number, cp.cafe_pic, cp.cafe_num, c.cafe_name, c.cafe_openTime, c.cafe_phoneNumber",
+			"c.cafe_address, c.cafe_price, c.cafe_owner", "FROM cafe_pic AS cp",
+			"JOIN cafeteria AS c ON cp.cafe_num = c.cafe_num", "WHERE cp.cafe_num = #{cafe_num}" })
+	List<Cafeteria> showByPic(@Param("cafe_num") int cafeNum);
 
 }

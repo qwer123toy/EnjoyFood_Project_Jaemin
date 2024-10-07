@@ -14,13 +14,22 @@
 </head>
 <body>
 
-	<!-- 상단 고정바 -->
-	<header>
-		<div id="logo-container">
-			<h1 id="logo">TASTE GPT</h1>
-		</div>
-		
-	</header>
+	 <!-- 상단 고정 바 -->
+    <header>
+        <div ><a href="mainpage" class="logo">TASTE GPT</a></div>
+        <div class="search-container">
+            <button class="btn">맛집 검색 🍽️</button>
+            <button class="btn">지역별 검색 🎮</button>
+            <a href="searchCategory" class="btn">유형별 검색 🎮</a>
+            
+        </div>
+        <div class="login">
+            <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
+            <form action="/login" method="get">
+                <button class="btn">로그인</button>
+            </form>
+        </div>
+    </header>
 	 <!-- 왼쪽 고정 바 -->
     <nav class="sidebar">
         	<button>유형별 검색</button>
