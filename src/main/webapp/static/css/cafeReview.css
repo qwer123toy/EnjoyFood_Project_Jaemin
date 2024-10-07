@@ -7,18 +7,34 @@ body {
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 15px;
-	background-color: #fff;
-	border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white; /* 상단바의 배경을 흰색으로 */
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-	font-size: 24px;
-	color: #ff1493;
-	font-weight: bold;
+header .logo {
+    font-size: 24px;
+    color: #ff6f61;
+    font-weight: bold;
+}
+
+header .btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #5c5c5c;
+    cursor: pointer;
+}
+
+header .login {
+    margin-right: 20px;
 }
 
 .menu-container .btn {

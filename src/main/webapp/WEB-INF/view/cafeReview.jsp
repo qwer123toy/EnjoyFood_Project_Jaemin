@@ -63,7 +63,7 @@
 					<c:forEach var="cafeteria" items="${list}">
 						
 							<ul>
-								<li>${cafeteria.cafe_name}</li>
+								<li>${cafeteria.cafeName}</li>
 							</ul>
 						
 					</c:forEach>
