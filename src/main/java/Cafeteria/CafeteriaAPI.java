@@ -41,13 +41,14 @@ public class CafeteriaAPI extends HttpServlet {
 		WebUtil webUtil = new WebUtil();
 		String json = webUtil.readBody(req);
 		JsonMapper jsonMapper = new JsonMapper();
-		Cafeteria cafetria = jsonMapper.readValue(json, Cafeteria.class);
+		Menus menus = jsonMapper.readValue(json, Menus.class);
+//		Cafeteria cafetria = jsonMapper.readValue(json, Cafeteria.class);
 
-		log.info(cafetria.toString());
+		log.info(menus.toString());
 
-		service.insert(cafetria);
+		service.insertMenu(menus);
 		webUtil.setCodeAndMimeType(resp, 201, "json");
-		webUtil.writeBodyJson(resp, cafetria);
+		webUtil.writeBodyJson(resp, menus);
 	}
 
 	// 수정

@@ -63,4 +63,22 @@ public interface CafeteriaMapper {
 			"JOIN cafeteria AS c ON cp.cafe_num = c.cafe_num", "WHERE cp.cafe_num = #{cafe_num}" })
 	List<Cafeteria> showByPic(@Param("cafe_num") int cafeNum);
 
+//	@Select("SELECT cafe_num, cafe_tag")
+//	int selectByTag(Cafe_Tag cafeTag);
+
+//	@Insert("INSERT INTO cafe_pic (cafe_num, cafe_pic) VALUES (#{cafe_num}, #{cafe_pic})")
+//	int insertPic(@Param("cafe_num") int cafeNum, @Param("cafe_pic") String cafePic);
+
+	@Insert("INSERT INTO cafe_tag (cafe_num, cafe_tag) VALUES (#{cafe_num}, #{cafe_tag}")
+	int insertTag(@Param("cafe_num") int cafeNum, @Param("cafe_tag") String cafeTag);
+
+	@Insert({ "INSERT INTO menu (cafe_num, menu_num, menu_name, menu_price, menu_namepic) ",
+			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
+	int insertMenu(Menus menus);
+//	int insertMenu(@Param("cafe_num") int cafeNum, 
+//        @Param("menu_num") int menuNum, 
+//        @Param("menu_name") String menuName, 
+//        @Param("menu_price") int menuPrice, 
+//        @Param("menu_namepic") String menuNamePic);
+
 }
