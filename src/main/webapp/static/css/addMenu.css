@@ -1,0 +1,89 @@
+@charset "UTF-8";
+body {
+    background-color: #FADADD; /* 배경색 */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 80%;
+    border-radius: 30px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-display {
+    margin-top: 20px;
+    
+}
+
+.uploaded-image {
+	
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+.info-section h2 {
+    color: #007BFF;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+
+input[type="text"], select, input[type="file"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #FFB6C1; /* 버튼 배경색 */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FF69B4; /* 버튼 호버 색상 */
+}
