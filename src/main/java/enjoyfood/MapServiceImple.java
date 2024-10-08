@@ -16,11 +16,11 @@ public class MapServiceImple implements MapService {
 	}
 
 	@Override
-	public String findAddressByName(String cafe_name) {
+	public String findAddressByName(String cafeName) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			// BookMapper 인터페이스의 구현체를 SqlSession에서 가져옴
 			MapMapper mapper = sqlSession.getMapper(MapMapper.class);
-			String address = mapper.findAddressByName(cafe_name);
+			String address = mapper.findAddressByName(cafeName);
 			
 			return address;
 		}

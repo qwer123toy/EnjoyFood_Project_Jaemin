@@ -5,13 +5,22 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "cafe_categoryNum", "cafe_category" })
-@Generated("jsonschema2pojo")
-public class Cafe_Category {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-	@JsonProperty("cafe_categoryNum")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "cafeCategoryNum", "cafeCategory" })
+@Generated("jsonschema2pojo")
+public class CafeCategory {
+
+	@JsonProperty("cafeCategoryNum")
 	private Integer cafeCategoryNum;
-	@JsonProperty("cafe_category")
+	@JsonProperty("cafeCategory")
 	private String cafeCategory;
 }

@@ -97,23 +97,6 @@ public class UserAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
 
-		AuthRequest authRequest = webUtil.readBodyJson(req, AuthRequest.class);
-
-		String action = authRequest.getAction();
-		User user = authRequest.getUser();
-
-		switch (action) {
-		case "login":
-			handleLogin(req, resp, webUtil, user);
-			break;
-		case "signup":
-			handleSignup(resp, webUtil, user);
-			break;
-		default:
-			handleBadRequest(resp, webUtil);
-			break;
-		}
-
 	}
 
 	private void handleLogin(HttpServletRequest req, HttpServletResponse resp, WebUtil webUtil, User user)

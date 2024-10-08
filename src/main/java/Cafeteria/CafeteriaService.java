@@ -2,8 +2,8 @@ package Cafeteria;
 
 import java.util.List;
 
+// 메서드 간단하게 사용하는 클래스
 public interface CafeteriaService {
-	// 메서드 간단하게 사용하는 클래스
 	List<Cafeteria> selectAll();
 
 	Cafeteria update(Cafeteria cafeteria);
@@ -15,4 +15,6 @@ public interface CafeteriaService {
 	Cafeteria selectByName(String cafeName);
 
 	List<Cafeteria> showByPic(int cafeNum);
+
+	int insertMenu(Menus menus);
 }
