@@ -36,4 +36,5 @@ public interface UserMapper {
 
 	@Select("SELECT count(*) FROM user WHERE userOwnerNumber=#{ownerNumber}")
 	int countUserByOwnerNumber(@Param("ownerNumber") String ownerNumber);
+	
 }

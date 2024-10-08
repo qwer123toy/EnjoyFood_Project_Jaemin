@@ -70,3 +70,18 @@ input {
 .hidden {
 	display: none;
 }
+
+.help-links {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.find-link {
+	color: #007bff;
+	text-decoration: none;
+	margin: 0 5px;
+}
+
+.find-link:hover {
+	text-decoration: underline;
+}
