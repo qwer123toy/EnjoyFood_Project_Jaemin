@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import config.SessionManager;
 import config.WebUtil;
 import user.model.AuthRequest;
 import user.model.AuthResponse;
@@ -95,7 +96,7 @@ public class UserAPI extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
-
+		
 		AuthRequest authRequest = webUtil.readBodyJson(req, AuthRequest.class);
 
 		String action = authRequest.getAction();
@@ -112,7 +113,6 @@ public class UserAPI extends HttpServlet {
 			handleBadRequest(resp, webUtil);
 			break;
 		}
-
 	}
 
 	private void handleLogin(HttpServletRequest req, HttpServletResponse resp, WebUtil webUtil, User user)
@@ -122,9 +122,14 @@ public class UserAPI extends HttpServlet {
 			webUtil.setCodeAndMimeType(resp, 401, "json");
 			webUtil.writeBodyJson(resp, new AuthResponse(false, "아이디 또는 비밀번호가 잘못되었습니다."));
 		} else {
+			HttpSession oldSession = SessionManager.getSession(loginUser.getUserID());
+			if (oldSession != null) {
+				oldSession.invalidate();
+			}
 			HttpSession session = req.getSession();
 			session.setAttribute("userID", loginUser.getUserID());
 			session.setAttribute("userNickname", loginUser.getUserNickname());
+			SessionManager.addSession(loginUser.getUserID(), session);
 			webUtil.setCodeAndMimeType(resp, 200, "json");
 			webUtil.writeBodyJson(resp, new AuthResponse(true, "로그인 성공"));
 		}
