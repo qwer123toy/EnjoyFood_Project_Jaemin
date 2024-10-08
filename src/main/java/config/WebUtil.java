@@ -19,7 +19,7 @@ public class WebUtil {
 		mimeTypes.put("plain", "text/plain; charset=utf-8");
 		mimeTypes.put("json", "application/json; charset=utf-8");
 	}
-
+	
 	public <T> T readBodyJson(HttpServletRequest req, Class<T> valueType) throws IOException {
 		String body = readBody(req);
 		JsonMapper mapper = new JsonMapper();
