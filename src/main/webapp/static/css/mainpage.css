@@ -1,1 +1,144 @@
-@charset "UTF-8";
+/* 기본 스타일 */
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee); /* 페이지 전체 배경을 상단바 배경처럼 */
+    margin: 0;
+    padding: 0;
+}
+
+
+header .logo {
+    font-size: 24px;
+    color: #ff6f61;
+    font-weight: bold;
+}
+
+header a {
+    text-decoration: none !important; /* 밑줄 제거 */
+    color: #3c82d9 !important; /* 기본 색상 설정 */
+    font-weight: bold !important; /* 굵은 글씨 */
+    transition: color 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 추가 */
+    position: relative !important; /* 하단 애니메이션을 위해 상대 위치 지정 */
+}
+
+header a::after {
+    content: ''; /* 하단에 가상의 요소 추가 */
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #3c82d9; /* 하단 밑줄 색상 */
+    transition: width 0.3s ease; /* 밑줄 애니메이션 */
+}
+
+header a:hover::after {
+    width: 100%; /* 호버 시 하단 밑줄이 확대 */
+}
+
+header a:hover {
+    color: #ff3a85; /* 호버 시 색상 변경 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 추가 */
+}
+
+
+header .login {
+    margin-right: 20px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 150px;
+    background-color: white; /* 사이드바 배경 흰색 */
+    padding: 20px;
+    height: 100vh;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar button {
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    color: #5c5c5c;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.search-bar {
+    margin-top: 150px;
+    text-align: center;
+}
+
+.search-bar input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #ff6f61;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.store-list {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px auto;
+    width: 80%;
+    flex-wrap: wrap;
+}
+
+.store-item {
+    background-color: white; /* 가게 아이템 배경 흰색 */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 250px;
+}
+
+.store-item:hover {
+    transform: translateY(-10px);
+}
+
+.store-image {
+    background-color: #cfcfcf;
+    height: 150px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+ul li a {
+    color: #6a1b9a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
