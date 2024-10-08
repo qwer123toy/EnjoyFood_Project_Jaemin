@@ -31,6 +31,7 @@ function tryLogin(e) {
 	fetch(url, { method: "post", body: json })
 		.then((resp) => { return resp.json(); })
 		.then((authResponse) => {
+//				console.log(authResponse);
 			if (authResponse.success) {
 				window.location.href = "\mainpage"
 			} else {
