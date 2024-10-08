@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Cafeteria.Cafeteria;
-import Cafeteria.CafeteriaService;
-import Cafeteria.CafeteriaServiceImple;
-import Cafeteria.Menus;
+import cafeteria.Cafeteria;
+import cafeteria.CafeteriaService;
+import cafeteria.CafeteriaServiceImple;
+import cafeteria.Menus;
 import enjoyfood.MapService;
 import enjoyfood.MapServiceImple;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,8 @@ public class CafeDetailsServlet extends HttpServlet {
 		// cafeteria 선언 추가
 		try {
 			// 조회된 가게 정보를 cafeteria로 저장
-			Cafeteria cafeteria = service.selectByName("카페 C");
+			String cafeName = req.getParameter("cafeName");
+			Cafeteria cafeteria = service.selectByName(cafeName);
 
 			log.info(cafeteria.toString());
 			req.setAttribute("cafeteria", cafeteria);
@@ -42,3 +43,4 @@ public class CafeDetailsServlet extends HttpServlet {
 		}
 	}
 }
+

@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;

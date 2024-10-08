@@ -1,8 +1,9 @@
-package Cafeteria;
+package cafeteria;
 
-import java.awt.print.Book;
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+
 import config.AppContextListener;
 
 public class CafeteriaServiceImple implements CafeteriaService {
@@ -98,6 +99,17 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			sqlSession.commit();
 
 			return pk;
+		}
+	}
+
+	@Override
+	public List<Cafeteria> searchByAll(String menuName, String cafeCategory, String cafeTag, String cafeName,
+			String cafeAddress) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<Cafeteria> list = mapper.searchByAll(menuName, cafeCategory, cafeTag, cafeName, cafeAddress);
+
+			return list;
 		}
 	}
 

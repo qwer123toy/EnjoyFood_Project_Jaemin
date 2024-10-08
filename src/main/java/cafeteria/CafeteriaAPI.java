@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import java.io.IOException;
 import java.io.PrintWriter;
