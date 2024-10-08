@@ -4,7 +4,7 @@ public interface UserService {
 
 	User login(User user);
 
-	boolean siunup(User user);
+	boolean signup(User user);
 
 	boolean isIdDuplicate(String id);
 

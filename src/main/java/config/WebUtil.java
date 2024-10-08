@@ -20,6 +20,16 @@ public class WebUtil {
 		mimeTypes.put("json", "application/json; charset=utf-8");
 	}
 
+<<<<<<< HEAD
+=======
+	public <T> T readBodyJson(HttpServletRequest req, Class<T> valueType) throws IOException {
+		String body = readBody(req);
+		JsonMapper mapper = new JsonMapper();
+		T t = mapper.readValue(body, valueType);
+		return t;
+	}
+
+>>>>>>> branch 'lhs' of https://github.com/AHHyeon12/EnjoyFood_Project.git
 	public String readBody(HttpServletRequest req) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = req.getReader();
@@ -31,14 +41,12 @@ public class WebUtil {
 	}
 
 	public void writeBodyJson(HttpServletResponse resp, Object object) throws IOException {
-		PrintWriter pw = resp.getWriter();
 		JsonMapper mapper = new JsonMapper();
 		String json = mapper.writeValueAsString(object);
-		pw.print(json);
-		pw.flush();
+		writeBody(resp, json);
 	}
 
-	public void writeBodyPlain(HttpServletResponse resp, String string) throws IOException {
+	public void writeBody(HttpServletResponse resp, String string) throws IOException {
 		PrintWriter pw = resp.getWriter();
 		pw.print(string);
 		pw.flush();

@@ -11,29 +11,29 @@ import user.model.User;
 
 public interface UserMapper {
 
-	@Select("SELECT * FROM user WHERE user_ID=#{id}")
+	@Select("SELECT * FROM user WHERE userID=#{id}")
 	@Results(id = "userResults", value = {
-			@Result(column = "user_ID", property = "userID", jdbcType = JdbcType.VARCHAR, id = true),
-			@Result(column = "user_PW", property = "userPW", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "user_PhoneNumber", property = "userPhoneNumber", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "user_Nickname", property = "userNickname", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "user_Type", property = "userType", jdbcType = JdbcType.INTEGER),
-			@Result(column = "user_OwnerNumber", property = "userOwnerNumber", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "user_Picture", property = "userPicture", jdbcType = JdbcType.BLOB) })
+			@Result(column = "userID", property = "userID", jdbcType = JdbcType.VARCHAR, id = true),
+			@Result(column = "userPW", property = "userPW", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "userPhoneNumber", property = "userPhoneNumber", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "userNickname", property = "userNickname", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "userType", property = "userType", jdbcType = JdbcType.INTEGER),
+			@Result(column = "userOwnerNumber", property = "userOwnerNumber", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "userPicture", property = "userPicture", jdbcType = JdbcType.BLOB) })
 	User selectById(@Param("id") String id);
 
-	@Insert("INSERT INTO user (user_ID, user_PW, user_PhoneNumber, user_Nickname, user_Type, user_OwnerNumber, user_Picture) VALUES (#{userID}, #{userPW}, #{userPhoneNumber}, #{userNickname}, #{userType}, #{userOwnerNumber}, #{userPicture})")
+	@Insert("INSERT INTO user (userID, userPW, userPhoneNumber, userNickname, userType, userOwnerNumber, userPicture) VALUES (#{userID}, #{userPW}, #{userPhoneNumber}, #{userNickname}, #{userType}, #{userOwnerNumber}, #{userPicture})")
 	int insert(User user);
 
-	@Select("SELECT count(*) FROM user WHERE user_ID=#{id}")
+	@Select("SELECT count(*) FROM user WHERE userID=#{id}")
 	int countUserById(@Param("id") String id);
 
-	@Select("SELECT count(*) FROM user WHERE user_PhoneNumber=#{phoneNumber}")
+	@Select("SELECT count(*) FROM user WHERE userPhoneNumber=#{phoneNumber}")
 	int countUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
-	@Select("SELECT count(*) FROM user WHERE user_Nickname=#{nickname}")
+	@Select("SELECT count(*) FROM user WHERE userNickname=#{nickname}")
 	int countUserByNickname(@Param("nickname") String nickname);
 
-	@Select("SELECT count(*) FROM user WHERE user_OwnerNumber=#{ownerNumber}")
+	@Select("SELECT count(*) FROM user WHERE userOwnerNumber=#{ownerNumber}")
 	int countUserByOwnerNumber(@Param("ownerNumber") String ownerNumber);
 }
