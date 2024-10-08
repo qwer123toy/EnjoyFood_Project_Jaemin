@@ -35,6 +35,21 @@ public class CafeteriaAPI extends HttpServlet {
 		pw.flush();
 	}
 
+	// 새로 추가
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		WebUtil webUtil = new WebUtil();
+		String json = webUtil.readBody(req);
+		JsonMapper jsonMapper = new JsonMapper();
+		Cafeteria cafetria = jsonMapper.readValue(json, Cafeteria.class);
+
+		log.info(cafetria.toString());
+
+		service.insert(cafetria);
+		webUtil.setCodeAndMimeType(resp, 201, "json");
+		webUtil.writeBodyJson(resp, cafetria);
+	}
+
 	// 수정
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,17 +73,18 @@ public class CafeteriaAPI extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
+		String json = webUtil.readBody(req);
 		JsonMapper jsonMapper = new JsonMapper();
-//		
-//		JsonNode jsonNode = jsonMapper.readTree(json);
-//		int cafeNum = rootNode.path("cafeNum").asInt();
-//		
-//		int rows = service.delete(cafeNum);
-//		
-//		if (rows == 1) {
-//			resp.setStatus(204);
-//		} else {
-//			resp.setStatus(404);
-//		}
+
+		JsonNode jsonNode = jsonMapper.readTree(json);
+		int cafeNum = jsonNode.path("cafeNum").asInt();
+
+		int rows = service.delete(cafeNum);
+
+		if (rows == 1) {
+			resp.setStatus(204);
+		} else {
+			resp.setStatus(404);
+		}
 	}
 }

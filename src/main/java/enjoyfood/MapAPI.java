@@ -19,6 +19,7 @@ public class MapAPI extends HttpServlet {
     private static final String API_URL = "/WEB-INF/view/map.jsp";
     private MapService service = MapServiceImple.getInstance();
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //      String addr = ?    

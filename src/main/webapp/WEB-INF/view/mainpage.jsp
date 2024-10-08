@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taste GPT</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/static/css/mainpage.css">
     <script src="/static/js/mainpage.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/mainpage.css">
 </head>
 <body>
 
@@ -17,9 +17,10 @@
     <header>
         <div class="logo">TASTE GPT</div>
         <div class="search-container">
-            <button class="btn">맛집 검색 🍽️</button>
-            <button class="btn">지역별 검색 🎮</button>
-            <button class="btn">유형별 검색 🎮</button>
+            <a href="searchCategory" class="searchbtn">맛집 검색 🍽️</a>
+            <a href="searchCategory">지역별 검색 🎮</a>
+            <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
+            
         </div>
         <div class="login">
             <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
@@ -48,8 +49,8 @@
         </div>
 
         <!-- 가게 리스트 -->
-        <div class="store-list">
             <!-- 데이터베이스에서 검색 결과를 불러와서 JSTL로 반복 출력 -->
+        <!-- <div class="store-list">
             <c:forEach var="store" items="${cafeteria}">
                 <div class="store-item">
                     <a href="/store-details/${cafeteria.id}">
@@ -63,7 +64,7 @@
                     </ul>
                 </div>
             </c:forEach>
-        </div>
+        </div>  -->
     </main>
 </body>
 </html>
