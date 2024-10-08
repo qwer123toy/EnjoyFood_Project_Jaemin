@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import java.util.List;
 
@@ -13,6 +13,35 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 
 public interface CafeteriaMapper {
+
+	// 메뉴명, 카테고리, 태그, 카페이름, 주소
+	@Select({
+	    "SELECT c.cafeName, c.cafeAddress, m.menuName, cc.cafeCategory, t.cafeTag",
+	    "FROM cafeteria c",
+	    "JOIN menu m ON c.cafeNum = m.cafeNum",
+	    "JOIN cafeTag t ON t.cafeNum = c.cafeNum",
+	    "JOIN cafecategory cc ON cc.cafeCategoryNum = (SELECT cafeCategoryNum FROM cafeTag WHERE cafeNum = c.cafeNum)",
+	    "WHERE (m.menuName LIKE CONCAT('%', #{menuName}, '%')",
+	    "OR cc.cafeCategory LIKE CONCAT('%', #{cafeCategory}, '%')",
+	    "OR t.cafeTag LIKE CONCAT('%', #{cafeTag}, '%')",
+	    "OR c.cafeName LIKE CONCAT('%', #{cafeName}, '%')",
+	    "OR c.cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%'))",
+	    "ORDER BY c.cafeName;"
+	})
+	@Results(id = "cafeSearch", value = {
+	    @Result(column = "cafeName", property = "cafeName", jdbcType = JdbcType.VARCHAR),
+	    @Result(column = "cafeAddress", property = "cafeAddress", jdbcType = JdbcType.VARCHAR),
+	    @Result(column = "menuName", property = "menuName", jdbcType = JdbcType.VARCHAR),
+	    @Result(column = "cafeCategory", property = "cafeCategory", jdbcType = JdbcType.VARCHAR),
+	    @Result(column = "cafeTag", property = "cafeTag", jdbcType = JdbcType.VARCHAR)
+	})
+	List<Cafeteria> searchByAll(
+	    @Param("menuName") String menuName,
+	    @Param("cafeCategory") String cafeCategory,
+	    @Param("cafeTag") String cafeTag,
+	    @Param("cafeName") String cafeName,
+	    @Param("cafeAddress") String cafeAddress
+	);
 
 	@Select("SELECT cafeNum, cafeName, cafeOpenTime, cafePhoneNumber, cafeAddress, cafePrice, cafeOwner FROM Cafeteria")
 	@Results(id = "cafeResults", value = {
