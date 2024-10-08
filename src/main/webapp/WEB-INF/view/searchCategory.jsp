@@ -14,13 +14,13 @@
 </head>
 <body>
 
-	 <!-- 상단 고정 바 -->
+	<!-- 상단 고정 바 -->
     <header>
-        <div ><a href="mainpage" class="logo">TASTE GPT</a></div>
+        <div class="logo"><a href="mainpage">TASTE GPT</a></div>
         <div class="search-container">
-            <button class="btn">맛집 검색 🍽️</button>
-            <button class="btn">지역별 검색 🎮</button>
-            <a href="searchCategory" class="btn">유형별 검색 🎮</a>
+            <a href="mainpage" class="searchbtn">맛집 검색 🍽️</a>
+            <a href="searchCategory">지역별 검색 🎮</a>
+            <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
             
         </div>
         <div class="login">
@@ -36,6 +36,7 @@
 
     </nav>
 	 <!-- 검색 입력란 -->
+	 <main>
         <div class="search-bar">
             <form method="get" action="mainpage">
                <input type="number" id="max-price" placeholder="최대 금액" />
@@ -81,38 +82,21 @@
 </section>
 
 	<!-- 추천 가게 이미지 및 맛집 정보 -->
-	<section id="recommendations">
-		<div class="recommendation-item">
-			<a href="recommendation1.html" class="store-recommendation">추천 가게
-				이미지</a>
-			<div class="store-info">
-				<p>
-					맛집명: <span>가게 이름</span>
-				</p>
-				<p>
-					평균 금액: <span>30,000원</span>
-				</p>
-				<p>
-					주소: <span>서울특별시 강남구</span>
-				</p>
-			</div>
-		</div>
-		<div class="recommendation-item">
-			<a href="recommendation2.html" class="store-recommendation">추천 가게
-				이미지</a>
-			<div class="store-info">
-				<p>
-					맛집명: <span>가게 이름</span>
-				</p>
-				<p>
-					평균 금액: <span>50,000원</span>
-				</p>
-				<p>
-					주소: <span>서울특별시 용산구</span>
-				</p>
-			</div>
-		</div>
-	</section>
-
+		 <div class="store-list">
+            <c:forEach var="cafeteria" items="${list}">
+                <div class="store-item">
+                    <a href="/store-details/${cafeteria.cafeNum}">
+                        <!--  <div class="store-image">이미지 넣을거임!</div> -->
+                    </a>
+                    <ul>
+                        <li><a href="cafeteria?cafeNum=${cafeteria.cafeNum}&cafeName=${cafeteria.cafeName}">${cafeteria.cafeName}</a></li>
+                        <li>평균 금액: ${cafeteria.cafePrice} 원</li>
+                        <li>전화번호: ${cafeteria.cafePhoneNumber}</li>
+                        <li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
+                    </ul>
+                </div>
+            </c:forEach>
+        </div> 
+</main>
 </body>
 </html>

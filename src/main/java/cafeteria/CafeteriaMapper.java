@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import java.util.List;
 
@@ -24,6 +24,30 @@ public interface CafeteriaMapper {
 			@Result(column = "cafePrice", property = "cafePrice", jdbcType = JdbcType.INTEGER),
 			@Result(column = "cafeOwner", property = "cafeOwner", jdbcType = JdbcType.VARCHAR) })
 	List<Cafeteria> selectAll();
+
+	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 이용해서 식당 리스트
+	@Select({
+	    "SELECT distinct c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice",
+	    "FROM cafeteria c", 
+	    "JOIN menu m ON c.cafeNum = m.cafeNum",
+	    "JOIN cafeTag t ON t.cafeNum = c.cafeNum",
+	    "JOIN cafecategory cc ON cc.cafeCategoryNum = (SELECT cafeCategoryNum FROM cafeTag WHERE cafeNum = c.cafeNum)",
+	    "WHERE (m.menuName LIKE CONCAT('%', #{menuName}, '%')",
+	    "OR cc.cafeCategory LIKE CONCAT('%', #{cafeCategory}, '%')",
+	    "OR t.cafeTag LIKE CONCAT('%', #{cafeTag}, '%')",
+	    "OR c.cafeName LIKE CONCAT('%', #{cafeName}, '%')",
+	    "OR c.cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%'))",
+	    "ORDER BY c.cafeName;"
+	})
+	@ResultMap("cafeResults")
+	List<Cafeteria> searchByAll(
+	    @Param("menuName") String menuName,
+	    @Param("cafeCategory") String cafeCategory,
+	    @Param("cafeTag") String cafeTag,
+	    @Param("cafeName") String cafeName,
+	    @Param("cafeAddress") String cafeAddress
+	);
+
 
 	// 맛집 새로 추가
 	@Insert({ "INSERT INTO cafeteria (cafeNum, cafeName, cafeOpenTime, cafePhoneNumber,",
@@ -72,8 +96,8 @@ public interface CafeteriaMapper {
 	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag}")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
 
-	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic) ",
-			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
+	@Insert({ "INSERT INTO menu (cafeNum,  menuName, menuPrice, menuNamepic) ",
+			"VALUES (#{cafeNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
 	int insertMenu(Menus menus);
 
 }
