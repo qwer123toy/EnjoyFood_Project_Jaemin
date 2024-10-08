@@ -123,13 +123,13 @@ public class UserAPI extends HttpServlet {
 			webUtil.setCodeAndMimeType(resp, 401, "json");
 			webUtil.writeBodyJson(resp, new AuthResponse(false, "아이디 또는 비밀번호가 잘못되었습니다."));
 		} else {
-			HttpSession session = req.getSession();
-			session.setAttribute("userID", loginUser.getUserID());
-			session.setAttribute("userNickname", loginUser.getUserNickname());
 			HttpSession oldSession = SessionManager.getSession(loginUser.getUserID());
 			if (oldSession != null) {
 				oldSession.invalidate();
 			}
+			HttpSession session = req.getSession();
+			session.setAttribute("userID", loginUser.getUserID());
+			session.setAttribute("userNickname", loginUser.getUserNickname());
 			SessionManager.addSession(loginUser.getUserID(), session);
 			webUtil.setCodeAndMimeType(resp, 200, "json");
 			webUtil.writeBodyJson(resp, new AuthResponse(true, "로그인 성공"));
