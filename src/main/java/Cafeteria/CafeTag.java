@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "cafeNum", "cafeTag" })
 @Generated("jsonschema2pojo")
-public class Cafe_Tag {
+public class CafeTag {
 
 	@JsonProperty("cafeNum")
 	private Integer cafeNum;
