@@ -103,11 +103,21 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public List<Cafeteria> searchByAll(String menuName, String cafeCategory, String cafeTag, String cafeName,
+	public List<Cafeteria> searchByAll(String menuName, String categoryName, String cafetag, String cafeName,
 			String cafeAddress) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
-			List<Cafeteria> list = mapper.searchByAll(menuName, cafeCategory, cafeTag, cafeName, cafeAddress);
+			List<Cafeteria> list = mapper.searchByAll(menuName, categoryName, cafetag, cafeName, cafeAddress);
+
+			return list;
+		}
+	}
+
+	@Override
+	public List<Cafeteria> searchByPrice(int cafePrice, String cafetag) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<Cafeteria> list = mapper.searchByPrice(cafePrice, cafePrice);
 
 			return list;
 		}

@@ -18,7 +18,14 @@ public interface CafeteriaService {
 
 	int delete(int cafeNum);
 
-	List<Cafeteria> searchByAll(String menuName, String cafeCategory, String cafeTag, String cafeName,
-			String cafeAddress);
+	List<Cafeteria> searchByAll(
+			String menuName,
+			String categoryName,
+			String cafetag,
+			String cafeName,
+			String cafeAddress
+			);
 
+	List<Cafeteria> searchByPrice(int cafePrice, String cafetag);
+	
 }
