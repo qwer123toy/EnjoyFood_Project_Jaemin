@@ -25,29 +25,28 @@ public interface CafeteriaMapper {
 			@Result(column = "cafeOwner", property = "cafeOwner", jdbcType = JdbcType.VARCHAR) })
 	List<Cafeteria> selectAll();
 
-	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 이용해서 식당 리스트
-	@Select({
-	    "SELECT distinct c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice",
-	    "FROM cafeteria c", 
-	    "JOIN menu m ON c.cafeNum = m.cafeNum",
-	    "JOIN cafeTag t ON t.cafeNum = c.cafeNum",
-	    "JOIN cafecategory cc ON cc.cafeCategoryNum = (SELECT cafeCategoryNum FROM cafeTag WHERE cafeNum = c.cafeNum)",
-	    "WHERE (m.menuName LIKE CONCAT('%', #{menuName}, '%')",
-	    "OR cc.cafeCategory LIKE CONCAT('%', #{cafeCategory}, '%')",
-	    "OR t.cafeTag LIKE CONCAT('%', #{cafeTag}, '%')",
-	    "OR c.cafeName LIKE CONCAT('%', #{cafeName}, '%')",
-	    "OR c.cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%'))",
-	    "ORDER BY c.cafeName;"
-	})
+	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 검색한 식당 리스트
+	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice * FROM cafeteria",
+			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
+			"WHERE cafeNum IN (SELECT cafeNum FROM menu where menuName  LIKE CONCAT('%', #{menuName}, '%'))",
+			"OR categoryName=#{categoryName} OR cafetag LIKE CONCAT('%', #{cafetag}, '%')",
+			"OR cafeName LIKE CONCAT('%', #{cafeName}, '%') OR cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%')" })
 	@ResultMap("cafeResults")
 	List<Cafeteria> searchByAll(
-	    @Param("menuName") String menuName,
-	    @Param("cafeCategory") String cafeCategory,
-	    @Param("cafeTag") String cafeTag,
-	    @Param("cafeName") String cafeName,
-	    @Param("cafeAddress") String cafeAddress
-	);
+			@Param("menuName") String menuName, 
+			@Param("categoryName") String categoryName,
+			@Param("cafetag") String cafetag, 
+			@Param("cafeName") String cafeName,
+			@Param("cafeAddress") String cafeAddress);
 
+	// 가격, 카테고리 리스트
+	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
+			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
+			"WHERE cafePrice <= #{cafePrice} AND cafetag LIKE CONCAT('%', #{cafetag}, '%')" 
+			})
+	List<Cafeteria> searchByPrice(
+			@Param("cafePrice") int cafePrice, 
+			@Param("cafetag") String cafetag);
 
 	// 맛집 새로 추가
 	@Insert({ "INSERT INTO cafeteria (cafeNum, cafeName, cafeOpenTime, cafePhoneNumber,",
