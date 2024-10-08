@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import config.SessionManager;
 import config.WebUtil;
 import user.model.AuthRequest;
 import user.model.AuthResponse;
@@ -125,6 +126,11 @@ public class UserAPI extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("userID", loginUser.getUserID());
 			session.setAttribute("userNickname", loginUser.getUserNickname());
+			HttpSession oldSession = SessionManager.getSession(loginUser.getUserID());
+			if (oldSession != null) {
+				oldSession.invalidate();
+			}
+			SessionManager.addSession(loginUser.getUserID(), session);
 			webUtil.setCodeAndMimeType(resp, 200, "json");
 			webUtil.writeBodyJson(resp, new AuthResponse(true, "로그인 성공"));
 		}
