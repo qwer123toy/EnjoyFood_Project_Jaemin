@@ -21,7 +21,7 @@ public class CafeReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Cafeteria> list = service.selectAll();
 
-//		System.out.println(cafeteria);
+//		System.out.println(list);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/view/cafeReview.jsp").forward(req, resp);
 	}

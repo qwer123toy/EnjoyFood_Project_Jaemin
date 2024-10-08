@@ -14,6 +14,17 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface CafeteriaMapper {
 
+	@Select("SELECT cafeNum, cafeName, cafeOpenTime, cafePhoneNumber, cafeAddress, cafePrice, cafeOwner FROM Cafeteria")
+	@Results(id = "cafeResults", value = {
+			@Result(column = "cafeNum", property = "cafeNum", jdbcType = JdbcType.INTEGER),
+			@Result(column = "cafeName", property = "cafeName", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "cafeOpenTime", property = "cafeOpenTime", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "cafePhoneNumber", property = "cafePhoneNumber", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "cafeAddress", property = "cafeAddress", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "cafePrice", property = "cafePrice", jdbcType = JdbcType.INTEGER),
+			@Result(column = "cafeOwner", property = "cafeOwner", jdbcType = JdbcType.VARCHAR) })
+	List<Cafeteria> selectAll();
+
 	// 메뉴명, 카테고리, 태그, 카페이름, 주소
 	@Select({
 	    "SELECT c.cafeName, c.cafeAddress, m.menuName, cc.cafeCategory, t.cafeTag",
@@ -28,13 +39,7 @@ public interface CafeteriaMapper {
 	    "OR c.cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%'))",
 	    "ORDER BY c.cafeName;"
 	})
-	@Results(id = "cafeSearch", value = {
-	    @Result(column = "cafeName", property = "cafeName", jdbcType = JdbcType.VARCHAR),
-	    @Result(column = "cafeAddress", property = "cafeAddress", jdbcType = JdbcType.VARCHAR),
-	    @Result(column = "menuName", property = "menuName", jdbcType = JdbcType.VARCHAR),
-	    @Result(column = "cafeCategory", property = "cafeCategory", jdbcType = JdbcType.VARCHAR),
-	    @Result(column = "cafeTag", property = "cafeTag", jdbcType = JdbcType.VARCHAR)
-	})
+	@ResultMap("cafeResults")
 	List<Cafeteria> searchByAll(
 	    @Param("menuName") String menuName,
 	    @Param("cafeCategory") String cafeCategory,
@@ -43,16 +48,6 @@ public interface CafeteriaMapper {
 	    @Param("cafeAddress") String cafeAddress
 	);
 
-	@Select("SELECT cafeNum, cafeName, cafeOpenTime, cafePhoneNumber, cafeAddress, cafePrice, cafeOwner FROM Cafeteria")
-	@Results(id = "cafeResults", value = {
-			@Result(column = "cafeNum", property = "cafeNum", jdbcType = JdbcType.INTEGER),
-			@Result(column = "cafeName", property = "cafeName", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "cafeOpenTime", property = "cafeOpenTime", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "cafePhoneNumber", property = "cafePhoneNumber", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "cafeAddress", property = "cafeAddress", jdbcType = JdbcType.VARCHAR),
-			@Result(column = "cafePrice", property = "cafePrice", jdbcType = JdbcType.INTEGER),
-			@Result(column = "cafeOwner", property = "cafeOwner", jdbcType = JdbcType.VARCHAR) })
-	List<Cafeteria> selectAll();
 
 	// 맛집 새로 추가
 	@Insert({ "INSERT INTO cafeteria (cafeNum, cafeName, cafeOpenTime, cafePhoneNumber,",
@@ -101,8 +96,8 @@ public interface CafeteriaMapper {
 	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag}")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
 
-	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic) ",
-			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
+	@Insert({ "INSERT INTO menu (cafeNum,  menuName, menuPrice, menuNamepic) ",
+			"VALUES (#{cafeNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
 	int insertMenu(Menus menus);
 
 }

@@ -20,4 +20,5 @@ public interface CafeteriaService {
 
 	List<Cafeteria> searchByAll(String menuName, String cafeCategory, String cafeTag, String cafeName,
 			String cafeAddress);
+
 }

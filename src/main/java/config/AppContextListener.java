@@ -20,10 +20,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
-
+import cafeteria.CafeteriaMapper;
 import enjoyfood.MapMapper;
-
-import Cafeteria.CafeteriaMapper;
 import user.model.UserMapper;
 
 @WebListener
@@ -39,8 +37,8 @@ public class AppContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		loadProperties("localDB.properties"); // 로컬 DB
-//		loadProperties("publicDB.properties"); // 외부 DB
+//		loadProperties("localDB.properties"); // 로컬 DB
+		loadProperties("publicDB.properties"); // 외부 DB
 		initDataSource();
 		initSqlSessionFactory();
 	}
