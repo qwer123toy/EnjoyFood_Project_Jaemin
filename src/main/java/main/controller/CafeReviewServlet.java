@@ -13,6 +13,8 @@ import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
 
+
+
 @WebServlet("/cafeReview")
 public class CafeReviewServlet extends HttpServlet {
 	private CafeteriaService service = CafeteriaServiceImple.getInstance();
@@ -21,7 +23,7 @@ public class CafeReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Cafeteria> list = service.selectAll();
 
-//		System.out.println(list);
+//		System.out.println(cafeteria);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/view/cafeReview.jsp").forward(req, resp);
 	}

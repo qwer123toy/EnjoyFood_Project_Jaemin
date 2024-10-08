@@ -15,9 +15,9 @@
 
     <!-- 상단 고정 바 -->
     <header>
-        <div class="logo">TASTE GPT</div>
+        <div class="logo"><a href="mainpage">TASTE GPT</a></div>
         <div class="search-container">
-            <a href="searchCategory" class="searchbtn">맛집 검색 🍽️</a>
+            <a href="mainpage" class="searchbtn">맛집 검색 🍽️</a>
             <a href="searchCategory">지역별 검색 🎮</a>
             <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
             
@@ -42,29 +42,33 @@
     <main>
         <!-- 검색 입력란 -->
         <div class="search-bar">
-            <form method="get" action="mainpage.jsp">
-                <input type="text" name="searchQuery" placeholder="맛집 검색어 입력">
+            <form method="post">
+                <input type="text" name="searchQuery" id ="searchQuery" placeholder="맛집 검색어 입력">
                 <button type="submit">→</button>
             </form>
         </div>
 
         <!-- 가게 리스트 -->
             <!-- 데이터베이스에서 검색 결과를 불러와서 JSTL로 반복 출력 -->
-        <!-- <div class="store-list">
-            <c:forEach var="store" items="${cafeteria}">
+      <div class="store-list">
+            <c:forEach var="cafeteria" items="${list}">
                 <div class="store-item">
-                    <a href="/store-details/${cafeteria.id}">
-                        <div class="store-image">${cafeteria.pic}</div>
+                    <a href="/store-details/${cafeteria.cafeNum}">
+                        <!--  <div class="store-image">이미지 넣을거임!</div> -->
                     </a>
+                    
                     <ul>
-                        <li>${cafeteria.name}</li>
-                        <li>평균 금액: ${cafeteria.Price}</li>
-                        <li>전화번호: ${cafeteria.phoneNumber}</li>
-                        <li><a href="#">주소: ${cafeteria.address}</a></li>
+                    
+                        <li><a href="cafeteria?cafeNum=${cafeteria.cafeNum}&cafeName=${cafeteria.cafeName}">${cafeteria.cafeName}</a></li>
+                        <li>평균 금액: ${cafeteria.cafePrice} 원</li>
+                        <li>전화번호: ${cafeteria.cafePhoneNumber}</li>
+                        <li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
+                        
                     </ul>
+                    
                 </div>
             </c:forEach>
-        </div>  -->
+        </div>  
     </main>
 </body>
 </html>

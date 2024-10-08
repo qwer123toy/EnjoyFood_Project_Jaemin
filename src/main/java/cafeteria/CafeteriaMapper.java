@@ -25,10 +25,10 @@ public interface CafeteriaMapper {
 			@Result(column = "cafeOwner", property = "cafeOwner", jdbcType = JdbcType.VARCHAR) })
 	List<Cafeteria> selectAll();
 
-	// 메뉴명, 카테고리, 태그, 카페이름, 주소
+	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 이용해서 식당 리스트
 	@Select({
-	    "SELECT c.cafeName, c.cafeAddress, m.menuName, cc.cafeCategory, t.cafeTag",
-	    "FROM cafeteria c",
+	    "SELECT distinct c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice",
+	    "FROM cafeteria c", 
 	    "JOIN menu m ON c.cafeNum = m.cafeNum",
 	    "JOIN cafeTag t ON t.cafeNum = c.cafeNum",
 	    "JOIN cafecategory cc ON cc.cafeCategoryNum = (SELECT cafeCategoryNum FROM cafeTag WHERE cafeNum = c.cafeNum)",
