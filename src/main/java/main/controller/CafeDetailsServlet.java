@@ -28,7 +28,8 @@ public class CafeDetailsServlet extends HttpServlet {
 		// cafeteria 선언 추가
 		try {
 			// 조회된 가게 정보를 cafeteria로 저장
-			Cafeteria cafeteria = service.selectByName("카페 C");
+			String cafeName = req.getParameter("cafeName");
+			Cafeteria cafeteria = service.selectByName(cafeName);
 
 			log.info(cafeteria.toString());
 			req.setAttribute("cafeteria", cafeteria);
@@ -42,3 +43,4 @@ public class CafeDetailsServlet extends HttpServlet {
 		}
 	}
 }
+

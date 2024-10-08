@@ -34,6 +34,34 @@ header .btn {
 header .login {
 	margin-right: 20px;
 }
+header a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: #3c82d9; /* 기본 색상 설정 */
+    font-weight: bold; /* 굵은 글씨 */
+    transition: color 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 추가 */
+    position: relative; /* 하단 애니메이션을 위해 상대 위치 지정 */
+}
+
+
+header a::after {
+    content: ''; /* 하단에 가상의 요소 추가 */
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #3c82d9; /* 하단 밑줄 색상 */
+    transition: width 0.3s ease; /* 밑줄 애니메이션 */
+}
+
+header a:hover::after {
+    width: 100%; /* 호버 시 하단 밑줄이 확대 */
+}
+
+header a:hover {
+    color: #ff3a85; /* 호버 시 색상 변경 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 추가 */
+}
 
 .sidebar {
 	position: fixed;
@@ -122,6 +150,11 @@ header .login {
 	margin-top: 20px;
 }
 
+main {
+	margin-top: 50px;
+	padding: 20px;
+}
+
 .price-btn {
 	padding: 10px;
 	font-size: 1rem;
@@ -171,22 +204,57 @@ input[type="checkbox"]:checked+label .category {
 	background-color: #4A90E2;
 }
 
-#recommendations {
-	display: flex;
-	justify-content: space-around;
-	margin-top: 30px;
+
+/* 한 줄에 3개의 아이템을 배치하고, sidebar와 겹치지 않게 하기 */
+.store-list {
+    display: flex;
+    justify-content: space-between; /* 아이템 간의 공간을 균등하게 분배 */
+    flex-wrap: wrap; /* 아이템이 넘치면 자동으로 다음 줄로 넘어가게 함 */
+    margin-left: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
+    margin-right: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
+    padding: 20px; /* 내부 여백을 줌 */
 }
 
-.recommendation-item {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px;
-	background-color: #FFF5BA;
-	border: 1px solid #F3D250;
-	text-align: center;
+.store-item {
+    background-color: white; /* 가게 아이템의 배경을 흰색으로 설정 */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: calc(25%); /* 한 줄에 3개의 아이템이 들어가도록 너비를 설정 (마진과 패딩 포함) */
 }
 
-.store-info {
-	margin-top: 10px;
+.store-item:hover {
+    transform: translateY(-10px); /* 호버 시 살짝 떠오르게 애니메이션 효과 */
+}
+
+.store-image {
+    background-color: #cfcfcf;
+    height: 150px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+ul li a {
+    color: #6a1b9a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    text-decoration: underline;
 }
