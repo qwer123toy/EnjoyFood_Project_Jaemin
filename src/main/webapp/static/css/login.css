@@ -71,17 +71,17 @@ input {
 	display: none;
 }
 
-.help-links {
+.helplinks {
 	margin-top: 10px;
 	text-align: center;
 }
 
-.find-link {
+.findlink {
 	color: #007bff;
 	text-decoration: none;
 	margin: 0 5px;
 }
 
-.find-link:hover {
+.findlink:hover {
 	text-decoration: underline;
 }

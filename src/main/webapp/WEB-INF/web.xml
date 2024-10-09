@@ -31,4 +31,24 @@
 		<servlet-name>SignupServlet</servlet-name>
 		<url-pattern>/signup</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>findIdServlet</servlet-name>
+		<jsp-file>/WEB-INF/view/findId.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>findIdServlet</servlet-name>
+		<url-pattern>/findId</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>findPwServlet</servlet-name>
+		<jsp-file>/WEB-INF/view/findPw.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>findPwServlet</servlet-name>
+		<url-pattern>/findPw</url-pattern>
+	</servlet-mapping>
 </web-app>

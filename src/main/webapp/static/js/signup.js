@@ -145,7 +145,7 @@ function chkOwnerNumber() {
 }
 
 function isUnique(type, value) {
-	let query = url + "?" + type + "=" + value;
+	let query = url + "?action=chkDuple&" + type + "=" + value;
 	return fetch(query)
 		.then((resp) => resp.json())
 		.then((authResponse) => authResponse.success);
@@ -308,10 +308,12 @@ function trySignup(e) {
 		user: Object.fromEntries(formData)
 	};
 	let json = JSON.stringify(authRequest);
-	console.log(json);
+
 	fetch(url, { method: "post", body: json })
-		.then((resp) => { return resp.json(); })
+		.then((resp) => resp.json())
 		.then((authResponse) => {
-			console.log(authResponse);
+			alert(authResponse.message);
+			if (authResponse.success)
+				location.href = "/login";
 		});
 }
