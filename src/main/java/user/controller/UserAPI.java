@@ -59,8 +59,27 @@ public class UserAPI extends HttpServlet {
 			String userPhoneNumber = req.getParameter("userPhoneNumber");
 			handleFindPw(resp, webUtil, userID, userPhoneNumber);
 			return;
+		} else if (action.equals("userInfo")) {
+			handleUserInfoRequest(req, resp, webUtil);
+			return;
 		}
 		handleBadRequest(resp, webUtil);
+	}
+
+	private void handleUserInfoRequest(HttpServletRequest req, HttpServletResponse resp, WebUtil webUtil)
+			throws IOException {
+		String userID = (String) req.getSession().getAttribute("userID");
+		if (userID == null) {
+			handleBadRequest(resp, webUtil);
+			return;
+		}
+		User user = service.userInfo(userID);
+		if (user != null) {
+			webUtil.setCodeAndMimeType(resp, 200, "json");
+			webUtil.writeBodyJson(resp, user);
+		} else {
+			handleBadRequest(resp, webUtil);
+		}
 	}
 
 	private void handleFindPw(HttpServletResponse resp, WebUtil webUtil, String userID, String userPhoneNumber)

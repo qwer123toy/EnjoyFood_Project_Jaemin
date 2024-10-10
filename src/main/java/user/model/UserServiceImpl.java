@@ -31,6 +31,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User userInfo(String id) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			User selectById = mapper.selectById(id);
+			if (selectById == null)
+				return null;
+			selectById.setUserPW(null);
+			return selectById;
+		}
+	}
+
+	@Override
 	public boolean signup(User user) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			UserMapper mapper = sqlSession.getMapper(UserMapper.class);

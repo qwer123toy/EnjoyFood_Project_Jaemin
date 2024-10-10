@@ -51,4 +51,14 @@
 		<servlet-name>findPwServlet</servlet-name>
 		<url-pattern>/findPw</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>userInfoServlet</servlet-name>
+		<jsp-file>/WEB-INF/view/userInfo.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>userInfoServlet</servlet-name>
+		<url-pattern>/userInfo</url-pattern>
+	</servlet-mapping>
 </web-app>
