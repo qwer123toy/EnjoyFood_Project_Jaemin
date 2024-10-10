@@ -21,8 +21,23 @@ public class MainServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 List<Cafeteria> list = (List<Cafeteria>) req.getAttribute("list");
-
+		 
+		 // action 파라미터로 로그아웃 요청 확인
+        String action = req.getParameter("action");
+        
+        // 로그아웃 처리
+        if ("logout".equals(action)) {
+            req.getSession().invalidate(); // 세션 무효화
+            resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
+            return;
+        }
+        String userID = (String) req.getAttribute("userID");
+		String userNickName = (String) req.getAttribute("userNickname");
+		req.setAttribute("userID", userID);
+		req.setAttribute("userNickName", userNickName);
+		
+		List<Cafeteria> list = (List<Cafeteria>) req.getAttribute("list");
+		 	
 		    // 리스트가 없으면 전체 목록 조회
 		    if (list == null) {
 		        list = service.selectAll();
@@ -51,6 +66,7 @@ public class MainServlet extends HttpServlet {
 
 	    // 검색 결과를 JSP로 전달
 	    req.setAttribute("list", searchResults);
+	    
 	    req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
 	}
 	

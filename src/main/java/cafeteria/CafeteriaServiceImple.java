@@ -117,9 +117,24 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	public List<Cafeteria> searchByPrice(int cafePrice, String cafetag) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
-			List<Cafeteria> list = mapper.searchByPrice(cafePrice, cafePrice);
+			List<Cafeteria> list = mapper.searchByPrice(cafePrice, cafetag);
 
 			return list;
+		}
+	}
+
+	@Override
+	public double selectAvg(int cafeNum) {
+		// TODO Auto-generated method stub
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			String score = mapper.selectAvg(cafeNum);
+			double parsedScore = 0;
+			if (score != null) {
+				parsedScore = Double.parseDouble(score);
+			}
+
+			return parsedScore;
 		}
 	}
 

@@ -28,4 +28,6 @@ public interface CafeteriaService {
 
 	List<Cafeteria> searchByPrice(int cafePrice, String cafetag);
 	
+	double selectAvg(int cafeNum);
+
 }

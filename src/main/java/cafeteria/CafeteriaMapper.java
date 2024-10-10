@@ -39,7 +39,9 @@ public interface CafeteriaMapper {
 			@Param("cafeName") String cafeName,
 			@Param("cafeAddress") String cafeAddress);
 
-	// 가격, 카테고리 리스트
+	//태그가 없거나 여러 개일 때 값을 다 찾아와야된다
+	//지금 태그가 무조건 일치해야만 찾아줌
+	// 가격, 리스트
 	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
 			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
 			"WHERE cafePrice <= #{cafePrice} AND cafetag LIKE CONCAT('%', #{cafetag}, '%')" 
@@ -74,11 +76,6 @@ public interface CafeteriaMapper {
 	@Delete("DELETE FROM Cafeteria WHERE cafeNum=#{cafeNum}")
 	int delete(int cafeNum);
 
-	// 가격 범위 - 해당 범위외 값 안나옴
-	@Select({ "SELECT cafeName, cafeOpenTime, cafePhoneNumber, cafeAddress, cafePrice", "FROM cafeteria",
-			"WHERE cafePrice BETWEEN #{start} AND #{end}" })
-	@ResultMap("cafeResults")
-	List<Cafeteria> searchByPrice(@Param("start") int start, @Param("end") int end);
 
 	// 가게 번호와 해당 이미지 조회
 	@Select({ "SELECT cp.picNumber, cp.cafePic, cp.cafeNum, c.cafeName, c.cafeOpenTime, c.cafePhoneNumber",
@@ -98,5 +95,9 @@ public interface CafeteriaMapper {
 	@Insert({ "INSERT INTO menu (cafeNum,  menuName, menuPrice, menuNamepic) ",
 			"VALUES (#{cafeNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
 	int insertMenu(Menus menus);
+	
+	@Select("SELECT avg(cafeScore) FROM cafeScore WHERE cafeNum=#{cafeNum}")
+	String selectAvg(@Param("cafeNum") int cafeNum);
+
 
 }

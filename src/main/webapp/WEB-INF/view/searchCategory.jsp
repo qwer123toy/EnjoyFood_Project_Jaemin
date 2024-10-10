@@ -24,11 +24,25 @@
             
         </div>
         <div class="login">
-            <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
+    <c:choose>
+        <c:when test="${not empty userID}">
+            <span>${userID} 님, 환영합니다!</span>
+            <!-- 내 정보 보기 버튼 -->
+            <button class="btn" onclick="location.href='/myInfo'">내 정보 보기</button>
+            <!-- 로그아웃 버튼 -->
+            <form action="/mainpage" method="get" style="display:inline;">
+                <input type="hidden" name="action" value="logout">
+                <button class="btn">로그아웃</button>
+            </form>
+        </c:when>
+        <c:otherwise>
+            <!-- 로그인 버튼 -->
             <form action="/login" method="get">
                 <button class="btn">로그인</button>
             </form>
-        </div>
+        </c:otherwise>
+    </c:choose>
+</div>
     </header>
 	 <!-- 왼쪽 고정 바 -->
     <nav class="sidebar">
@@ -37,11 +51,12 @@
     </nav>
 	 <!-- 검색 입력란 -->
 	 <main>
+	 
         <div class="search-bar">
-            <form method="get" action="mainpage">
-               <input type="number" id="max-price" placeholder="최대 금액" />
+            <form method="post" >
+               <input type="number" name="max-price" id="max-price" placeholder="최대 금액" />
                <button type="submit">검색</button>
-		<select id="people-combo">
+		<select id="people-combo" name = "people-combo">
 			<option value="1">1명</option>
 			<option value="2">2명</option>
 			<option value="3">3명</option>

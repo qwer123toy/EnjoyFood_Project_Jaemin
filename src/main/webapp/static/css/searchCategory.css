@@ -31,9 +31,39 @@ header .btn {
 	cursor: pointer;
 }
 
+
 header .login {
-	margin-right: 20px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
 }
+
+header .login p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+header .login .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header .login .btn:hover {
+    background-color: #45a049;
+}
+
+header .login form {
+    margin: 0;
+}
+
 header a {
     text-decoration: none; /* 밑줄 제거 */
     color: #3c82d9; /* 기본 색상 설정 */
