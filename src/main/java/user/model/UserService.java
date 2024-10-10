@@ -1,5 +1,9 @@
 package user.model;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 public interface UserService {
 
 	User login(User user);
@@ -21,4 +25,13 @@ public interface UserService {
 	boolean update(User user);
 
 	boolean changePW(User user);
+	
+	List<User> selectAll();
+
+	List<User> selectAllById(String id);
+	
+	int updateActivationStatus(String id, int active);
+
+
+
 }

@@ -18,5 +18,6 @@ public class User {
 	private int userType;
 	private String userOwnerNumber;
 	private String userPicture;
+	private int active;
 
 }

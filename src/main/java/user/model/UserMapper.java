@@ -1,5 +1,7 @@
 package user.model;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -22,7 +24,18 @@ public interface UserMapper {
 			@Result(column = "userOwnerNumber", property = "userOwnerNumber", jdbcType = JdbcType.VARCHAR),
 			@Result(column = "userPicture", property = "userPicture", jdbcType = JdbcType.BLOB) })
 	User selectById(@Param("id") String id);
+	
+	@Select("SELECT * FROM user")
+	@ResultMap(value = "userResults")
+	List<User> selectAll();
+	
+	@Select("SELECT * FROM user WHERE userID=#{id}")
+	@ResultMap(value = "userResults")
+	List<User> selectAllById(@Param("id") String id);
 
+	@Update("UPDATE user SET active=#{active} where userID = #{id}")
+	int updateActivationStatus(@Param("id") String id, @Param("active") int active);
+	
 	@Select("SELECT * FROM user WHERE userPhoneNumber=#{phoneNumber}")
 	@ResultMap(value = "userResults")
 	User selectByPhoneNumber(@Param("phoneNumber") String phoneNumber);
