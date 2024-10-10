@@ -1,200 +1,77 @@
-/* 기본 스타일 */
-body {
-    font-family: 'Nanum Gothic', sans-serif;
-    background: linear-gradient(to right, #fbc2eb, #a6c1ee); /* 페이지 전체 배경을 상단바 배경처럼 */
-    margin: 0;
-    padding: 0;
-}
-
-header {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	background-color: white; /* 상단바의 배경을 흰색으로 */
-	padding: 15px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	z-index: 1000;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-header .logo {
-	font-size: 24px;
-	color: #ff6f61;
-	font-weight: bold;
-	text-decoration: none !important; /* 밑줄 제거 */
-}
-
-header .btn {
-	background: none;
-	border: none;
-	font-size: 16px;
-	color: #5c5c5c;
-	cursor: pointer;
-}
-
-header .login {
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    font-family: Arial, sans-serif;
-}
-
-
-header .login .btn {
-    
-   text-decoration: none; /* 밑줄 제거 */
-    font-weight: bold; /* 굵은 글씨 */
-    transition: color 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 추가 */
-    position: relative; /* 하단 애니메이션을 위해 상대 위치 지정 */
-}
-
-header .login .btn:after {
-    content: ''; /* 하단에 가상의 요소 추가 */
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #3c82d9; /* 하단 밑줄 색상 */
-    transition: width 0.3s ease; /* 밑줄 애니메이션 */
-}
-
-header .login .btn:hover::after {
-    width: 100%; /* 호버 시 하단 밑줄이 확대 */
-}
-
-header .login .btn:hover {
-    color: #ff3a85; /* 호버 시 색상 변경 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 추가 */
-}
-
-header a {
-    text-decoration: none; /* 밑줄 제거 */
-    color: #3c82d9; /* 기본 색상 설정 */
-    font-weight: bold; /* 굵은 글씨 */
-    transition: color 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 추가 */
-    position: relative; /* 하단 애니메이션을 위해 상대 위치 지정 */
-}
-
-
-header a::after {
-    content: ''; /* 하단에 가상의 요소 추가 */
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #3c82d9; /* 하단 밑줄 색상 */
-    transition: width 0.3s ease; /* 밑줄 애니메이션 */
-}
-
-header a:hover::after {
-    width: 100%; /* 호버 시 하단 밑줄이 확대 */
-}
-
-header a:hover {
-    color: #ff3a85; /* 호버 시 색상 변경 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 추가 */
-}
-
-
-.sidebar {
-    position: fixed;
-    top: 100px;
-    left: 0;
-    width: 150px;
-    background-color: white; /* 사이드바 배경 흰색 */
-    padding: 20px;
-    height: 100vh;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar button {
-    background: none;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    color: #5c5c5c;
-    cursor: pointer;
-    margin-bottom: 10px;
-    display: block;
-}
+@charset "UTF-8";
 
 .search-bar {
-    margin-top: 150px;
-    text-align: center;
+	margin-top: 150px;
+	text-align: center;
 }
 
 .search-bar input[type="text"] {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+	width: 50%;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 .search-bar button {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #ff6f61;
-    border: none;
-    color: white;
-    border-radius: 5px;
+	padding: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	background-color: #ff6f61;
+	border: none;
+	color: white;
+	border-radius: 5px;
 }
 /* 한 줄에 3개의 아이템을 배치하고, sidebar와 겹치지 않게 하기 */
 .store-list {
-    display: flex;
-    justify-content: space-between; /* 아이템 간의 공간을 균등하게 분배 */
-    flex-wrap: wrap; /* 아이템이 넘치면 자동으로 다음 줄로 넘어가게 함 */
-    margin-left: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
-    margin-right: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
-    
-    padding: 20px; /* 내부 여백을 줌 */
+	display: flex;
+	justify-content: space-between; /* 아이템 간의 공간을 균등하게 분배 */
+	flex-wrap: wrap; /* 아이템이 넘치면 자동으로 다음 줄로 넘어가게 함 */
+	margin-left: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
+	margin-right: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
+	padding: 20px; /* 내부 여백을 줌 */
 }
 
 .store-item {
-    background-color: white; /* 가게 아이템의 배경을 흰색으로 설정 */
-    padding: 20px;
-    margin: 10px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    width: calc(25%); /* 한 줄에 3개의 아이템이 들어가도록 너비를 설정 (마진과 패딩 포함) */
+	background-color: white; /* 가게 아이템의 배경을 흰색으로 설정 */
+	padding: 20px;
+	margin: 10px;
+	border-radius: 15px;
+	text-align: center;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+	width: calc(25%); /* 한 줄에 3개의 아이템이 들어가도록 너비를 설정 (마진과 패딩 포함) */
 }
 
 .store-item:hover {
-    transform: translateY(-10px); /* 호버 시 살짝 떠오르게 애니메이션 효과 */
+	transform: translateY(-10px); /* 호버 시 살짝 떠오르게 애니메이션 효과 */
 }
 
 .store-image {
-    background-color: #cfcfcf;
-    height: 150px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
+	background-color: #cfcfcf;
+	height: 150px;
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 10px;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
 }
 
 ul li {
-    margin: 5px 0;
+	margin: 5px 0;
 }
 
 ul li a {
-    color: #6a1b9a;
-    text-decoration: none;
-    font-weight: bold;
+	color: #6a1b9a;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 ul li a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }

@@ -1,12 +1,10 @@
 @charset "UTF-8";
 
 body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
 	display: flex;
 	justify-content: center;
-	height: 100vh;
 	align-items: center;
+	height: 100vh;
 }
 
 .main {
@@ -38,7 +36,7 @@ h1 {
 	box-sizing: border-box;
 }
 
-button {
+.form-group button {
 	width: 100%;
 	padding: 10px;
 	background-color: #007BFF;
@@ -47,7 +45,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+.form-group button:hover {
 	opacity: 0.9;
 }
 

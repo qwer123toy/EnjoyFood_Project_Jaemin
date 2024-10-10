@@ -138,7 +138,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 # DB properties
 publicDB.properties
 
+=======
+>>>>>>> branch 'lhs' of https://github.com/AHHyeon12/EnjoyFood_Project.git
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,maven
