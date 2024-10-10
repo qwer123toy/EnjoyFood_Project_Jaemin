@@ -38,6 +38,7 @@
 	<main>
 		<section class="review-section">
 			<h1 class="review-title">리뷰 작성 화면</h1>
+			
 			<div class="review-container">
 				<!-- 이미지 업로드 -->
 				<div class="review-image">

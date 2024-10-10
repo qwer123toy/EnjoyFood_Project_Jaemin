@@ -2,6 +2,7 @@ package main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -57,15 +58,25 @@ public class SearchCateServlet extends HttpServlet {
 		String countPpl = (String) req.getParameter("people-combo");
 		int searchByPriceAvg = (int) Math.round(Double.parseDouble(searchByPrice)/Double.parseDouble(countPpl));
 		
+		String[] categories = req.getParameterValues("category");
+	    String additionalCategory = req.getParameter("additionalCategory");
+	    System.out.println("Categories: " + Arrays.toString(categories));  // For debugging
+	    System.out.println("Additional Category: " + additionalCategory);  // For debugging
 	    // 검색어가 비어 있지 않은 경우, 검색 수행
 	    List<Cafeteria> searchResults;
 	    List<String> chkList= new ArrayList<String>();
 	    
-	    chkList.add("파스타맛집");
-	    chkList.add("라멘맛집");
-	    
+	    // 체크된 카테고리와 추가 카테고리 추가
+	    if (categories != null) {
+	        for (String category : categories) {
+	            chkList.add(category);
+	        }
+	    }
+	    if (additionalCategory != null && !additionalCategory.trim().isEmpty()) {
+	        chkList.add(additionalCategory);
+	    }
 	    if (searchByPrice != null && !searchByPrice.trim().isEmpty()) {
-	        searchResults = service.searchByPT(searchByPriceAvg, chkList);
+	        searchResults = service.getCafeByPriceAndTags(searchByPriceAvg, chkList);
 	    } else {
 	        // 검색어가 없으면 전체 가게 목록을 출력
 	        searchResults = service.selectAll();

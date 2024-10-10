@@ -2,6 +2,8 @@ package cafeteria;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 // 메서드 간단하게 사용하는 클래스
 public interface CafeteriaService {
 	List<Cafeteria> selectAll();
@@ -23,6 +25,8 @@ public interface CafeteriaService {
 
 	
 	double selectAvg(int cafeNum);
-	List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags);
+//	List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags);
+	List<Cafeteria> getCafeByPriceAndTags(int cafePrice, List<String> cafetags);
+
 
 }
