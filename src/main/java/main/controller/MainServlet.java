@@ -38,7 +38,6 @@ public class MainServlet extends HttpServlet {
 		}
 		HttpSession session = req.getSession();
 		String userSessionID = (String) session.getAttribute("userID");
-		System.out.println(userSessionID);
 		String userID = (String) req.getAttribute("userID");
 		if(userSessionID != null) {
 			User user = (User) userService.userInfo(userSessionID);
