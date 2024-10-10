@@ -1,9 +1,9 @@
 package cafeteria;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import org.apache.ibatis.session.SqlSession;
-
 import config.AppContextListener;
 
 public class CafeteriaServiceImple implements CafeteriaService {
@@ -114,13 +114,31 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public List<Cafeteria> searchByPrice(int cafePrice, String cafetag) {
+	public List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
-			List<Cafeteria> list = mapper.searchByPrice(cafePrice, cafePrice);
 
-			return list;
+			List<Cafeteria> resultList;
+
+			if (cafetags == null || cafetags.isEmpty()) {
+				resultList = mapper.searchByPT(cafePrice, null); // 태그를 null로 전달
+			} else {
+				String tags = String.join(",", cafetags); // 리스트를 문자열
+				resultList = mapper.searchByPT(cafePrice, tags);
+			}
+
+			return resultList.stream().distinct().collect(Collectors.toList());
 		}
 	}
+
+//	@Override
+//	public List<Cafeteria> searchByPrice(int cafePrice, String cafetag) {
+//		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+//			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+//			List<Cafeteria> list = mapper.searchByPrice(cafePrice, cafePrice);
+//
+//			return list;
+//		}
+//	}
 
 }

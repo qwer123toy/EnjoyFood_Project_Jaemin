@@ -1,7 +1,6 @@
 package cafeteria;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -32,21 +31,24 @@ public interface CafeteriaMapper {
 			"OR categoryName=#{categoryName} OR cafetag LIKE CONCAT('%', #{cafetag}, '%')",
 			"OR cafeName LIKE CONCAT('%', #{cafeName}, '%') OR cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%')" })
 	@ResultMap("cafeResults")
-	List<Cafeteria> searchByAll(
-			@Param("menuName") String menuName, 
-			@Param("categoryName") String categoryName,
-			@Param("cafetag") String cafetag, 
-			@Param("cafeName") String cafeName,
+	List<Cafeteria> searchByAll(@Param("menuName") String menuName, @Param("categoryName") String categoryName,
+			@Param("cafetag") String cafetag, @Param("cafeName") String cafeName,
 			@Param("cafeAddress") String cafeAddress);
 
-	// 가격, 카테고리 리스트
+	// 1010 가격, 태그
 	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
 			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
-			"WHERE cafePrice <= #{cafePrice} AND cafetag LIKE CONCAT('%', #{cafetag}, '%')" 
-			})
-	List<Cafeteria> searchByPrice(
-			@Param("cafePrice") int cafePrice, 
-			@Param("cafetag") String cafetag);
+			"WHERE cafePrice <= #{cafePrice} AND cafetag IN (#{cafetag})" })
+	List<Cafeteria> searchByPT(@Param("cafePrice") int cafePrice, @Param("cafetag") String string);
+
+//	// 가격, 태그
+//	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
+//			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
+//			"WHERE cafePrice <= #{cafePrice} AND cafetag LIKE CONCAT('%', #{cafetag}, '%')" 
+//			})
+//	List<Cafeteria> searchByPrice(
+//			@Param("cafePrice") int cafePrice, 
+//			@Param("cafetag") String cafetag);
 
 	// 맛집 새로 추가
 	@Insert({ "INSERT INTO cafeteria (cafeNum, cafeName, cafeOpenTime, cafePhoneNumber,",
