@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
@@ -16,12 +17,16 @@ import cafeteria.Menus;
 import enjoyfood.MapService;
 import enjoyfood.MapServiceImple;
 import lombok.extern.slf4j.Slf4j;
+import user.model.User;
+import user.model.UserService;
+import user.model.UserServiceImpl;
 
 @WebServlet("/cafeteria")
 @Slf4j
 public class CafeDetailsServlet extends HttpServlet {
 	public CafeteriaService service = CafeteriaServiceImple.getInstance();
 	private MapService mapservice = MapServiceImple.getInstance();
+	private final UserService userService = UserServiceImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,10 +41,15 @@ public class CafeDetailsServlet extends HttpServlet {
 	            resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
 	            return;
 	        }
-	        String userID = (String) req.getAttribute("userID");
-			String userNickName = (String) req.getAttribute("userNickname");
+	        HttpSession session = req.getSession();
+			String userSessionID = (String) session.getAttribute("userID");
+			
+			String userID = (String) req.getAttribute("userID");
+			if(userSessionID != null) {
+				User user = (User) userService.userInfo(userSessionID);
+				req.setAttribute("userType", user.getUserType());			
+			}
 			req.setAttribute("userID", userID);
-			req.setAttribute("userNickName", userNickName);
 			
 			
 			// 조회된 가게 정보를 cafeteria로 저장
