@@ -8,8 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Taste GPT</title>
-<link rel="stylesheet" type="text/css"
-	href="/static/css/searchCategory.css">
+<link rel="stylesheet" type="text/css" href="/static/css/searchCategory.css">
 <script src="/static/js/searchCategory.js"></script>
 </head>
 <body>
@@ -23,26 +22,29 @@
             <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
             
         </div>
-        <div class="login">
-    <c:choose>
-        <c:when test="${not empty userID}">
-            <span>${userID} 님, 환영합니다!</span>
-            <!-- 내 정보 보기 버튼 -->
-            <button class="btn" onclick="location.href='/myInfo'">내 정보 보기</button>
-            <!-- 로그아웃 버튼 -->
-            <form action="/mainpage" method="get" style="display:inline;">
-                <input type="hidden" name="action" value="logout">
-                <button class="btn">로그아웃</button>
-            </form>
-        </c:when>
-        <c:otherwise>
-            <!-- 로그인 버튼 -->
-            <form action="/login" method="get">
-                <button class="btn">로그인</button>
-            </form>
-        </c:otherwise>
-    </c:choose>
-</div>
+		<div class="login">
+		    <c:choose>
+		        <c:when test="${not empty userID}">
+		            <span>${userID} 님, 환영합니다!</span>
+		            <!-- 내 정보 보기 버튼 -->
+		            <button class="btn" onclick="#">내 정보 보기</button>
+		            <form action="/usersuggestion">
+		            	<button class="btn">건의하기</button>
+		            </form>
+		            <!-- 로그아웃 버튼 -->
+		            <form action="/mainpage" method="get" style="display:inline;">
+		                <input type="hidden" name="action" value="logout">
+		                <button class="btn">로그아웃</button>
+		            </form>
+		        </c:when>
+		        <c:otherwise>
+		            <!-- 로그인 버튼 -->
+		            <form action="/login" method="get">
+		                <button class="btn">로그인</button>
+		            </form>
+		        </c:otherwise>
+		    </c:choose>
+		</div>
     </header>
 	 <!-- 왼쪽 고정 바 -->
     <nav class="sidebar">

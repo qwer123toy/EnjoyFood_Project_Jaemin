@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -58,8 +59,13 @@ public class SearchCateServlet extends HttpServlet {
 		
 	    // 검색어가 비어 있지 않은 경우, 검색 수행
 	    List<Cafeteria> searchResults;
+	    List<String> chkList= new ArrayList<String>();
+	    
+	    chkList.add("파스타맛집");
+	    chkList.add("라멘맛집");
+	    
 	    if (searchByPrice != null && !searchByPrice.trim().isEmpty()) {
-	        searchResults = service.searchByPrice(searchByPriceAvg, "초밥");
+	        searchResults = service.searchByPT(searchByPriceAvg, chkList);
 	    } else {
 	        // 검색어가 없으면 전체 가게 목록을 출력
 	        searchResults = service.selectAll();

@@ -18,16 +18,11 @@ public interface CafeteriaService {
 
 	int delete(int cafeNum);
 
-	List<Cafeteria> searchByAll(
-			String menuName,
-			String categoryName,
-			String cafetag,
-			String cafeName,
-			String cafeAddress
-			);
+	List<Cafeteria> searchByAll(String menuName, String categoryName, String cafetag, String cafeName,
+			String cafeAddress);
 
-	List<Cafeteria> searchByPrice(int cafePrice, String cafetag);
 	
 	double selectAvg(int cafeNum);
+	List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags);
 
 }

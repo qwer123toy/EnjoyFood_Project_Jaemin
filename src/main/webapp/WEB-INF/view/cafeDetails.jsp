@@ -26,12 +26,15 @@
             <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
             
         </div>
-        <div class="login">
+       <div class="login">
     <c:choose>
         <c:when test="${not empty userID}">
             <span>${userID} 님, 환영합니다!</span>
             <!-- 내 정보 보기 버튼 -->
-            <button class="btn" onclick="location.href='/myInfo'">내 정보 보기</button>
+            <button class="btn" onclick="#">내 정보 보기</button>
+            <form action="/usersuggestion">
+            	<button class="btn">건의하기</button>
+            </form>
             <!-- 로그아웃 버튼 -->
             <form action="/mainpage" method="get" style="display:inline;">
                 <input type="hidden" name="action" value="logout">

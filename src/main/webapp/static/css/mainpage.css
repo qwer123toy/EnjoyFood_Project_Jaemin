@@ -41,29 +41,33 @@ header .login {
     font-family: Arial, sans-serif;
 }
 
-header .login p {
-    font-size: 16px;
-    color: #333;
-    margin: 0;
-}
 
 header .login .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    
+   text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold; /* 굵은 글씨 */
+    transition: color 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 추가 */
+    position: relative; /* 하단 애니메이션을 위해 상대 위치 지정 */
+}
+
+header .login .btn:after {
+    content: ''; /* 하단에 가상의 요소 추가 */
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #3c82d9; /* 하단 밑줄 색상 */
+    transition: width 0.3s ease; /* 밑줄 애니메이션 */
+}
+
+header .login .btn:hover::after {
+    width: 100%; /* 호버 시 하단 밑줄이 확대 */
 }
 
 header .login .btn:hover {
-    background-color: #45a049;
-}
-
-header .login form {
-    margin: 0;
+    color: #ff3a85; /* 호버 시 색상 변경 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 추가 */
 }
 
 header a {

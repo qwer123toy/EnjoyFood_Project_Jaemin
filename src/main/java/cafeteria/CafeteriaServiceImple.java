@@ -1,9 +1,9 @@
 package cafeteria;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import org.apache.ibatis.session.SqlSession;
-
 import config.AppContextListener;
 
 public class CafeteriaServiceImple implements CafeteriaService {
@@ -114,12 +114,26 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public List<Cafeteria> searchByPrice(int cafePrice, String cafetag) {
+	public List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
-			List<Cafeteria> list = mapper.searchByPrice(cafePrice, cafetag);
 
-			return list;
+			List<Cafeteria> resultList;
+
+			if (cafetags == null || cafetags.isEmpty()) {
+				resultList = mapper.searchByPT(cafePrice, null); // 태그를 null로 전달
+			} else {
+				// 각 태그를 싱글 쿼테이션으로 감싸기
+				String tags = cafetags.stream().map(tag -> "'" + tag + "'") // 각 태그를 '태그' 형식으로 감싸기
+						.collect(Collectors.joining(",")); // 콤마로 연결
+
+				// 만약 맨 앞과 맨 뒤에 쌍따옴표가 필요 없다면
+				// tags 변수에는 따옴표가 포함된 상태로 저장되므로 추가적인 조작이 필요 없습니다
+
+				resultList = mapper.searchByPT(cafePrice, tags);
+			}
+
+			return resultList.stream().distinct().collect(Collectors.toList());
 		}
 	}
 
