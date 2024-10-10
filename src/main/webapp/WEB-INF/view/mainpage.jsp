@@ -8,63 +8,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taste GPT</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <script src="/static/js/mainpage.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/default.css">
     <link rel="stylesheet" type="text/css" href="/static/css/mainpage.css">
+    <script src="/static/js/mainpage.js"></script>
 </head>
 <body>
 
     <!-- 상단 고정 바 -->
-    <header>
-        <div class="logo">TASTE GPT</div>
-        <div class="search-container">
-            <a href="searchCategory" class="searchbtn">맛집 검색 🍽️</a>
-            <a href="searchCategory">지역별 검색 🎮</a>
-            <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
-            
-        </div>
-        <div class="login">
-            <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
-            <form action="/login" method="get">
-                <button class="btn">로그인</button>
-            </form>
-        </div>
-    </header>
+    <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
     <!-- 왼쪽 고정 바 -->
-    <nav class="sidebar">
-        <button>인기순</button>
-        <button>신규 오픈</button>
-        <button>리뷰 보기</button>
-        <button>문의사항</button>
-    </nav>
+   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
 
     <!-- 메인 컨텐츠 -->
     <main>
         <!-- 검색 입력란 -->
         <div class="search-bar">
-            <form method="get" action="mainpage.jsp">
-                <input type="text" name="searchQuery" placeholder="맛집 검색어 입력">
+            <form method="post">
+                <input type="text" name="searchQuery" id ="searchQuery" placeholder="맛집 검색어 입력">
                 <button type="submit">→</button>
             </form>
         </div>
 
         <!-- 가게 리스트 -->
             <!-- 데이터베이스에서 검색 결과를 불러와서 JSTL로 반복 출력 -->
-        <!-- <div class="store-list">
-            <c:forEach var="store" items="${cafeteria}">
+      <div class="store-list">
+            <c:forEach var="cafeteria" items="${list}">
                 <div class="store-item">
-                    <a href="/store-details/${cafeteria.id}">
-                        <div class="store-image">${cafeteria.pic}</div>
+                    <a href="/store-details/${cafeteria.cafeNum}">
+                        <!--  <div class="store-image">이미지 넣을거임!</div> -->
                     </a>
+                    
                     <ul>
-                        <li>${cafeteria.name}</li>
-                        <li>평균 금액: ${cafeteria.Price}</li>
-                        <li>전화번호: ${cafeteria.phoneNumber}</li>
-                        <li><a href="#">주소: ${cafeteria.address}</a></li>
+                    
+                        <li><a href="cafeteria?cafeNum=${cafeteria.cafeNum}&cafeName=${cafeteria.cafeName}">${cafeteria.cafeName}</a></li>
+                        <li>평균 금액: ${cafeteria.cafePrice} 원</li>
+                        <li>전화번호: ${cafeteria.cafePhoneNumber}</li>
+                        <li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
+                        
                     </ul>
+                    
                 </div>
             </c:forEach>
-        </div>  -->
+        </div>  
     </main>
 </body>
 </html>

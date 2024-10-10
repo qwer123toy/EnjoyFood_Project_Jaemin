@@ -8,39 +8,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Taste GPT</title>
-<link rel="stylesheet" type="text/css"
-	href="/static/css/searchCategory.css">
+<link rel="stylesheet" type="text/css" href="/static/css/searchCategory.css">
 <script src="/static/js/searchCategory.js"></script>
 </head>
 <body>
 
 	 <!-- 상단 고정 바 -->
-    <header>
-        <div ><a href="mainpage" class="logo">TASTE GPT</a></div>
-        <div class="search-container">
-            <button class="btn">맛집 검색 🍽️</button>
-            <button class="btn">지역별 검색 🎮</button>
-            <a href="searchCategory" class="btn">유형별 검색 🎮</a>
-            
-        </div>
-        <div class="login">
-            <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
-            <form action="/login" method="get">
-                <button class="btn">로그인</button>
-            </form>
-        </div>
-    </header>
+    <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
+
+    <!-- 왼쪽 고정 바 -->
+   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+
 	 <!-- 왼쪽 고정 바 -->
     <nav class="sidebar">
         	<button>유형별 검색</button>
 
     </nav>
 	 <!-- 검색 입력란 -->
+	 <main>
+	 
         <div class="search-bar">
-            <form method="get" action="mainpage">
-               <input type="number" id="max-price" placeholder="최대 금액" />
+            <form method="post" >
+               <input type="number" name="max-price" id="max-price" placeholder="최대 금액" />
                <button type="submit">검색</button>
-		<select id="people-combo">
+		<select id="people-combo" name = "people-combo">
 			<option value="1">1명</option>
 			<option value="2">2명</option>
 			<option value="3">3명</option>
@@ -64,55 +55,50 @@
 
 	<!-- 체크박스 카테고리 -->
 	<section id="categories">
-		<label class="category" for="date"> <input type="checkbox"
-			id="date" name="category"> 데이트
-		</label> <label class="category" for="family"> <input type="checkbox"
-			id="family" name="category"> 가족 외식
-		</label> <label class="category" for="student"> <input type="checkbox"
-			id="student" name="category"> 학생
-		</label> <label class="category" for="special-event"> <input
-			type="checkbox" id="special-event" name="category"> 특별한 이벤트
-		</label> <label class="category" for="dessert"> <input type="checkbox"
-			id="dessert" name="category"> 디저트
-		</label> <label class="category" for="omakase"> <input type="checkbox"
-			id="omakase" name="category"> 오마카세
-		</label>
+	    <label class="category" for="date">
+	        <input type="checkbox" id="date" name="category" value="데이트"> 데이트
+	    </label>
+	    <label class="category" for="family">
+	        <input type="checkbox" id="family" name="category" value="가족 외식"> 가족 외식
+	    </label>
+	    <label class="category" for="student">
+	        <input type="checkbox" id="student" name="category" value="학생"> 학생
+	    </label>
+	    <label class="category" for="special-event">
+	        <input type="checkbox" id="special-event" name="category" value="특별한 이벤트"> 특별한 이벤트
+	    </label>
+	    <label class="category" for="dessert">
+	        <input type="checkbox" id="dessert" name="category" value="디저트"> 디저트
+	    </label>
+	    <label class="category" for="omakase">
+	        <input type="checkbox" id="omakase" name="category" value="오마카세"> 오마카세
+	    </label>
 	</section>
+	
+	<!-- 직접 입력을 위한 추가 필드 -->
+	<div>
+	    <label for="additional-category">기타 카테고리:</label>
+	    <input type="text" id="additional-category" name="additionalCategory" placeholder="기타 카테고리 입력">
+	</div>
+
 </section>
 
 	<!-- 추천 가게 이미지 및 맛집 정보 -->
-	<section id="recommendations">
-		<div class="recommendation-item">
-			<a href="recommendation1.html" class="store-recommendation">추천 가게
-				이미지</a>
-			<div class="store-info">
-				<p>
-					맛집명: <span>가게 이름</span>
-				</p>
-				<p>
-					평균 금액: <span>30,000원</span>
-				</p>
-				<p>
-					주소: <span>서울특별시 강남구</span>
-				</p>
-			</div>
-		</div>
-		<div class="recommendation-item">
-			<a href="recommendation2.html" class="store-recommendation">추천 가게
-				이미지</a>
-			<div class="store-info">
-				<p>
-					맛집명: <span>가게 이름</span>
-				</p>
-				<p>
-					평균 금액: <span>50,000원</span>
-				</p>
-				<p>
-					주소: <span>서울특별시 용산구</span>
-				</p>
-			</div>
-		</div>
-	</section>
-
+		 <div class="store-list">
+            <c:forEach var="cafeteria" items="${list}">
+                <div class="store-item">
+                    <a href="/store-details/${cafeteria.cafeNum}">
+                        <!--  <div class="store-image">이미지 넣을거임!</div> -->
+                    </a>
+                    <ul>
+                        <li><a href="cafeteria?cafeNum=${cafeteria.cafeNum}&cafeName=${cafeteria.cafeName}">${cafeteria.cafeName}</a></li>
+                        <li>인당 평균 금액: ${cafeteria.cafePrice} 원</li>
+                        <li>전화번호: ${cafeteria.cafePhoneNumber}</li>
+                        <li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
+                    </ul>
+                </div>
+            </c:forEach>
+        </div> 
+</main>
 </body>
 </html>

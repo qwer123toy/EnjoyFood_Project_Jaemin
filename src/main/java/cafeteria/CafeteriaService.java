@@ -6,15 +6,24 @@ import java.util.List;
 public interface CafeteriaService {
 	List<Cafeteria> selectAll();
 
+	List<Cafeteria> showByPic(int cafeNum);
+
 	Cafeteria update(Cafeteria cafeteria);
-
-	int delete(int cafeNum);
-
-	int insert(Cafeteria cafetria);
 
 	Cafeteria selectByName(String cafeName);
 
-	List<Cafeteria> showByPic(int cafeNum);
+	int insert(Cafeteria cafetria);
 
-	int insertMenu(Menu menus);
+	int insertMenu(Menu menu);
+
+	int delete(int cafeNum);
+
+	List<Cafeteria> searchByAll(String menuName, String categoryName, String cafetag, String cafeName,
+			String cafeAddress);
+
+	double selectAvg(int cafeNum);
+
+//	List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags);
+	List<Cafeteria> getCafeByPriceAndTags(int cafePrice, List<String> cafetags);
+
 }

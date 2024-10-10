@@ -6,23 +6,6 @@ body {
 	padding: 0;
 }
 
-header {
-	position: fixed;
-	width : 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 15px;
-	margin-bottom : 15px;
-	background-color: #fff;
-	border-bottom: 1px solid #ddd;
-}
-
-.logo {
-	font-size: 24px;
-	color: #ff1493;
-	font-weight: bold;
-}
 
 .menu-container .btn {
 	background-color: #ff69b4;
@@ -61,6 +44,7 @@ header {
 }
 
 main {
+	
     margin-left: 200px; /* 이 값을 필요에 따라 조정 */
     padding: 20px;
     display: flex;
@@ -70,11 +54,11 @@ main {
 }
 
 .store-info {
+	margin-top: 50px;
 	text-align: center;
 }
 
 .store-infoDetail {
-    width: 350px; /* 가게 이미지의 너비 */
     height: 350px; /* 가게 이미지의 높이 */
     margin: 0 auto; /* 가로 가운데 정렬 */
     display: flex;
@@ -82,16 +66,49 @@ main {
     align-items: center; /* 세로 정렬 */
 }
 
-
 .store-title {
 	font-size: 36px;
 	color: #ff1493;
 	margin-bottom: 20px;
 }
 
+
+.star-rating {
+    width: 150px; /* 별 5개의 가로 너비를 늘려 별 크기 증가 */
+    height: 30px; /* 별 높이를 키움 */
+    display: inline-block;
+    position: relative;
+    font-size: 30px; /* 별 크기를 키움 */
+    line-height: 30px; /* 별이 세로로 꽉 차도록 높이를 맞춤 */
+    color: lightgray; /* 회색 별 색상 */
+}
+
+.star-rating-filled {
+    color: gold; /* 노란색 별 색상 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.star-rating::before {
+    content: "★★★★★"; /* 별 5개를 텍스트로 표현 */
+    display: block;
+    height: 100%;
+}
+
+.star-rating-filled::before {
+    content: "★★★★★"; /* 별 5개를 채울 부분 */
+    display: block;
+    height: 100%;
+}
+
+
+
 .menu-images-wrapper {
 	position: relative;
-	width: 500px;
 	overflow: hidden;
 	margin: 0 auto;
 }
@@ -182,18 +199,6 @@ main {
 	color: #ff69b4;
 }
 
-.scroll-bar {
-	position: fixed;
-	right: 0;
-	top: 70px;
-	padding: 20px;
-	background-color: #ffb6c1;
-	height: 100%;
-	width: 80px;
-	text-align: center;
-	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
 /* 추가된 리뷰 섹션 스타일 */
 .review-section {
 	margin-top: 50px;
@@ -239,23 +244,4 @@ main {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-}
-
-/* 오른쪽 스크롤 바 */
-.scroll-bar {
-	position: fixed;
-	right: 0;
-	top: 70px;
-	padding: 20px;
-	background-color: #ffb6c1;
-	height: 100%;
-	width: 80px;
-	text-align: center;
-	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.scroll-bar p {
-	margin-bottom: 20px;
-	font-size: 14px;
-	color: #0000ff;
 }

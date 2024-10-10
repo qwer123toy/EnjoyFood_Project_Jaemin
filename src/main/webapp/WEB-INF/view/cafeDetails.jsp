@@ -9,16 +9,20 @@
 <title>가게 상세보기</title>
 <link rel="stylesheet" type="text/css"
 	href="/static/css/cafeDetails.css">
+	
+<!-- 서버에서 넘겨준 address 값을 자바스크립트 변수로 전달 -->
+<script type="text/javascript">
+    var address = "<%= request.getAttribute("address") %>";
+    var cafeName = "<%= request.getAttribute("cafeName") %>";
+</script>
 </head>
 <body>
-	<!-- 상단 고정 바 -->
-	<header>
-		<div class="logo">TASTE GPT</div>
-		<div class="menu-container">
-			<button class="btn">메인화면</button>
-		</div>
-		<div class="user-info">유저 정보</div>
-	</header>
+	 <!-- 상단 고정 바 -->
+    <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
+
+    <!-- 왼쪽 고정 바 -->
+   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+
 
 	<!-- 왼쪽 고정 바 -->
 	<nav class="sidebar">
@@ -30,7 +34,7 @@
 	<main>
 		<section class="store-info">
 			<!-- 기존 상세보기 화면 -->
-			<h1 class="store-title">가게 상세보기 화면 1</h1>
+			<h1 class="store-title">${cafeteria.cafeName}</h1>
 
 			<!-- 메뉴 이미지 슬라이더 -->
 			<div class="menu-images-wrapper">
@@ -47,20 +51,15 @@
 <!-- 가게 정보 -->
 <div class ="store-infoDetail">
 <div class="store-details">
-    <div class="store-image"  style="width:40%;height:330px;">가게 이미지</div>
+    <div class="store-image"  style="width:300px;height:300px;margin-right:100px;">가게 이미지</div>
     <p style="margin-top:-12px">
     <em class="link">
         <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
         </a>
     </em>
 </p>
-<div id="store-map" style="width:30%;height:230px;"></div>
+<div id="store-map" style="width:300px;height:300px; margin-right:100px"></div>
 
-<!-- 서버에서 넘겨준 address 값을 자바스크립트 변수로 전달 -->
-<script type="text/javascript">
-    var address = "<%= request.getAttribute("address") %>";
-    var cafeName = "<%= request.getAttribute("cafeName") %>";
-</script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b35dc634ac3bd42d8c421860d626613&libraries=services"></script>
 <script>
@@ -101,21 +100,33 @@ geocoder.addressSearch(address, function(result, status) {
     } 
 });    
 </script>
-    <ul class="store-info-list"  style="width:20%;height:230px;">
-        <li>맛집명: <strong>${cafeteria.cafeName}</strong></li>
-        <li>평균 금액: <strong>${cafeteria.cafePrice}</strong></li>
-        <li>전화번호: <strong>${cafeteria.cafePhoneNumber}</strong></li>
-        <li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
-    </ul>
+	<ul class="store-info-list" style="width:300px; height:300px; margin-right:100px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <li>상호명: <strong>${cafeteria.cafeName}</strong></li>
+    <li>평균 금액: <strong>${cafeteria.cafePrice} 원</strong></li>
+    <li>전화번호: <strong>${cafeteria.cafePhoneNumber}</strong></li>
+    <li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
+    <li id="score">
+        평점: <strong>${score}</strong> 
+        <div class="star-rating">
+            <div class="star-rating-filled" style="width: calc(${score} * 20%)"></div>
+            
+        </div>
+    </li>
+</ul>
+
+
 </div>
 </div>
-	
-	
 	
 			<!-- 간단한 맛집 소개 -->
 			<div class="store-description">
 				<h2>간단한 맛집 소개</h2>
 				<p>이곳은 맛집에 대한 간단한 설명을 보여줍니다.</p>
+				<p>상 호 명 : ${cafeteria.cafeName}</p>
+				<p>영업 시간 : ${cafeteria.cafeOpenTime}</p>
+				<p>가게 유형 : </p>
+				<p>가게 태그 : </p>
+				
 			</div>
 		</section>
 	
@@ -123,7 +134,6 @@ geocoder.addressSearch(address, function(result, status) {
 		<section class="review-section">
 			<h2>Review</h2>
 			<div>
-				<p>최신순</p> <p>평점순</p>
 			</div>
 			<div class="review-list">
 				<div class="review-item">
@@ -163,7 +173,10 @@ geocoder.addressSearch(address, function(result, status) {
 					</p>
 				</div>
 			</div>
-			<button class="btn-review">리뷰 작성하기</button>
+			<form action="/cafeReview" method="get">
+    <input type="hidden" name="cafeNum" value="${cafeteria.cafeNum}">
+    <button class="btn-review">리뷰 작성하기</button>
+</form>
 		</section>
 	</main>
 

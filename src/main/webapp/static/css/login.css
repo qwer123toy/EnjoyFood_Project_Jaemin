@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -69,4 +67,19 @@ input {
 
 .hidden {
 	display: none;
+}
+
+.helplinks {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.findlink {
+	color: #007bff;
+	text-decoration: none;
+	margin: 0 5px;
+}
+
+.findlink:hover {
+	text-decoration: underline;
 }

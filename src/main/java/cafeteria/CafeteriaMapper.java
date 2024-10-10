@@ -25,6 +25,30 @@ public interface CafeteriaMapper {
 			@Result(column = "cafeOwner", property = "cafeOwner", jdbcType = JdbcType.VARCHAR) })
 	List<Cafeteria> selectAll();
 
+	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 검색한 식당 리스트
+	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
+			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
+			"WHERE cafeNum IN (SELECT cafeNum FROM menu where menuName  LIKE CONCAT('%', #{menuName}, '%'))",
+			"OR categoryName=#{categoryName} OR cafetag LIKE CONCAT('%', #{cafetag}, '%')",
+			"OR cafeName LIKE CONCAT('%', #{cafeName}, '%') OR cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%')" })
+	@ResultMap("cafeResults")
+	List<Cafeteria> searchByAll(@Param("menuName") String menuName, @Param("categoryName") String categoryName,
+			@Param("cafetag") String cafetag, @Param("cafeName") String cafeName,
+			@Param("cafeAddress") String cafeAddress);
+
+//	@Select({ "<script> SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice \r\n"
+//			+ "    FROM cafeteria\r\n"
+//			+ "    NATURAL JOIN cafecategory \r\n"
+//			+ "    NATURAL JOIN category_management \r\n"
+//			+ "    NATURAL JOIN cafetag\r\n"
+//			+ "    WHERE cafePrice <= #{cafePrice} \r\n"
+//			+ "    AND cafetag IN (\r\n"
+//			+ "        <foreach item=\"item\" index=\"index\" collection=\"cafetag\" open=\"(\" separator=\",\" close=\")\">\r\n"
+//			+ "            #{item}\r\n"
+//			+ "        </foreach>"
+//			+ "</script>" })
+//	List<Cafeteria> searchByPT(@Param("cafePrice") int cafePrice, @Param("cafetag") List<String> cafetags);
+
 	// 맛집 새로 추가
 	@Insert({ "INSERT INTO cafeteria (cafeNum, cafeName, cafeOpenTime, cafePhoneNumber,",
 			"cafeAddress, cafePrice, cafeOwner)",
@@ -51,12 +75,6 @@ public interface CafeteriaMapper {
 	@Delete("DELETE FROM Cafeteria WHERE cafeNum=#{cafeNum}")
 	int delete(int cafeNum);
 
-	// 가격 범위 - 해당 범위외 값 안나옴
-	@Select({ "SELECT cafeName, cafeOpenTime, cafePhoneNumber, cafeAddress, cafePrice", "FROM cafeteria",
-			"WHERE cafePrice BETWEEN #{start} AND #{end}" })
-	@ResultMap("cafeResults")
-	List<Cafeteria> searchByPrice(@Param("start") int start, @Param("end") int end);
-
 	// 가게 번호와 해당 이미지 조회
 	@Select({ "SELECT cp.picNumber, cp.cafePic, cp.cafeNum, c.cafeName, c.cafeOpenTime, c.cafePhoneNumber",
 			"c.cafeAddress, c.cafePrice, c.cafeOwner", "FROM cafePic AS cp",
@@ -74,6 +92,9 @@ public interface CafeteriaMapper {
 
 	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic, menuExplain) ",
 			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic}, #{menuExplain})" })
-	int insertMenu(Menu menus);
+	int insertMenu(Menu menu);
+
+	@Select("SELECT avg(cafeScore) FROM cafeReview WHERE cafeNum=#{cafeNum}")
+	String selectAvg(@Param("cafeNum") int cafeNum);
 
 }

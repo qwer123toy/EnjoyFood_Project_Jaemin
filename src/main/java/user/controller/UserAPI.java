@@ -21,33 +21,88 @@ import user.model.UserValidator;
 
 @WebServlet({ "/api/v1/user", "/api/v1/user/*" })
 public class UserAPI extends HttpServlet {
+
 	private final UserService service = UserServiceImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
 
-		String userID = req.getParameter("userID");
-		if (userID != null) {
-			checkIdDuplicate(resp, webUtil, userID);
+		String action = req.getParameter("action");
+		if (action.equals("chkDuple")) {
+			String userID = req.getParameter("userID");
+			if (userID != null) {
+				checkIdDuplicate(resp, webUtil, userID);
+				return;
+			}
+			String userNickname = req.getParameter("userNickname");
+			if (userNickname != null) {
+				checkNicknameDuplicate(resp, webUtil, userNickname);
+				return;
+			}
+			String userPhoneNumber = req.getParameter("userPhoneNumber");
+			if (userPhoneNumber != null) {
+				checkPhoneNumberDuplicate(resp, webUtil, userPhoneNumber);
+				return;
+			}
+			String userOwnerNumber = req.getParameter("userOwnerNumber");
+			if (userOwnerNumber != null) {
+				checkOwnerNumberDuplicate(resp, webUtil, userOwnerNumber);
+				return;
+			}
+		} else if (action.equals("findID")) {
+			String userPhoneNumber = req.getParameter("userPhoneNumber");
+			handleFindId(resp, webUtil, userPhoneNumber);
 			return;
-		}
-		String userNickname = req.getParameter("userNickname");
-		if (userNickname != null) {
-			checkNicknameDuplicate(resp, webUtil, userNickname);
+		} else if (action.equals("findPW")) {
+			String userID = req.getParameter("userID");
+			String userPhoneNumber = req.getParameter("userPhoneNumber");
+			handleFindPw(resp, webUtil, userID, userPhoneNumber);
 			return;
-		}
-		String userPhoneNumber = req.getParameter("userPhoneNumber");
-		if (userPhoneNumber != null) {
-			checkPhoneNumberDuplicate(resp, webUtil, userPhoneNumber);
-			return;
-		}
-		String userOwnerNumber = req.getParameter("userOwnerNumber");
-		if (userOwnerNumber != null) {
-			checkOwnerNumberDuplicate(resp, webUtil, userOwnerNumber);
+		} else if (action.equals("userInfo")) {
+			handleUserInfoRequest(req, resp, webUtil);
 			return;
 		}
 		handleBadRequest(resp, webUtil);
+	}
+
+	private void handleUserInfoRequest(HttpServletRequest req, HttpServletResponse resp, WebUtil webUtil)
+			throws IOException {
+		String userID = (String) req.getSession().getAttribute("userID");
+		if (userID == null) {
+			handleBadRequest(resp, webUtil);
+			return;
+		}
+		User user = service.userInfo(userID);
+		if (user != null) {
+			webUtil.setCodeAndMimeType(resp, 200, "json");
+			webUtil.writeBodyJson(resp, user);
+		} else {
+			handleBadRequest(resp, webUtil);
+		}
+	}
+
+	private void handleFindPw(HttpServletResponse resp, WebUtil webUtil, String userID, String userPhoneNumber)
+			throws IOException {
+		User user = service.findUser(userPhoneNumber);
+		if (user != null && user.getUserID().equals(userID)) {
+			webUtil.setCodeAndMimeType(resp, 200, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(true, "일치하는 계정 확인"));
+		} else {
+			webUtil.setCodeAndMimeType(resp, 404, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(false, "일치하는 계정이 없습니다."));
+		}
+	}
+
+	private void handleFindId(HttpServletResponse resp, WebUtil webUtil, String userPhoneNumber) throws IOException {
+		User user = service.findUser(userPhoneNumber);
+		if (user != null) {
+			webUtil.setCodeAndMimeType(resp, 200, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(true, "아이디는 [" + user.getUserID() + "] 입니다."));
+		} else {
+			webUtil.setCodeAndMimeType(resp, 404, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(false, "일치하는 계정이 없습니다."));
+		}
 	}
 
 	private void checkOwnerNumberDuplicate(HttpServletResponse resp, WebUtil webUtil, String userOwnerNumber)
@@ -96,7 +151,7 @@ public class UserAPI extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
-		
+
 		AuthRequest authRequest = webUtil.readBodyJson(req, AuthRequest.class);
 
 		String action = authRequest.getAction();
@@ -124,7 +179,11 @@ public class UserAPI extends HttpServlet {
 		} else {
 			HttpSession oldSession = SessionManager.getSession(loginUser.getUserID());
 			if (oldSession != null) {
-				oldSession.invalidate();
+				try {
+					oldSession.invalidate();
+				} catch (IllegalStateException e) {
+					log("Session has already been invalidated.");
+				}
 			}
 			HttpSession session = req.getSession();
 			session.setAttribute("userID", loginUser.getUserID());
@@ -159,7 +218,7 @@ public class UserAPI extends HttpServlet {
 				if (service.signup(user)) {
 					map.put("success", "회원가입 성공");
 				} else {
-					map.put("error", "sql 에러");
+					map.put("error", "회원가입 에러");
 				}
 			}
 		}
@@ -176,5 +235,44 @@ public class UserAPI extends HttpServlet {
 	private void handleBadRequest(HttpServletResponse resp, WebUtil webUtil) throws IOException {
 		webUtil.setCodeAndMimeType(resp, 400, "json");
 		webUtil.writeBodyJson(resp, new AuthResponse(false, "잘못된 요청입니다."));
+	}
+
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		WebUtil webUtil = new WebUtil();
+
+		AuthRequest authRequest = webUtil.readBodyJson(req, AuthRequest.class);
+
+		String action = authRequest.getAction();
+		User user = authRequest.getUser();
+
+		switch (action) {
+		case "changePW":
+			handleChangePW(resp, webUtil, user);
+			break;
+		default:
+			handleBadRequest(resp, webUtil);
+			break;
+		}
+	}
+
+	private void handleChangePW(HttpServletResponse resp, WebUtil webUtil, User user) throws IOException {
+		if (UserValidator.isValidPW(user.getUserPW())) {
+			if (service.changePW(user)) {
+				webUtil.setCodeAndMimeType(resp, 200, "json");
+				webUtil.writeBodyJson(resp, new AuthResponse(true, "비밀번호 변경 성공"));
+			} else {
+				webUtil.setCodeAndMimeType(resp, 400, "json");
+				webUtil.writeBodyJson(resp, new AuthResponse(false, "비밀번호 변경 에러"));
+			}
+		} else {
+			webUtil.setCodeAndMimeType(resp, 400, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(false, "잘못된 비밀번호 형식"));
+		}
+	}
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		super.doDelete(req, resp);
 	}
 }

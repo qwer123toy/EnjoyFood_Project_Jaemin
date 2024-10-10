@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 상단 로고 클릭 시 메인 페이지로 이동
-    document.getElementById('logo').addEventListener('click', function() {
-        window.location.href = 'mainpage'; // 메인 페이지로 이동
-    });
-
-
     // 금액 버튼 클릭 시 해당 금액 입력란에 설정
     const priceButtons = document.querySelectorAll('.price-btn');
     priceButtons.forEach(button => {

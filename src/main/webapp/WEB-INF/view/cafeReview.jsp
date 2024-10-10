@@ -12,13 +12,21 @@
 </head>
 <body>
 	<!-- 상단 고정 바 -->
-	<header>
-		<div class="logo">TASTE GPT</div>
-		<div class="menu-container">
-			<button class="btn">메인화면</button>
-		</div>
-		<div class="user-info">유저 정보</div>
-	</header>
+    <header>
+        <div class="logo"><a href="mainpage">TASTE GPT</a></div>
+        <div class="search-container">
+            <a href="searchCategory" class="searchbtn">맛집 검색 🍽️</a>
+            <a href="searchCategory">지역별 검색 🎮</a>
+            <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
+            
+        </div>
+        <div class="login">
+            <!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
+            <form action="/login" method="get">
+                <button class="btn">로그인</button>
+            </form>
+        </div>
+    </header>
 
 	<!-- 왼쪽 고정 바 -->
 	<nav class="sidebar">
@@ -30,6 +38,7 @@
 	<main>
 		<section class="review-section">
 			<h1 class="review-title">리뷰 작성 화면</h1>
+			
 			<div class="review-container">
 				<!-- 이미지 업로드 -->
 				<div class="review-image">
