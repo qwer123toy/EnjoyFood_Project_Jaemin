@@ -11,38 +11,12 @@
    
 </head>
 <body><!-- 상단 고정 바 -->
-    <header>
-        <a href="mainpage" class="main-link">TASTE GPT</a>
-        <div class="search-container">
-            <a href="searchCategory" class="searchbtn">맛집 검색 🍽️</a>
-            <a href="searchCategory">지역별 검색 🎮</a>
-            <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
-            
-        </div>
-        <div class="login">
-    <c:choose>
-        <c:when test="${not empty userID}">
-            <span>${userID} 님, 환영합니다!</span>
-            <!-- 내 정보 보기 버튼 -->
-            <button class="btn" onclick="#">내 정보 보기</button>
-            <form action="/usersuggestion">
-            	<button class="btn">건의하기</button>
-            </form>
-            <!-- 로그아웃 버튼 -->
-            <form action="/mainpage" method="get" style="display:inline;">
-                <input type="hidden" name="action" value="logout">
-                <button class="btn">로그아웃</button>
-            </form>
-        </c:when>
-        <c:otherwise>
-            <!-- 로그인 버튼 -->
-            <form action="/login" method="get">
-                <button class="btn">로그인</button>
-            </form>
-        </c:otherwise>
-    </c:choose>
-</div>
-    </header>
+     <!-- 상단 고정 바 -->
+    <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
+
+    <!-- 왼쪽 고정 바 -->
+   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+
 
 
     <!-- 건의사항 폼 -->

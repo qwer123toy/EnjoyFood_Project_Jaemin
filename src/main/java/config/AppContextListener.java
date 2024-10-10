@@ -20,6 +20,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
+import cafeteria.CafeteriaDynamicMapper;
 import cafeteria.CafeteriaMapper;
 import enjoyfood.MapMapper;
 import user.model.UserMapper;
@@ -51,6 +52,7 @@ public class AppContextListener implements ServletContextListener {
 		configuration.addMapper(UserMapper.class);
 		configuration.addMapper(MapMapper.class);
 		configuration.addMapper(CafeteriaMapper.class);
+		configuration.addMapper(CafeteriaDynamicMapper.class);
 
 		sessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 	}

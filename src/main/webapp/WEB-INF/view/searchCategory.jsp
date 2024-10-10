@@ -13,39 +13,12 @@
 </head>
 <body>
 
-	<!-- 상단 고정 바 -->
-    <header>
-        <div class="logo"><a href="mainpage">TASTE GPT</a></div>
-        <div class="search-container">
-            <a href="mainpage" class="searchbtn">맛집 검색 🍽️</a>
-            <a href="searchCategory">지역별 검색 🎮</a>
-            <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
-            
-        </div>
-		<div class="login">
-		    <c:choose>
-		        <c:when test="${not empty userID}">
-		            <span>${userID} 님, 환영합니다!</span>
-		            <!-- 내 정보 보기 버튼 -->
-		            <button class="btn" onclick="#">내 정보 보기</button>
-		            <form action="/usersuggestion">
-		            	<button class="btn">건의하기</button>
-		            </form>
-		            <!-- 로그아웃 버튼 -->
-		            <form action="/mainpage" method="get" style="display:inline;">
-		                <input type="hidden" name="action" value="logout">
-		                <button class="btn">로그아웃</button>
-		            </form>
-		        </c:when>
-		        <c:otherwise>
-		            <!-- 로그인 버튼 -->
-		            <form action="/login" method="get">
-		                <button class="btn">로그인</button>
-		            </form>
-		        </c:otherwise>
-		    </c:choose>
-		</div>
-    </header>
+	 <!-- 상단 고정 바 -->
+    <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
+
+    <!-- 왼쪽 고정 바 -->
+   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+
 	 <!-- 왼쪽 고정 바 -->
     <nav class="sidebar">
         	<button>유형별 검색</button>
@@ -82,20 +55,32 @@
 
 	<!-- 체크박스 카테고리 -->
 	<section id="categories">
-		<label class="category" for="date"> <input type="checkbox"
-			id="date" name="category"> 데이트
-		</label> <label class="category" for="family"> <input type="checkbox"
-			id="family" name="category"> 가족 외식
-		</label> <label class="category" for="student"> <input type="checkbox"
-			id="student" name="category"> 학생
-		</label> <label class="category" for="special-event"> <input
-			type="checkbox" id="special-event" name="category"> 특별한 이벤트
-		</label> <label class="category" for="dessert"> <input type="checkbox"
-			id="dessert" name="category"> 디저트
-		</label> <label class="category" for="omakase"> <input type="checkbox"
-			id="omakase" name="category"> 오마카세
-		</label>
+	    <label class="category" for="date">
+	        <input type="checkbox" id="date" name="category" value="데이트"> 데이트
+	    </label>
+	    <label class="category" for="family">
+	        <input type="checkbox" id="family" name="category" value="가족 외식"> 가족 외식
+	    </label>
+	    <label class="category" for="student">
+	        <input type="checkbox" id="student" name="category" value="학생"> 학생
+	    </label>
+	    <label class="category" for="special-event">
+	        <input type="checkbox" id="special-event" name="category" value="특별한 이벤트"> 특별한 이벤트
+	    </label>
+	    <label class="category" for="dessert">
+	        <input type="checkbox" id="dessert" name="category" value="디저트"> 디저트
+	    </label>
+	    <label class="category" for="omakase">
+	        <input type="checkbox" id="omakase" name="category" value="오마카세"> 오마카세
+	    </label>
 	</section>
+	
+	<!-- 직접 입력을 위한 추가 필드 -->
+	<div>
+	    <label for="additional-category">기타 카테고리:</label>
+	    <input type="text" id="additional-category" name="additionalCategory" placeholder="기타 카테고리 입력">
+	</div>
+
 </section>
 
 	<!-- 추천 가게 이미지 및 맛집 정보 -->
@@ -107,7 +92,7 @@
                     </a>
                     <ul>
                         <li><a href="cafeteria?cafeNum=${cafeteria.cafeNum}&cafeName=${cafeteria.cafeName}">${cafeteria.cafeName}</a></li>
-                        <li>평균 금액: ${cafeteria.cafePrice} 원</li>
+                        <li>인당 평균 금액: ${cafeteria.cafePrice} 원</li>
                         <li>전화번호: ${cafeteria.cafePhoneNumber}</li>
                         <li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
                     </ul>
