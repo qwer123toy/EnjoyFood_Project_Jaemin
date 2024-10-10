@@ -41,14 +41,14 @@ h1 {
 button {
 	width: 100%;
 	padding: 10px;
-	background-color: #5cb85c;
+	background-color: #007BFF;
 	color: white;
 	border: none;
 	cursor: pointer;
 }
 
 button:hover {
-	background-color: #4cae4c;
+	opacity: 0.9;
 }
 
 .error {

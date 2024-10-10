@@ -14,4 +14,9 @@ public interface UserService {
 
 	boolean isOwnerNumberDuplicate(String ownerNumber);
 
+	User findUser(String phoneNumber);
+
+	boolean update(User user);
+
+	boolean changePW(User user);
 }
