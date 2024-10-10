@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
 .main {
 	max-width: 400px;
 	margin: 50px auto;
@@ -22,7 +29,7 @@ input[type="text"], input[type="password"] {
 	border-radius: 5px;
 }
 
-button {
+#findPwForm button {
 	width: 100%;
 	padding: 10px;
 	background-color: #007bff;
@@ -32,7 +39,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#findPwForm button:hover {
 	background-color: #0056b3;
 }
 

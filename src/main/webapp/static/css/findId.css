@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
 .main {
 	max-width: 400px;
 	margin: 50px auto;
@@ -22,7 +29,7 @@ input[type="text"] {
 	border-radius: 5px;
 }
 
-button {
+#findIdForm button {
 	width: 100%;
 	padding: 10px;
 	background-color: #007bff;
@@ -33,7 +40,7 @@ button {
 	margin-bottom: 10px;
 }
 
-button:hover {
+#findIdForm button:hover {
 	background-color: #0056b3;
 }
 

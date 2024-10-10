@@ -160,7 +160,11 @@ public class UserAPI extends HttpServlet {
 		} else {
 			HttpSession oldSession = SessionManager.getSession(loginUser.getUserID());
 			if (oldSession != null) {
-				oldSession.invalidate();
+				try {
+					oldSession.invalidate();
+				} catch (IllegalStateException e) {
+					log("Session has already been invalidated.");
+				}
 			}
 			HttpSession session = req.getSession();
 			session.setAttribute("userID", loginUser.getUserID());

@@ -5,11 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css">
 <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
 <script src="/static/js/signup.js" defer></script>
 </head>
 <body>
+ 	<!-- 상단 고정 바 -->
+    <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
+    
+	<!-- 왼쪽 고정 바 -->
+   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+   	
 	<main class="main">
 		<h1>회원가입</h1>
 		<form id="signupForm">

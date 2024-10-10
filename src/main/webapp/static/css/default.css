@@ -4,3 +4,10 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+	background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+	/* 페이지 전체 배경을 상단바 배경처럼 */
+	min-width: 1280px;
+}
