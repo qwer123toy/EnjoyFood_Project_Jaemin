@@ -90,7 +90,7 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public int insertMenu(Menus menus) {
+	public int insertMenu(Menu menus) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
 			int pk = mapper.insertMenu(menus);

@@ -16,6 +16,16 @@
 <title>관리자 기본 페이지</title>
 <link rel="stylesheet" type="text/css" href="/static/css/ownerPage.css"> <!-- CSS 파일 경로 설정 -->
 </head>
+<style>
+.uploaded-image {
+    width: 200px;  /* 이미지 가로 크기 */
+    height: 200px; /* 이미지 세로 크기 */
+    object-fit: cover; /* 이미지가 영역에 맞게 크기 조정 */
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+</style>
 <body>
      <div class="container">
         <!-- 왼쪽 정보 입력 섹션 -->
@@ -168,32 +178,33 @@
             <input type="text" placeholder="주소" class="input-field" />
         </div>
 
-    <h2>이미지 업로드</h2>
-    <form action="imageUpload.jsp" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required />
-        <input type="submit" value="업로드" />
-    </form>
 
     <div class="image-display">
-        <h3>업로드한 이미지</h3>
-        <%
-            // 이미지 파일을 업로드한 후 보여주기
-            if (request.getMethod().equalsIgnoreCase("POST")) {
-                // part를 받아오기 위해 MultipartConfig를 추가
-                Part imagePart = request.getPart("image");
-                String fileName = imagePart.getSubmittedFileName();
-                String uploadPath = application.getRealPath("/") + "uploads/" + fileName;
-
-                // 이미지 저장
-                imagePart.write(uploadPath);
-                String imageUrl = "uploads/" + fileName; // 웹에서 접근 가능한 경로
-
-                // 이미지 출력
-                out.println("<img src='" + imageUrl + "' alt='Uploaded Image' class='uploaded-image' />");
-            }
-        %>
+       <h2>대표 사진을 등록해 주세요.</h2>
+                 <img id="imagePreview" class="uploaded-image" alt="이미지 미리보기">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="imageUpload" name="file" accept="image/*">
+                </form>
     </div>
-
+ <script>
+        // 이미지 미리보기 기능 구현
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // 미리보기 이미지에 선택한 파일의 데이터를 로드
+                document.getElementById('imagePreview').src = e.target.result;
+            };
+            
+            // 선택한 파일이 이미지일 경우만 미리보기 활성화
+            if (file && file.type.startsWith('image/')) {
+                reader.readAsDataURL(file); // 파일을 읽어서 미리보기로 표시
+            } else {
+                document.getElementById('imagePreview').src = ''; // 파일이 없을 경우 미리보기 초기화
+            }
+        });
+    </script>
            <!-- 태그 입력 -->
             <div class="tag-input-container">
                 <label for="tagInput">태그 입력</label>

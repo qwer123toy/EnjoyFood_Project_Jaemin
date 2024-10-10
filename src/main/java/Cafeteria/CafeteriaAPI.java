@@ -41,7 +41,7 @@ public class CafeteriaAPI extends HttpServlet {
 		WebUtil webUtil = new WebUtil();
 		String json = webUtil.readBody(req);
 		JsonMapper jsonMapper = new JsonMapper();
-		Menus menus = jsonMapper.readValue(json, Menus.class);
+		Menu menus = jsonMapper.readValue(json, Menu.class);
 //		Cafeteria cafetria = jsonMapper.readValue(json, Cafeteria.class);
 
 		log.info(menus.toString());

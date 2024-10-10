@@ -72,8 +72,8 @@ public interface CafeteriaMapper {
 	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag}")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
 
-	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic) ",
-			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
-	int insertMenu(Menus menus);
+	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic, menuExplain) ",
+			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic}, #{menuExplain})" })
+	int insertMenu(Menu menus);
 
 }

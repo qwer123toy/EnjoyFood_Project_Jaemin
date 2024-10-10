@@ -1,111 +1,172 @@
 @charset "UTF-8";
+
 body {
-    background-color: #FADADD; /* 배경색 */
-    font-family: Arial, sans-serif;
+	background-color: #FADADD; /* 배경색 */
+	font-family: Arial, sans-serif;
+}
+
+.info-section h1 {
+	font-size: 36px;
+	font-weight: bold;
+	background: linear-gradient(45deg, #FF69B4, #FF1493);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-align: center;
+	margin-bottom: 30px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .container {
-    display: flex;
-    
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    height: 80%;
-    border-radius: 30px;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+	height: 80%;
+	border-radius: 30px;
+	background-color: white;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 input[type="text"], textarea {
-    width: 200px;
-    height: 50px;
-    border: 2px solid #007BFF;
-    border-radius: 10px;
-    margin: 10px 0;
-    padding-left: 20px;
-    font-size: 18px;
-    color: #007BFF;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-textarea {
-    height: 100px; /* 높이를 조정하여 세로로 길게 만듭니다 */
-    resize: none; /* 사용자가 크기를 조정하지 못하도록 설정 */
+	width: 200px;
+	height: 50px;
+	border: 2px solid #007BFF;
+	border-radius: 10px;
+	margin: 10px 0;
+	padding-left: 20px;
+	font-size: 18px;
+	color: #007BFF;
+	outline: none;
+	transition: border-color 0.3s;
 }
 
 input[type="text"]:focus, textarea:focus {
-    border-color: #0056b3;
+	border-color: #0056b3;
 }
 
 .image-display {
-    margin-top: 20px;
-    
+	margin-top: 20px;
+	max-width: 100%;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+textarea#menuDescription {
+	width: 50%;
+	height: 150px; /* 메뉴 설명을 위한 긴 텍스트 영역 */
+	margin-top: 20px;
 }
 
 .uploaded-image {
-	
-    max-width: 100%;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	max-width: 100%;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+	border-radius: 10px;
+	margin-top: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .info-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    padding: 20px;
-}
-.info-section h2 {
-    color: #007BFF;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-.menu-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-}
-.row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+	padding: 20px;
 }
 
+.info-section h2 {
+	color: #007BFF;
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.menu-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 10px;
+}
 
 input[type="text"], select, input[type="file"] {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 200px;
+}
+
+.buttons button {
+	background: linear-gradient(45deg, #FF69B4, #FF1493); /* 그라데이션 배경 */
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 30px; /* 둥근 모서리 */
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+	transition: background 0.3s, transform 0.3s; /* 부드러운 애니메이션 */
+}
+
+.buttons button:hover {
+	background: linear-gradient(45deg, #FF1493, #FF69B4); /* 호버 시 배경색 반전 */
+	transform: scale(1.05); /* 호버 시 약간 확대 */
+}
+
+.buttons button:active {
+	background: linear-gradient(45deg, #FF1493, #C71585); /* 클릭 시 배경색 어둡게 */
+	transform: scale(0.98); /* 클릭 시 살짝 눌리는 효과 */
+}
+
+.uploaded-image {
+	width: 200px; /* 이미지 가로 크기 */
+	height: 200px; /* 이미지 세로 크기 */
+	object-fit: cover; /* 이미지가 영역에 맞게 크기 조정 */
+	border-radius: 10px;
+	margin-top: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 220px;
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	width: 220px;
+	margin-top: 20px;
 }
 
-button {
-    background-color: #FFB6C1; /* 버튼 배경색 */
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+.buttons button {
+	background: linear-gradient(45deg, #FF69B4, #FF1493); /* 그라데이션 배경 */
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 30px; /* 둥근 모서리 */
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+	transition: background 0.3s, transform 0.3s; /* 부드러운 애니메이션 */
 }
 
-button:hover {
-    background-color: #FF69B4; /* 버튼 호버 색상 */
+.buttons button:hover {
+	background: linear-gradient(45deg, #FF1493, #FF69B4); /* 호버 시 배경색 반전 */
+	transform: scale(1.05); /* 호버 시 약간 확대 */
+}
+
+.buttons button:active {
+	background: linear-gradient(45deg, #FF1493, #C71585); /* 클릭 시 배경색 어둡게 */
+	transform: scale(0.98); /* 클릭 시 살짝 눌리는 효과 */
 }

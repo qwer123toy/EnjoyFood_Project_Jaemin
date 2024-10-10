@@ -16,5 +16,5 @@ public interface CafeteriaService {
 
 	List<Cafeteria> showByPic(int cafeNum);
 
-	int insertMenu(Menus menus);
+	int insertMenu(Menu menus);
 }
