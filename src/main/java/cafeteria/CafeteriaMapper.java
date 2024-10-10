@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import java.util.List;
 

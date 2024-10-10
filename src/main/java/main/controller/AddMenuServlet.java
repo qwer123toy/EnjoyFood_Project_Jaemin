@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Cafeteria.CafeteriaService;
-import Cafeteria.CafeteriaServiceImple;
-import Cafeteria.Menu;
+import cafeteria.CafeteriaService;
+import cafeteria.CafeteriaServiceImple;
+import cafeteria.Menu;
 import config.WebUtil;
 
 @WebServlet("/addMenu")

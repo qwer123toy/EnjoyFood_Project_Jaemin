@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Cafeteria.Cafeteria;
-import Cafeteria.CafeteriaService;
-import Cafeteria.CafeteriaServiceImple;
-import Cafeteria.Menu;
+import cafeteria.Cafeteria;
+import cafeteria.CafeteriaService;
+import cafeteria.CafeteriaServiceImple;
+import cafeteria.Menu;
 import enjoyfood.MapService;
 import enjoyfood.MapServiceImple;
 import lombok.extern.slf4j.Slf4j;

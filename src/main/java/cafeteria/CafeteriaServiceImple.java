@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import java.awt.print.Book;
 import java.util.List;

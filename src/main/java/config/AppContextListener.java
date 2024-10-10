@@ -20,10 +20,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
-
+import cafeteria.CafeteriaMapper;
 import enjoyfood.MapMapper;
-
-import Cafeteria.CafeteriaMapper;
 import user.model.UserMapper;
 
 @WebListener

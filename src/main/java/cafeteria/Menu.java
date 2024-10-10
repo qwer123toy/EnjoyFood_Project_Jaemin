@@ -1,4 +1,4 @@
-package Cafeteria;
+package cafeteria;
 
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,12 +15,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "cafeNum", "cafeTag" })
+@JsonPropertyOrder({ "cafeNum", "menuNum", "menuName", "menuPrice", "menuNamepic", "menuExplain"})
 @Generated("jsonschema2pojo")
-public class CafeTag {
+public class Menu {
 
 	@JsonProperty("cafeNum")
 	private Integer cafeNum;
-	@JsonProperty("cafeTag")
-	private String cafeTag;
+	@JsonProperty("menuNum")
+	private Integer menuNum;
+	@JsonProperty("menuName")
+	private String menuName;
+	@JsonProperty("menuPrice")
+	private Integer menuPrice;
+	@JsonProperty("menuNamepic")
+	private String menuNamepic;
+	@JsonProperty("menuExplain")
+	private String menuExplain;
+	
 }
