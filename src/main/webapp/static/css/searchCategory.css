@@ -3,7 +3,6 @@ body {
 	background: linear-gradient(to right, #FFDEE9, #B5FFFC);
 }
 
-
 .sidebar {
 	position: fixed;
 	top: 150px;
@@ -39,7 +38,7 @@ body {
 	border-radius: 5px;
 }
 
-.search-bar button {
+.submit-btn {
 	padding: 10px;
 	font-size: 16px;
 	cursor: pointer;
@@ -96,6 +95,14 @@ main {
 	padding: 20px;
 }
 
+/* 부모 요소를 중앙 정렬 */
+#price-buttons {
+	text-align: center; /* 부모 요소 내에서 가운데 정렬 */
+	margin: 0 auto; /* 부모 요소를 화면 중앙에 배치 */
+	max-width: 600px; /* 필요에 따라 버튼이 있는 영역의 최대 너비를 설정 */
+}
+
+/* 버튼 스타일 */
 .price-btn {
 	padding: 10px;
 	font-size: 1rem;
@@ -103,29 +110,41 @@ main {
 	border-radius: 20px;
 	border: none;
 	cursor: pointer;
+	text-align: center;
+	display: inline-block; /* 버튼 크기를 내용에 맞게 조정 */
+	margin: 5px; /* 버튼 사이의 간격 */
 }
 
 .price-btn:hover {
 	background-color: #F0F0F0;
 }
 
+/* 카테고리 체크박스 섹션 스타일 */
 #categories {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center; /* 부모 안에서 중앙으로 정렬 */
+	flex-wrap: wrap; /* 필요 시 다음 줄로 감싸기 */
+	gap: 20px; /* 체크박스 간격 조정 */
 	margin-top: 20px;
+	max-width: 1000px; /* 필요에 따라 섹션의 최대 너비를 설정 */
+	margin: 0 auto; /* 중앙 배치 */
 }
+
+/* 각 체크박스와 레이블 스타일 */
+.category {
+	display: flex;
+	align-items: center;
+	gap: 10px; /* 체크박스와 텍스트 사이 간격 */
+	padding: 10px;
+	background-color: lightgray;
+	border-radius: 20px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+
 /* 체크박스 숨기기 */
 input[type="checkbox"] {
 	display: none;
-}
-
-/* 체크되지 않았을 때 기본 스타일 */
-.category {
-	display: inline-block;
-	padding: 10px;
-	border-radius: 15px;
-	background-color: #cccccc; /* 기본 색상 */
-	cursor: pointer;
 }
 
 /* 체크박스가 체크되었을 때 배경색 변경 */
@@ -145,57 +164,63 @@ input[type="checkbox"]:checked+label .category {
 	background-color: #4A90E2;
 }
 
+#additional-category-input {
+    margin-left: 10px; /* 입력란과 체크박스 사이 간격 */
+}
 
-/* 한 줄에 3개의 아이템을 배치하고, sidebar와 겹치지 않게 하기 */
+/* 한 줄에 3개의 아이템을 배치하고, 결과 수에 따라 중앙 정렬 */
 .store-list {
-    display: flex;
-    justify-content: space-between; /* 아이템 간의 공간을 균등하게 분배 */
-    flex-wrap: wrap; /* 아이템이 넘치면 자동으로 다음 줄로 넘어가게 함 */
-    margin-left: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
-    margin-right: 300px; /* 왼쪽 사이드바와 겹치지 않도록 여백을 줌 */
-    padding: 20px; /* 내부 여백을 줌 */
+	display: flex; /* flexbox로 레이아웃 설정 */
+	flex-wrap: wrap; /* 넘치면 자동으로 다음 줄로 넘어감 */
+	margin-left: 300px; /* 사이드바와 겹치지 않도록 왼쪽 여백 설정 */
+	margin-right: 300px; /* 사이드바와 겹치지 않도록 오른쪽 여백 설정 */
+	padding: 20px; /* 내부 여백 설정 */
+	gap: 20px; /* 아이템 간격 설정 */
 }
 
 .store-item {
-    background-color: white; /* 가게 아이템의 배경을 흰색으로 설정 */
-    padding: 20px;
-    margin: 10px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    width: calc(25%); /* 한 줄에 3개의 아이템이 들어가도록 너비를 설정 (마진과 패딩 포함) */
+	background-color: white; /* 아이템 배경 색상 설정 */
+	padding: 20px; /* 아이템 내부 여백 설정 */
+	margin: 10px; /* 아이템 간격 설정 */
+	border-radius: 15px; /* 둥근 모서리 설정 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
+	transition: transform 0.3s ease; /* 호버 시 애니메이션 설정 */
+	width: calc(45% - 40px); /* 한 줄에 3개의 아이템이 들어가도록 너비 계산 (마진 포함) */
 }
 
 .store-item:hover {
-    transform: translateY(-10px); /* 호버 시 살짝 떠오르게 애니메이션 효과 */
+	transform: translateY(-10px); /* 호버 시 아이템이 살짝 떠오르는 효과 */
 }
 
+
+
+
 .store-image {
-    background-color: #cfcfcf;
-    height: 150px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
+	background-color: #cfcfcf;
+	height: 150px;
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 10px;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
 }
 
 ul li {
-    margin: 5px 0;
+	margin: 5px 0;
 }
 
 ul li a {
-    color: #6a1b9a;
-    text-decoration: none;
-    font-weight: bold;
+	color: #6a1b9a;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 ul li a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
