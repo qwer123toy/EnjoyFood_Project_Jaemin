@@ -32,33 +32,52 @@ public class MainServlet extends HttpServlet {
 
 		// 로그아웃 처리
 		if ("logout".equals(action)) {
-			req.getSession().invalidate(); // 세션 무효화
-			resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
+			handleLogout(req, resp);
 			return;
 		}
-		HttpSession session = req.getSession();
-		String userSessionID = (String) session.getAttribute("userID");
-		String userID = (String) req.getAttribute("userID");
-		if(userSessionID != null) {
-			User user = (User) userService.userInfo(userSessionID);
-			req.setAttribute("userType", user.getUserType());			
-		}
-		req.setAttribute("userID", userID);
+		initUserAttributes(req);
 
+		initCafeteriaList(req);
+		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
+	}
+
+	private void initCafeteriaList(HttpServletRequest req) {
 		List<Cafeteria> list = (List<Cafeteria>) req.getAttribute("list");
 
 		// 리스트가 없으면 전체 목록 조회
 		if (list == null) {
 			list = service.selectAll();
 		}
-
 		// 리스트를 요청에 다시 설정하고 JSP로 포워드
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
+	}
+
+	private void initUserAttributes(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String userSessionID = (String) session.getAttribute("userID");
+		String userID = (String) req.getAttribute("userID");
+		if (userSessionID != null) {
+			User user = (User) userService.userInfo(userSessionID);
+			req.setAttribute("userType", user.getUserType());
+		}
+		req.setAttribute("userID", userID);
+	}
+
+	private void handleLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		req.getSession().invalidate(); // 세션 무효화
+		resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		initUserAttributes(req);
+
+		initSearchQuery(req);
+
+		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
+	}
+
+	private void initSearchQuery(HttpServletRequest req) {
 		String searchQuery = (String) req.getParameter("searchQuery");
 		// 로그 남기기 (검색어 확인)
 		log.info("검색어: " + searchQuery);
@@ -73,20 +92,8 @@ public class MainServlet extends HttpServlet {
 			searchResults = service.selectAll();
 		}
 
-		HttpSession session = req.getSession();
-		String userSessionID = (String) session.getAttribute("userID");
-		String userID = (String) req.getAttribute("userID");
-		if(userSessionID != null) {
-			User user = (User) userService.userInfo(userSessionID);
-			req.setAttribute("userType", user.getUserType());			
-		}
-		req.setAttribute("userID", userID);
-
-		
 		// 검색 결과를 JSP로 전달
 		req.setAttribute("list", searchResults);
-
-		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
 	}
 
 }

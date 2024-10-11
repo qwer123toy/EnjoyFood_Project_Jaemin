@@ -24,6 +24,7 @@ import cafeteria.CafeteriaDynamicMapper;
 import cafeteria.CafeteriaMapper;
 import enjoyfood.MapMapper;
 import user.model.UserMapper;
+import user.suggestion.SuggestionMapper;
 
 @WebListener
 public class AppContextListener implements ServletContextListener {
@@ -53,6 +54,7 @@ public class AppContextListener implements ServletContextListener {
 		configuration.addMapper(MapMapper.class);
 		configuration.addMapper(CafeteriaMapper.class);
 		configuration.addMapper(CafeteriaDynamicMapper.class);
+		configuration.addMapper(SuggestionMapper.class);
 
 		sessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 	}

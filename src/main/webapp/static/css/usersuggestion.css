@@ -108,7 +108,7 @@ header a:hover {
 }
 
 
-#suggestion-form {
+#suggestionForm {
 	margin-top: 150px;
 	width: 80%;
 	max-width: 800px;
@@ -145,7 +145,7 @@ textarea {
 	resize: none;
 }
 
-#submit-btn {
+#submitBtn {
 	margin-top: 20px;
 	padding: 12px 25px;
 	background-color: #3c82d9;
@@ -156,6 +156,6 @@ textarea {
 	cursor: pointer;
 }
 
-#submit-btn:hover {
+#submitBtn:hover {
 	background-color: #355ea9;
 }

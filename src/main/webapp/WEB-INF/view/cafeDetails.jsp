@@ -33,7 +33,7 @@
 
 	<!-- 메인 컨텐츠 -->
 	<main>
-		<section class="store-info">
+		<section class="store-info">			
 			<!-- 기존 상세보기 화면 -->
 			<h1 class="store-title">${cafeteria.cafeName}</h1>
 
