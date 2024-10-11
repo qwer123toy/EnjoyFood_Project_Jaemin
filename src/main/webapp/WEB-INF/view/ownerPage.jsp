@@ -27,17 +27,18 @@
 }
 </style>
 <body>
+<form method="post" id="ownerPage" action="/addOwner" enctype="multipart/form-data">
      <div class="container">
         <!-- 왼쪽 정보 입력 섹션 -->
         <div class="info-section">
             <h2>기본 정보</h2>
             <!-- 상호명 입력 -->
-            <input type="text" placeholder="상호명 입력" class="input-field" />
+            <input type="text" id="cafeName" name="cafeName" placeholder="상호명 입력" class="input-field" />
              <!-- 가게 소개 입력 -->
-            <input type="text" placeholder="가게 소개 입력" class="input-field" />
+            <input type="text" id="cafeExpalin" name="cafeExpalin" placeholder="가게 소개 입력" class="input-field" />
 			
 			<!-- 카테고리 입력 -->
-			<div class="category">
+			<div class="category" id="category" name="category">
             <select class="input-field">
                 <option value="">식당 카테고리 선택</option>
                 <option value="한식">한식</option>
@@ -52,11 +53,11 @@
         </div>
         
             <!-- 예상 금액 입력 -->
-            <input type="text" placeholder="1인 기준 예상 금액 입력" class="input-field" />
+            <input type="text" id="cafePrice" name="cafePrice" placeholder="1인 기준 예상 금액 입력" class="input-field" />
 
            <!-- 영업 시작 및 종료 시간 -->
-<div class="time-container">
-  <div class="time-item">
+<div class="time-container" id="cafeOpenTime" name="cafeOpenTime" >
+  <div class="time-item" >
     <label for="start-time">영업 시작 시간</label>
     <select id="start-time" class="input-field">
       <option value="06:00">06:00</option>
@@ -157,10 +158,10 @@
 </style>
 
             <!-- 전화번호 입력 -->
-<input type="text" id="phone-number" placeholder="전화번호" class="input-field" />
+<input type="text" id="cafePhoneNumber" name="cafePhoneNumber" placeholder="전화번호" class="input-field" />
 
 <script>
-  const phoneNumberInput = document.getElementById('phone-number');
+  const phoneNumberInput = document.getElementById('cafePhoneNumber');
 
   phoneNumberInput.addEventListener('input', function (e) {
     // 입력된 값에서 하이픈을 제거
@@ -175,15 +176,15 @@
 </script>
 
             <!-- 주소 입력 -->
-            <input type="text" placeholder="주소" class="input-field" />
+            <input type="text" id="cafeAddress" name="cafeAddress" placeholder="주소" class="input-field" />
         </div>
 
 
-    <div class="image-display">
+    <div class="imgDisplay">
        <h2>대표 사진을 등록해 주세요.</h2>
                  <img id="imagePreview" class="uploaded-image" alt="이미지 미리보기">
                 <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" id="imageUpload" name="file" accept="image/*">
+                    <input type="file" id="imgDisplay" name="imgDisplay" accept="image/*">
                 </form>
     </div>
  <script>
@@ -214,10 +215,10 @@
             </div>
      
     </div>
+    </form>
         <!-- 다음 버튼 -->
-        <div class="next-button">
-            <button>→</button>
+        <div class="next-button" type="submit" id="confirmStoreBtn">
+            <button>카페 정보 저장</button>
         </div>
-    </div>
 </body>
 </html>
