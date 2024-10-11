@@ -7,6 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 관리</title>
     <link rel="stylesheet" type="text/css" href="/static/css/admin-users.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const viewButtons = document.querySelectorAll('.view-button');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const base64Image = this.getAttribute('data-picture');
+                    const newWindow = window.open('', '_blank'); // 새 창 열기
+                    newWindow.document.write(`<html><body><img src="data:image/png;base64,${base64Image}" alt="사업자 등록증" /></body></html>`); // 이미지 출력
+                    newWindow.document.close(); // 문서 종료
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -36,6 +50,7 @@
                     <th>활성화 상태
                     <button type="submit">변경</button> <!-- 일괄 변경 버튼 -->
                     </th>
+                    <th>사업자등록증</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,11 +72,21 @@
                                 <option value="0" <c:if test="${user.active == 0}">selected</c:if>>비활성화</option>
                             </select>
                         </td>
+                        <td>
+						    <c:choose>
+						        <c:when test="${user.userPicture == null}">없음</c:when>
+						        <c:otherwise>
+						            <a href="/admin/userPicture?userId=${user.userID}" target="_blank">
+						                <button type="button">보기</button>
+						            </a>
+						        </c:otherwise>
+						    </c:choose>
+						</td>
+
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-        
     </form>
 </body>
 </html>
