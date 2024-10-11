@@ -16,17 +16,20 @@ public interface CafeteriaService {
 
 	int insert(Cafeteria cafetria);
 
-	int insertMenu(Menus menus);
+	int insertMenu(Menu menus);
 
 	int delete(int cafeNum);
 
 	List<Cafeteria> searchByAll(String menuName, String categoryName, String cafetag, String cafeName,
 			String cafeAddress);
 
-	
 	double selectAvg(int cafeNum);
+
 //	List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags);
 	List<Cafeteria> getCafeByPriceAndTags(int cafePrice, List<String> cafetags);
 
+	List<Menu> showCafeMenu(int cafeNum);
+
+	int insertReview(CafeReview cafeReview);
 
 }

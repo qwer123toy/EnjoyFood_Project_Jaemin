@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cafeteria.Cafeteria;
+import cafeteria.CafeReview;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
+import cafeteria.Menu;
+import config.WebUtil;
 import lombok.extern.slf4j.Slf4j;
-
-
 
 @WebServlet("/cafeReview")
 @Slf4j
@@ -23,19 +23,32 @@ public class CafeReviewServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cafeNumStr = req.getParameter("cafeNum");
-		int cafeNum = Integer.parseInt(cafeNumStr);
-		// 해당 카페 번호를 이용해서 해당 카페의 메뉴를 띄워주기
-		// 이용 메뉴 탭에 띄워줄 예정
-		// 근데 체크박스로 뜰거임
-		//그래서 나중에 평점, 내용, 금액, 메뉴체크, 이미지 다 넣고 작성 완료 하면
-		//DB에 저장되어야 함
-		
-		List<Cafeteria> list = service.selectAll();
-
-//		System.out.println(cafeteria);
-		req.setAttribute("cafeNum", cafeNum);
+		int cafeNum = Integer.parseInt(req.getParameter("cafeNum"));
+		List<Menu> list = service.showCafeMenu(cafeNum);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/view/cafeReview.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 요청 파라미터에서 값 가져오기
+		WebUtil webUtil = new WebUtil();
+
+		CafeReview cafeReview = webUtil.readBodyJson(req, CafeReview.class);
+		String userID = (String) req.getSession(false).getAttribute("userID");
+		if (userID == null) {
+			webUtil.writeBody(resp, "{\"success\":false,\"message\":\"로그인\"}");
+			webUtil.setCodeAndMimeType(resp, 401, "json");
+			return;
+		}
+		cafeReview.setUserId(userID);
+		int result = service.insertReview(cafeReview);
+		if (result == 1) {
+			webUtil.writeBody(resp, "{\"success\":true,\"message\":\"성공\"}");
+			webUtil.setCodeAndMimeType(resp, 200, "json");
+		} else {
+			webUtil.writeBody(resp, "{\"success\":false,\"message\":\"실패\"}");
+			webUtil.setCodeAndMimeType(resp, 401, "json");
+		}
 	}
 }

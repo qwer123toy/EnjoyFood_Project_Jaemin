@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
-import cafeteria.Menus;
+import cafeteria.Menu;
 import enjoyfood.MapService;
 import enjoyfood.MapServiceImple;
 import lombok.extern.slf4j.Slf4j;

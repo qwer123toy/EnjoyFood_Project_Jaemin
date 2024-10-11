@@ -21,9 +21,9 @@ public class CafeReview {
 	@JsonProperty("cafeNum")
 	private Integer cafeNum;
 	@JsonProperty("cafeReivewNum")
-	private String cafeReivewNum;
+	private Integer cafeReivewNum;
 	@JsonProperty("cafeScore")
-	private Integer cafeScore;
+	private double cafeScore;
 	@JsonProperty("cafeComment")
 	private String cafeComment;
 	@JsonProperty("userId")

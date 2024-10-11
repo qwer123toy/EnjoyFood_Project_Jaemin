@@ -74,7 +74,6 @@ public interface CafeteriaMapper {
 	@Delete("DELETE FROM Cafeteria WHERE cafeNum=#{cafeNum}")
 	int delete(int cafeNum);
 
-
 	// 가게 번호와 해당 이미지 조회
 	@Select({ "SELECT cp.picNumber, cp.cafePic, cp.cafeNum, c.cafeName, c.cafeOpenTime, c.cafePhoneNumber",
 			"c.cafeAddress, c.cafePrice, c.cafeOwner", "FROM cafePic AS cp",
@@ -92,10 +91,18 @@ public interface CafeteriaMapper {
 
 	@Insert({ "INSERT INTO menu (cafeNum,  menuName, menuPrice, menuNamepic) ",
 			"VALUES (#{cafeNum}, #{menuName}, #{menuPrice}, #{menuNamepic})" })
-	int insertMenu(Menus menus);
-	
+	int insertMenu(Menu menus);
+
 	@Select("SELECT avg(cafeScore) FROM cafeReview WHERE cafeNum=#{cafeNum}")
 	String selectAvg(@Param("cafeNum") int cafeNum);
 
+	// 리뷰화면 - 해당 cafeNum의 메뉴 출력
+	@Select("SELECT menuName, menuPrice FROM menu WHERE cafeNum=#{cafeNum}")
+	List<Menu> showCafeMenu(@Param("cafeNum") int cafeNum);
+
+	// 사용자 리뷰 DB저장
+	@Insert({ "INSERT INTO cafereview (cafeNum,  cafeScore, cafeComment, userId, userPayment, userPic) ",
+			"VALUES (#{cafeNum},  #{cafeScore}, #{cafeComment}, #{userId}, #{userPayment}, #{userPic})" })
+	int insertReview(CafeReview cafeReview);
 
 }
