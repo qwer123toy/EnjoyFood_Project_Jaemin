@@ -32,7 +32,6 @@ public class AddMenuServlet extends HttpServlet {
 		WebUtil webUtil = new WebUtil();
 
 		Menu menu = webUtil.readBodyJson(req, Menu.class);
-		service.insertMenu(menu);
 //		int cafeNum = Integer.parseInt(req.getParameter("cafeNum"));
 //		int menuNum = Integer.parseInt(req.getParameter("menuNum"));
 //		String menuExplain = req.getParameter("menuExplain");
@@ -61,13 +60,13 @@ public class AddMenuServlet extends HttpServlet {
 //
 //		Menus menus = Menus.builder().menuName(menuName).menuPrice(parsedMenuPrice).menuExplain(menuExplain)
 //				.menuNamepic(menuNamepic).build();
-//		int result = service.insertMenu(menus);
-//
-//		if (result > 0) {
-//			System.out.println("메뉴 추가 성공!");
-//		} else {
-//			System.out.println("메뉴 추가 실패!");
-//		}
+		int result = service.insertMenu(menu);
+
+		if (result > 0) {
+			System.out.println("메뉴 추가 성공!");
+		} else {
+			System.out.println("메뉴 추가 실패!");
+		}
 
 	}
 

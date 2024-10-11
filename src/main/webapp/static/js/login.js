@@ -31,14 +31,14 @@ function tryLogin(e) {
 	fetch(url, { method: "post", body: json })
 		.then((resp) => { return resp.json(); })
 		.then((authResponse) => {
-//				console.log(authResponse);
+			//	console.log(authResponse);
 			if (authResponse.success) {
-				window.location.href = "\mainpage"
+				location.href = "\mainpage"
 			} else {
 				userID.value = "";
 				userPW.value = "";
 				userID.focus();
-				error.innerHTML = "아이디나 비밀번호가 일치하지 않습니다.";
+				error.innerHTML = authResponse.message;
 				error.classList.remove("hidden");
 			}
 		});

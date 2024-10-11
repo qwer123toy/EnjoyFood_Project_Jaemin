@@ -175,8 +175,13 @@ public class UserAPI extends HttpServlet {
 		User loginUser = service.login(user);
 		if (loginUser == null) {
 			webUtil.setCodeAndMimeType(resp, 401, "json");
-			webUtil.writeBodyJson(resp, new AuthResponse(false, "아이디 또는 비밀번호가 잘못되었습니다."));
+			webUtil.writeBodyJson(resp, new AuthResponse(false, "아이디나 비밀번호가 일치하지 않습니다."));
 		} else {
+			if (loginUser.getActive() == 0) {
+				webUtil.setCodeAndMimeType(resp, 403, "json");
+				webUtil.writeBodyJson(resp, new AuthResponse(false, "사용 불가능한 계정입니다."));
+				return;
+			}
 			HttpSession oldSession = SessionManager.getSession(loginUser.getUserID());
 			if (oldSession != null) {
 				try {

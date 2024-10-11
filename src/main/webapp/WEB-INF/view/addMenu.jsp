@@ -7,6 +7,11 @@
 <script src="/static/js/addMenu.js" defer></script>
 
 <style>
+
+ #formContainer {
+    display: none; /* 처음에 formContainer 숨기기 */
+}
+
 .uploaded-image {
 	width: 200px; /* 이미지 가로 크기 */
 	height: 200px; /* 이미지 세로 크기 */
@@ -54,6 +59,7 @@
 	<div class="info-section">
 		<h2>메뉴 추가</h2>
 	</div>
+	
 	<form method="post" id="addMenuForm" action="/addMenu" enctype="multipart/form-data">
 		<div class="menu-container">
 			<div class="column">
@@ -74,11 +80,14 @@
 			</div>
 		</div>
 		<div class="buttons">
-			<button class="button" type="submit" id="backBtn">이전</button>
-			<button class="button" type="submit" id="addMenuBtn">메뉴추가</button>
-
-		</div>
+    <button class="button left-button" type="button" id="backBtn">이전</button>
+    <div class="right-buttons">
+        <button class="button" type="submit" id="plusMenuBtn">메뉴추가</button>
+        <button class="button" type="submit" id="addMenuBtn">최종저장</button>
+    </div>
+</div>
 	</form>
+	
 </body>
 
 </html>
