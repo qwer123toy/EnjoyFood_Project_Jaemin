@@ -37,7 +37,7 @@
 				<!-- 상호명 입력 -->
 				<input type="text" id="cafeName" name="cafeName" placeholder="상호명 입력" class="input-field" />
 				<!-- 가게 소개 입력 -->
-				<input type="text" id="cafeExpalin" name="cafeExpalin" placeholder="가게 소개 입력" class="input-field" />
+				<input type="text" id="cafeExplain" name="cafeExplain" placeholder="가게 소개 입력" class="input-field" />
 
 				<!-- 카테고리 입력 -->
 				<div class="category" id="category" name="category">
@@ -45,7 +45,7 @@
 
 
 
-					<select class="input-field">
+					<select class="input-field" name="cafeCategory">
 						<option value="">식당 카테고리 선택</option>
 						<c:forEach var="category" items="${categoryList}">
 							<option value="${category.categoryNum }">${category.categoryName }</option>
@@ -60,7 +60,8 @@
 				<!-- 영업 시작 및 종료 시간 -->
 				<div class="time-container" id="cafeOpenTime" name="cafeOpenTime">
 					<div class="time-item">
-						<label for="start-time">영업 시작 시간</label> <select id="start-time" class="input-field">
+						<label for="start-time">영업 시작 시간</label> 
+						<select id="start-time" name="start-time" class="input-field">
 							<option value="06:00">06:00</option>
 							<option value="07:00">07:00</option>
 							<option value="08:00">08:00</option>
@@ -86,11 +87,12 @@
 							<option value="21:00">21:00</option>
 							<option value="custom-start">직접 입력</option>
 						</select>
-						<input type="text" id="custom-start-time" placeholder="영업 시작 시간 입력" class="input-field" style="display: none;" />
+						<input type="text" id="custom-start-time" name="custom-start-time"  placeholder="영업 시작 시간 입력" class="input-field" style="display: none;" />
 					</div>
 
 					<div class="time-item">
-						<label for="end-time">영업 종료 시간</label> <select id="end-time" class="input-field">
+						<label for="end-time">영업 종료 시간</label> 
+						<select id="end-time" name="end-time" class="input-field">
 							<option value="15:00">15:00</option>
 							<option value="15:30">15:30</option>
 							<option value="16:00">16:00</option>
@@ -110,7 +112,7 @@
 							<option value="05:00">05:00</option>
 							<option value="custom-end">직접 입력</option>
 						</select>
-						<input type="text" id="custom-end-time" placeholder="영업 종료 시간 입력" class="input-field" style="display: none;" />
+						<input type="text" id="custom-end-time" name="custom-end-time" placeholder="영업 종료 시간 입력" class="input-field" style="display: none;" />
 					</div>
 				</div>
 
