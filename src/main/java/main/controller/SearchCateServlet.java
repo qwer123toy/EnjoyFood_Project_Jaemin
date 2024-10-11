@@ -69,11 +69,18 @@ public class SearchCateServlet extends HttpServlet {
 		
 		String[] categories = req.getParameterValues("category");
 	    String additionalCategory = req.getParameter("additionalCategory");
-	    System.out.println("Categories: " + Arrays.toString(categories));  // For debugging
-	    System.out.println("Additional Category: " + additionalCategory);  // For debugging
 	    // 검색어가 비어 있지 않은 경우, 검색 수행
 	    List<Cafeteria> searchResults;
 	    List<String> chkList= new ArrayList<String>();
+	    
+	    HttpSession session = req.getSession();
+		String userSessionID = (String) session.getAttribute("userID");
+		String userID = (String) req.getAttribute("userID");
+		if(userSessionID != null) {
+			User user = (User) userService.userInfo(userSessionID);
+			req.setAttribute("userType", user.getUserType());			
+		}
+		req.setAttribute("userID", userID);
 	    
 	    // 체크된 카테고리와 추가 카테고리 추가
 	    if (categories != null) {

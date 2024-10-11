@@ -11,7 +11,7 @@
     <div class="search-container">
         <a href="mainpage" class="searchbtn">맛집 검색 🍽️</a>
         <a href="searchCategory">지역별 검색 🎮</a>
-        <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
+        <a href="searchCategory" class="btn-header">금액별 검색 🎮</a>
     </div>
     <div class="login">
         <c:choose>

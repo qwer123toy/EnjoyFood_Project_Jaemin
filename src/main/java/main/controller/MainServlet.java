@@ -73,6 +73,16 @@ public class MainServlet extends HttpServlet {
 			searchResults = service.selectAll();
 		}
 
+		HttpSession session = req.getSession();
+		String userSessionID = (String) session.getAttribute("userID");
+		String userID = (String) req.getAttribute("userID");
+		if(userSessionID != null) {
+			User user = (User) userService.userInfo(userSessionID);
+			req.setAttribute("userType", user.getUserType());			
+		}
+		req.setAttribute("userID", userID);
+
+		
 		// 검색 결과를 JSP로 전달
 		req.setAttribute("list", searchResults);
 
