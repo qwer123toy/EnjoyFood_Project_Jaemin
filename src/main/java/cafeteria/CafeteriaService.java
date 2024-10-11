@@ -44,5 +44,5 @@ public interface CafeteriaService {
 
 	int insertTag(int cafeNum,  String cafeTag);
 
-	
+	List<String> selectCafePic(int cafeNum);
 }
