@@ -116,5 +116,4 @@ public interface CafeteriaMapper {
 	List<CafeReview> selectCafeReview(@Param("cafeNum") int cafeNum);
 	
 	
-	
 }
