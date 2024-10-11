@@ -170,7 +170,6 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
 
 			List<Menu> resultList = mapper.showCafeMenu(cafeNum);
-			System.out.println(resultList);
 			return resultList;
 		}
 	}
@@ -184,6 +183,16 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			sqlSession.commit();
 
 			return rew;
+		}
+	}
+
+	@Override
+	public List<CafeReview> selectCafeReview(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			List<CafeReview> resultList = mapper.selectCafeReview(cafeNum);
+			return resultList;
 		}
 	}
 }

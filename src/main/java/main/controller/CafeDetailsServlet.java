@@ -2,6 +2,7 @@ package main.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cafeteria.CafeReview;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
@@ -55,7 +57,8 @@ public class CafeDetailsServlet extends HttpServlet {
 			// 조회된 가게 정보를 cafeteria로 저장
 			String cafeName = req.getParameter("cafeName");
 			Cafeteria cafeteria = service.selectByName(cafeName);
-
+			
+			List<CafeReview> cafeReviewList = service.selectCafeReview(cafeteria.getCafeNum());
 			double score = service.selectAvg(cafeteria.getCafeNum());
 			score = Math.round(score * 100) / 100.0;
 			System.out.println(score);
@@ -63,6 +66,7 @@ public class CafeDetailsServlet extends HttpServlet {
 			req.setAttribute("cafeteria", cafeteria);
 			req.setAttribute("address", cafeteria.getCafeAddress());
 			req.setAttribute("cafeName", cafeteria.getCafeName());
+			req.setAttribute("cafeReviewList", cafeReviewList);
 			req.setAttribute("score", score);
 //	            JSP 페이지(cafeDetails.jsp)로 전달하여 렌더링
 			req.getRequestDispatcher("/WEB-INF/view/cafeDetails.jsp").forward(req, resp);
