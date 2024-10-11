@@ -25,8 +25,7 @@ public class SuggestionsServlet extends HttpServlet {
 			SuggestionMapper suggestionMapper = sqlSession.getMapper(SuggestionMapper.class);
 			listSuggestion = suggestionMapper.select();
 		}
-		req.setAttribute("listSuggestion", listSuggestion);
-		req.getRequestDispatcher("/WEB-INF/views/admin-suggestions.jsp").forward(req, resp);
-
+		req.setAttribute("listSuggestion", listSuggestion);		
+		req.getRequestDispatcher("/WEB-INF/view/admin-suggestions.jsp").forward(req, resp);
 	}
 }

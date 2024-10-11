@@ -32,7 +32,7 @@ public class SuggestionServlet extends HttpServlet {
 			return;
 		}
 		suggestion.setUserId(userID);
-		if (new SuggestionServiceImpl().insert(suggestion)) {
+		if (SuggestionServiceImpl.getInstance().insert(suggestion)) {
 			resp.sendRedirect(req.getContextPath() + "/mainpage");
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/userSuggestion");
