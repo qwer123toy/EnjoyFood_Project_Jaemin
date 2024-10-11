@@ -21,7 +21,7 @@
         </a>
     </em>
 </p>
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map" style="width:100%; height:95vh"></div>
 
 <!-- 서버에서 넘겨준 address 값을 자바스크립트 변수로 전달 -->
 <script type="text/javascript">

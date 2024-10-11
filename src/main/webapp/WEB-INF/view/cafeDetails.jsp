@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가게 상세보기</title>
-<link rel="stylesheet" type="text/css"
-	href="/static/css/cafeDetails.css">
+<link rel="stylesheet" type="text/css" href="/static/css/cafeDetails.css">
 
 <!-- 서버에서 넘겨준 address 값을 자바스크립트 변수로 전달 -->
 <script type="text/javascript">
@@ -33,7 +32,7 @@
 
 	<!-- 메인 컨텐츠 -->
 	<main>
-		<section class="store-info">			
+		<section class="store-info">
 			<!-- 기존 상세보기 화면 -->
 			<h1 class="store-title">${cafeteria.cafeName}</h1>
 
@@ -53,8 +52,7 @@
 			<div class="store-infoDetail">
 				<div class="store-details">
 					<div class="store-image"
-						style="width: 300px; height: 300px; margin-right: 100px;">가게
-						이미지</div>
+						style="width: 300px; height: 300px; margin-right: 100px;">가게 이미지</div>
 					<p style="margin-top: -12px">
 						<em class="link"> <a href="javascript:void(0);"
 							onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
@@ -124,8 +122,7 @@
 						<li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
 						<li id="score">평점: <strong>${score}</strong>
 							<div class="star-rating">
-								<div class="star-rating-filled"
-									style="width: calc(${score} * 20%)"></div>
+								<div class="star-rating-filled" style="width: calc(${score} * 20%)"></div>
 
 							</div>
 						</li>
@@ -149,31 +146,31 @@
 
 		<!-- 추가된 리뷰 섹션 -->
 		<section class="review-section">
-		    <h2>Review</h2>
-		    <div class="review-list">
-		        <c:forEach var="review" items="${cafeReviewList}">
-		            <div class="review-item" style="margin-right: 50px;">
-		                <div class="review-image">
-		                    <c:if test="${not empty review.userPic}">
-		                        <img src="${review.userPic}" alt="" style="width: 250px; height: 120px;" />
-		                    </c:if>
-		                </div>
-		                <p>
-		                    <strong>평점:</strong> ${review.cafeScore}
-		                </p>
-		                <p>
-		                    <strong>리뷰 내용:</strong> ${review.cafeComment}
-		                </p>
-		                <p>
-		                    <strong>메뉴별 금액:</strong> ${review.userPayment} 원
-		                </p>
-		            </div>
-		        </c:forEach>
-		    </div>
-		    <form action="/cafeReview" method="get">
-		        <input type="hidden" name="cafeNum" value="${cafeteria.cafeNum}">
-		        <button class="btn-review">리뷰 작성하기</button>
-		    </form>
+			<h2>Review</h2>
+			<div class="review-list">
+				<c:forEach var="review" items="${cafeReviewList}">
+					<div class="review-item" style="margin-right: 50px;">
+						<div class="review-image">
+							<c:if test="${not empty review.userPic}">
+								<img src="${review.userPic}" alt="" style="width: 250px; height: 120px;" />
+							</c:if>
+						</div>
+						<p>
+							<strong>평점:</strong> ${review.cafeScore}
+						</p>
+						<p>
+							<strong>리뷰 내용:</strong> ${review.cafeComment}
+						</p>
+						<p>
+							<strong>메뉴별 금액:</strong> ${review.userPayment} 원
+						</p>
+					</div>
+				</c:forEach>
+			</div>
+			<form action="/cafeReview" method="get">
+				<input type="hidden" name="cafeNum" value="${cafeteria.cafeNum}">
+				<button class="btn-review">리뷰 작성하기</button>
+			</form>
 		</section>
 
 	</main>

@@ -241,4 +241,14 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			return resultList;
 		}
 	}
+
+	@Override
+	public List<String> selectCafePic(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			List<String> resultList = mapper.selectCafePic(cafeNum);
+			return resultList;
+		}
+	}
 }
