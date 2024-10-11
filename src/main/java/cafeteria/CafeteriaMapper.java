@@ -97,4 +97,13 @@ public interface CafeteriaMapper {
 	@Select("SELECT avg(cafeScore) FROM cafeReview WHERE cafeNum=#{cafeNum}")
 	String selectAvg(@Param("cafeNum") int cafeNum);
 
+	// 리뷰화면 - 해당 cafeNum의 메뉴 출력
+	@Select("SELECT menuName, menuPrice FROM menu WHERE cafeNum=#{cafeNum}")
+	List<Menu> showCafeMenu(@Param("cafeNum") int cafeNum);
+
+	// 사용자 리뷰 DB저장
+	@Insert({ "INSERT INTO cafereview (cafeNum,  cafeScore, cafeComment, userId, userPayment, userPic) ",
+			"VALUES (#{cafeNum},  #{cafeScore}, #{cafeComment}, #{userId}, #{userPayment}, #{userPic})" })
+	int insertReview(CafeReview cafeReview);
+
 }

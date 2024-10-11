@@ -26,4 +26,8 @@ public interface CafeteriaService {
 //	List<Cafeteria> searchByPT(int cafePrice, List<String> cafetags);
 	List<Cafeteria> getCafeByPriceAndTags(int cafePrice, List<String> cafetags);
 
+	List<Menu> showCafeMenu(int cafeNum);
+
+	int insertReview(CafeReview cafeReview);
+
 }

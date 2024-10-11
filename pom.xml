@@ -85,7 +85,12 @@
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>kr.co.greenart</groupId>
+			<artifactId>book-api-example</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
   <build>
