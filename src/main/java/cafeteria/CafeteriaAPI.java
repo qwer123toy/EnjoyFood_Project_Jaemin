@@ -40,15 +40,18 @@ public class CafeteriaAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
 		String json = webUtil.readBody(req);
+		System.out.println(json);
 		JsonMapper jsonMapper = new JsonMapper();
-		Menu menus = jsonMapper.readValue(json, Menu.class);
-//		Cafeteria cafetria = jsonMapper.readValue(json, Cafeteria.class);
-
-		log.info(menus.toString());
-
-		service.insertMenu(menus);
+		
+//		Menu menu = jsonMapper.readValue(json, Menu.class);
+		Cafeteria cafeteria = jsonMapper.readValue(json, Cafeteria.class);
+		
+//		service.insert(cafeteria);
 		webUtil.setCodeAndMimeType(resp, 201, "json");
-		webUtil.writeBodyJson(resp, menus);
+		webUtil.writeBodyJson(resp, cafeteria);
+		
+		
+		
 	}
 
 	// 수정

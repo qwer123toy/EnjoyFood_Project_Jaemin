@@ -1,30 +1,26 @@
-addEventListener("load", onload);
+window.addEventListener("load", onload);
 
 let menuInputpic;
 let menuNamepic;
 let imagePreview;
 let addMenuBtn;
+let confirmStoreBtn;
 
 function onload() {
 	menuInputpic = document.querySelector("#menuInputpic");
 	menuNamepic = document.querySelector("#menuNamepic");
 	imagePreview = document.querySelector("#imagePreview");
-	menuInputpic.addEventListener('change', validateFile);
-	addMenuBtn = document.querySelector("#addMenuBtn");
-	addMenuBtn.addEventListener("click", addMenu);
-	}
+	
+	confirmStoreBtn = document.querySelector("#ownerPage");
+	confirmStoreBtn.addEventListener("submit", addCafeteria);
+}
 
-
-
-	    
-
-
-function addMenu(e) {
+function addCafeteria(e) {
+	console.log(e)
 	e.preventDefault();
-	let formData = new FormData(document.querySelector("#addMenuForm"));
-	formData.delete("menuInputpic");
+	let formData = new FormData(document.querySelector("#ownerPage"));
 	let json = JSON.stringify(Object.fromEntries(formData));
-	fetch("/addMenu", { method: "post", body: json });
+	fetch("/ownerPage", { method: "post", body: json });
 }
 
 function validateFile(e) {

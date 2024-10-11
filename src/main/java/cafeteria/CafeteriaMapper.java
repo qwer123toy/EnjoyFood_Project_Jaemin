@@ -50,9 +50,9 @@ public interface CafeteriaMapper {
 //	List<Cafeteria> searchByPT(@Param("cafePrice") int cafePrice, @Param("cafetag") List<String> cafetags);
 
 	// 맛집 새로 추가
-	@Insert({ "INSERT INTO cafeteria (cafeNum, cafeName, cafeOpenTime, cafePhoneNumber,",
+	@Insert({ "INSERT INTO cafeteria (cafeName, cafeOpenTime, cafePhoneNumber,",
 			"cafeAddress, cafePrice, cafeOwner)",
-			"VALUES (#{cafeNum}, #{cafeName}, #{cafeOpenTime}, #{cafePhoneNumber},",
+			"VALUES (#{cafeName}, #{cafeOpenTime}, #{cafePhoneNumber},",
 			"#{cafeAddress}, #{cafePrice}, #{cafeOwner})" })
 	int insert(Cafeteria cafeteria);
 
@@ -84,12 +84,18 @@ public interface CafeteriaMapper {
 //	@Select("SELECT cafe_num, cafe_tag")
 //	int selectByTag(Cafe_Tag cafeTag);
 
-//	@Insert("INSERT INTO cafe_pic (cafe_num, cafe_pic) VALUES (#{cafe_num}, #{cafe_pic})")
-//	int insertPic(@Param("cafe_num") int cafeNum, @Param("cafe_pic") String cafePic);
+	@Select("SELECT * FROM cafecategory")
+	List<CafeCategory> selectCategoryAll();
+	
+	@Insert("INSERT INTO cafe_pic (cafe_num, cafe_pic) VALUES (#{cafe_num}, #{cafe_pic})")
+	int insertPic(@Param("cafe_num") int cafeNum, @Param("cafe_pic") String cafePic);
 
 	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag}")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
 
+	@Insert("INSERT INTO category_management (cafeNum, categoryNum) VALUES (#{cafeNum}, #{categoryNum}")
+	int insertCategoryM(@Param("cafeNum") int cafeNum, @Param("categoryNum") int categoryNum);
+	
 	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic, menuExplain) ",
 			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic}, #{menuExplain})" })
 	int insertMenu(Menu menu);
@@ -108,5 +114,7 @@ public interface CafeteriaMapper {
 	
 	@Select("SELECT * from cafereview where cafeNum = #{cafeNum}")
 	List<CafeReview> selectCafeReview(@Param("cafeNum") int cafeNum);
+	
+	
 	
 }

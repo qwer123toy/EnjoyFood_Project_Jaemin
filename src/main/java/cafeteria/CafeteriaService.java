@@ -2,6 +2,7 @@ package cafeteria;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
 // 메서드 간단하게 사용하는 클래스
@@ -33,5 +34,15 @@ public interface CafeteriaService {
 	int insertReview(CafeReview cafeReview);
 	
 	List<CafeReview> selectCafeReview(int cafeNum);
+	
+	List<CafeCategory> selectCategoryAll();
 
+	
+	int insertCategoryM(int cafeNum, int categoryNum);
+
+	int insertPic( int cafeNum, String cafePic);
+
+	int insertTag(int cafeNum,  String cafeTag);
+
+	
 }
