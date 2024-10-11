@@ -1,6 +1,5 @@
 package main.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import cafeteria.CafeReview;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
-import cafeteria.Menu;
 import enjoyfood.MapService;
 import enjoyfood.MapServiceImple;
 import lombok.extern.slf4j.Slf4j;
@@ -34,15 +32,6 @@ public class CafeDetailsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// cafeteria 선언 추가
 		try {
-			// action 파라미터로 로그아웃 요청 확인
-			String action = req.getParameter("action");
-
-			// 로그아웃 처리
-			if ("logout".equals(action)) {
-				req.getSession().invalidate(); // 세션 무효화
-				resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
-				return;
-			}
 			HttpSession session = req.getSession();
 			String userSessionID = (String) session.getAttribute("userID");
 
@@ -51,13 +40,13 @@ public class CafeDetailsServlet extends HttpServlet {
 				User user = (User) userService.userInfo(userSessionID);
 				req.setAttribute("userType", user.getUserType());
 			}
-			req.setAttribute("userID", userID);
+			req.setAttribute("userID2", userID);
 //			req.setAttribute("userNickName", userNickName);
 
 			// 조회된 가게 정보를 cafeteria로 저장
 			String cafeName = req.getParameter("cafeName");
 			Cafeteria cafeteria = service.selectByName(cafeName);
-			
+
 			List<CafeReview> cafeReviewList = service.selectCafeReview(cafeteria.getCafeNum());
 			double score = service.selectAvg(cafeteria.getCafeNum());
 			score = Math.round(score * 100) / 100.0;

@@ -28,7 +28,7 @@
                         <form action="/userInfo">
                             <button class="btn">내 정보 보기</button>
                         </form>
-                        <form action="/usersuggestion">
+                        <form action="/userSuggestion">
                             <button class="btn">건의하기</button>
                         </form>
                     </c:otherwise>
