@@ -22,8 +22,8 @@ public class MapAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//      String addr = ?    
-      String address = service.findAddressByName("카페 C");
+      String cafeName = req.getParameter("cafeName");     
+      String address = service.findAddressByName(cafeName);
 
       // 조회된 address 값을 request 객체에 저장
       req.setAttribute("address", address);

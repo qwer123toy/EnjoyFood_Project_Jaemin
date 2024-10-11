@@ -83,7 +83,7 @@ public interface CafeteriaMapper {
 
 //	@Select("SELECT cafe_num, cafe_tag")
 //	int selectByTag(Cafe_Tag cafeTag);
-
+//
 	@Select("SELECT * FROM cafecategory")
 	List<CafeCategory> selectCategoryAll();
 	
