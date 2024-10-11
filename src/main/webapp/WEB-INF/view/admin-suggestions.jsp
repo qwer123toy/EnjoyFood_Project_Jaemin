@@ -5,14 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>건의 사항 관리</title>
+<title>건의 사항</title>
 <link rel="stylesheet" type="text/css" href="/static/css/admin-suggestions.css">
 </head>
 <body>
 	<header>
 		<h1>건의 사항 관리</h1>
+		<form action="/admin/search" class="header-button">
+			<button type="submit" id="user-button">회원관리</button>
+		</form>
+		
 		<form action="/mainpage" class="header-button">
-			<button type="submit">메인페이지로</button>
+			<button type="submit" id = "mainpage-button">메인페이지</button>
 		</form>
 	</header>
 

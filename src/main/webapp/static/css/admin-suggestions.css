@@ -13,11 +13,18 @@ header {
     position: relative;
 }
 
-.header-button {
-    position: absolute;
-    right: 20px; /* 버튼을 오른쪽으로 옮김 */
-    top: 50%; /* 수직 중앙 정렬 */
-    transform: translateY(-50%); /* 수직 중앙 정렬을 위한 변환 */
+#mainpage-button {
+	position: absolute;
+	right: 20px; /* 버튼을 오른쪽으로 옮김 */
+	top: 50%; /* 수직 중앙 정렬 */
+	transform: translateY(-50%); /* 수직 중앙 정렬을 위한 변환 */
+}
+
+#user-button {
+	position: absolute;
+	right: 130px; /* 버튼을 오른쪽으로 옮김 */
+	top: 50%; /* 수직 중앙 정렬 */
+	transform: translateY(-50%); /* 수직 중앙 정렬을 위한 변환 */
 }
 
 .header-button button {

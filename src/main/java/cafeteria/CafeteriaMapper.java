@@ -109,4 +109,7 @@ public interface CafeteriaMapper {
 	@Select("SELECT * from cafereview where cafeNum = #{cafeNum}")
 	List<CafeReview> selectCafeReview(@Param("cafeNum") int cafeNum);
 	
+//	@Insert("INSERT INTO cafesuggestion (title, suggestion) VALUES (#{title}, #{suggestion}")
+//		int insertSuggestion(CafeSuggestion cafesuggestion);
+	
 }
