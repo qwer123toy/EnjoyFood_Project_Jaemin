@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
@@ -50,9 +51,11 @@ public interface CafeteriaMapper {
 //	List<Cafeteria> searchByPT(@Param("cafePrice") int cafePrice, @Param("cafetag") List<String> cafetags);
 
 	// 맛집 새로 추가
-	@Insert({ "INSERT INTO cafeteria (cafeName, cafeOpenTime, cafePhoneNumber,", "cafeAddress, cafePrice, cafeOwner)",
+	@Insert({ "INSERT INTO cafeteria (cafeName, cafeOpenTime, cafePhoneNumber,",
+			"cafeAddress, cafePrice, cafeOwner, cafeExplain)",
 			"VALUES (#{cafeName}, #{cafeOpenTime}, #{cafePhoneNumber},",
-			"#{cafeAddress}, #{cafePrice}, #{cafeOwner})" })
+			"#{cafeAddress}, #{cafePrice}, #{cafeOwner}, #{cafeExplain})" })
+	@Options(useGeneratedKeys = true, keyProperty = "cafeNum")  // keyProperty는 Cafeteria 객체의 필드 이름
 	int insert(Cafeteria cafeteria);
 
 	@Select("SELECT * FROM cafeteria WHERE cafeNum=#{cafeNum}")
@@ -82,7 +85,7 @@ public interface CafeteriaMapper {
 
 //	@Select("SELECT cafe_num, cafe_tag")
 //	int selectByTag(Cafe_Tag cafeTag);
-
+//
 	@Select("SELECT * FROM cafecategory")
 	List<CafeCategory> selectCategoryAll();
 
@@ -92,7 +95,7 @@ public interface CafeteriaMapper {
 	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag}")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
 
-	@Insert("INSERT INTO category_management (cafeNum, categoryNum) VALUES (#{cafeNum}, #{categoryNum}")
+	@Insert("INSERT INTO category_management (cafeNum, categoryNum) VALUES (#{cafeNum}, #{categoryNum})")
 	int insertCategoryM(@Param("cafeNum") int cafeNum, @Param("categoryNum") int categoryNum);
 
 	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic, menuExplain) ",
