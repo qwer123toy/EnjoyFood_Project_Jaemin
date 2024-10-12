@@ -13,6 +13,7 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css">
 <link rel="stylesheet" type="text/css" href="/static/css/mainpage.css">
+<link rel="icon" href="/static/ico/favicon.ico">
 <script src="/static/js/mainpage.js"></script>
 </head>
 <body>
