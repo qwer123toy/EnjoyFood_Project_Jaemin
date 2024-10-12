@@ -10,13 +10,11 @@ function onload() {
 	menuInputpic = document.querySelector("#menuInputpic");
 	menuNamepic = document.querySelector("#menuNamepic");
 	imagePreview = document.querySelector("#imagePreview");
-	
 	confirmStoreBtn = document.querySelector("#ownerPage");
 	confirmStoreBtn.addEventListener("submit", addCafeteria);
 }
 
 function addCafeteria(e) {
-	console.log(e)
 	e.preventDefault();
 	let formData = new FormData(document.querySelector("#ownerPage"));
 	let json = JSON.stringify(Object.fromEntries(formData));

@@ -37,7 +37,7 @@
 				<!-- 상호명 입력 -->
 				<input type="text" id="cafeName" name="cafeName" placeholder="상호명 입력" class="input-field" />
 				<!-- 가게 소개 입력 -->
-				<input type="text" id="cafeExpalin" name="cafeExpalin" placeholder="가게 소개 입력" class="input-field" />
+				<input type="text" id="cafeExplain" name="cafeExplain" placeholder="가게 소개 입력" class="input-field" />
 
 				<!-- 카테고리 입력 -->
 				<div class="category" id="category" name="category">
@@ -45,7 +45,7 @@
 
 
 
-					<select class="input-field">
+					<select class="input-field" name="cafeCategory">
 						<option value="">식당 카테고리 선택</option>
 						<c:forEach var="category" items="${categoryList}">
 							<option value="${category.categoryNum }">${category.categoryName }</option>
@@ -60,7 +60,8 @@
 				<!-- 영업 시작 및 종료 시간 -->
 				<div class="time-container" id="cafeOpenTime" name="cafeOpenTime">
 					<div class="time-item">
-						<label for="start-time">영업 시작 시간</label> <select id="start-time" class="input-field">
+						<label for="start-time">영업 시작 시간</label> 
+						<select id="start-time" name="start-time" class="input-field">
 							<option value="06:00">06:00</option>
 							<option value="07:00">07:00</option>
 							<option value="08:00">08:00</option>
@@ -86,11 +87,12 @@
 							<option value="21:00">21:00</option>
 							<option value="custom-start">직접 입력</option>
 						</select>
-						<input type="text" id="custom-start-time" placeholder="영업 시작 시간 입력" class="input-field" style="display: none;" />
+						<input type="text" id="custom-start-time" name="custom-start-time"  placeholder="영업 시작 시간 입력" class="input-field" style="display: none;" />
 					</div>
 
 					<div class="time-item">
-						<label for="end-time">영업 종료 시간</label> <select id="end-time" class="input-field">
+						<label for="end-time">영업 종료 시간</label> 
+						<select id="end-time" name="end-time" class="input-field">
 							<option value="15:00">15:00</option>
 							<option value="15:30">15:30</option>
 							<option value="16:00">16:00</option>
@@ -110,7 +112,7 @@
 							<option value="05:00">05:00</option>
 							<option value="custom-end">직접 입력</option>
 						</select>
-						<input type="text" id="custom-end-time" placeholder="영업 종료 시간 입력" class="input-field" style="display: none;" />
+						<input type="text" id="custom-end-time" name="custom-end-time" placeholder="영업 종료 시간 입력" class="input-field" style="display: none;" />
 					</div>
 				</div>
 
@@ -194,11 +196,39 @@
 			
 			<!-- 태그 입력 -->
 			<div class="tag-input-container">
-				<label for="tagInput">태그 입력</label>
-				<input type="text" id="tagInput" name="tagInput" placeholder="태그 입력 (쉼표로 구분)">
-				<button type="submit">태그 추가</button>
-
+			    <label for="tagInput">태그 입력</label>
+			    <input type="text" id="tagInput-1" name="tagInput-1" placeholder="태그 입력">
+			    <button type="button" id="addTagBtn">태그 추가</button>
+			    <input type="hidden" id="tagCount" name="tagCount" value="1">
+			    
 			</div>
+			
+			<!-- 추가된 태그 입력 필드들이 여기에 추가됨 -->
+			<div id="tagContainer"></div> 
+			
+			<script>
+			    let tagCount = 1; // 태그 필드의 개수를 추적
+			
+			    document.getElementById('addTagBtn').addEventListener('click', function() {
+			        tagCount++; // 새 태그 필드를 추가할 때마다 카운트를 증가
+			
+			        // 새로운 태그 입력 필드를 생성
+			        const newTagInput = document.createElement('input');
+			        newTagInput.type = 'text';
+			        newTagInput.id = `tagInput-${tagCount}`;
+			        newTagInput.name = `tagInput-${tagCount}`; // Name을 form 전송에 사용
+			        newTagInput.placeholder = '태그 입력';
+			        newTagInput.classList.add('input-field'); // 클래스 추가 (스타일 일치)
+			
+			        // 새로운 태그 입력 필드를 form 내부의 tagContainer에 추가
+			        document.getElementById('tagContainer').appendChild(newTagInput);
+			    
+			        // 숨김 필드에 현재 태그 수를 업데이트
+			        document.getElementById('tagCount').value = tagCount;
+			    });
+			</script>
+
+
 
 			<script>
 				// 이미지 미리보기 기능 구현

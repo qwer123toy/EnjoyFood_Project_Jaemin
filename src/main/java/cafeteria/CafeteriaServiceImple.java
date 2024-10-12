@@ -1,5 +1,5 @@
 package cafeteria;
-
+//
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,11 +34,11 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	public int insert(Cafeteria cafetria) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
-			int pk = mapper.insert(cafetria);
+			mapper.insert(cafetria);
 
 			sqlSession.commit();
 
-			return pk;
+			return cafetria.getCafeNum();
 		}
 	}
 
@@ -249,6 +249,46 @@ public class CafeteriaServiceImple implements CafeteriaService {
 
 			List<String> resultList = mapper.selectCafePic(cafeNum);
 			return resultList;
+		}
+	}
+
+	@Override
+	public List<Integer> selectCategoryNum(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			List<Integer> resultList = mapper.selectCategoryNum(cafeNum);
+			return resultList;
+		}
+	}
+
+	@Override
+	public CafeCategory selectCategory(int categoryNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			CafeCategory result = mapper.selectCategory(categoryNum);
+			return result;
+		}
+	}
+
+	@Override
+	public List<CafeTag> selectCafeTag(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			List<CafeTag> resultList = mapper.selectCafeTag(cafeNum);
+			return resultList;
+		}
+	}
+
+	@Override
+	public Integer selectAvgPayment(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			Integer result = mapper.selectAvgPayment(cafeNum);
+			return result;
 		}
 	}
 }
