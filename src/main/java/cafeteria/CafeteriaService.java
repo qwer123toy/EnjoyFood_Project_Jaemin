@@ -53,4 +53,6 @@ public interface CafeteriaService {
 	
 	List<CafeTag> selectCafeTag(int cafeNum);
 
+	Integer selectAvgPayment(int cafeNum);
+
 }

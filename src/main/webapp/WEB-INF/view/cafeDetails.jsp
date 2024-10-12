@@ -118,6 +118,9 @@
 						style="width: 300px; height: 300px; margin-right: 100px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 						<li>상호명: <strong>${cafeteria.cafeName}</strong></li>
 						<li>평균 금액: <strong>${cafeteria.cafePrice} 원</strong></li>
+							<c:if test="${not empty customerPaymentAvg}">
+						<li>실제 이용자 평균 금액: <strong>${customerPaymentAvg} 원</strong></li>						
+						</c:if>
 						<li>전화번호: <strong>${cafeteria.cafePhoneNumber}</strong></li>
 						<li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
 						<li id="score">평점: <strong>${score}</strong>

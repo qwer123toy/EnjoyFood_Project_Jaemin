@@ -281,4 +281,14 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			return resultList;
 		}
 	}
+
+	@Override
+	public Integer selectAvgPayment(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			Integer result = mapper.selectAvgPayment(cafeNum);
+			return result;
+		}
+	}
 }

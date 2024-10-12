@@ -129,4 +129,6 @@ public interface CafeteriaMapper {
 	@Select("SELECT * from cafetag where cafeNum = #{cafeNum}")
 	List<CafeTag> selectCafeTag(@Param("cafeNum") int cafeNum);
 	
+	@Select("SELECT AVG(userPayment) from cafereview where cafeNum = #{cafeNum} ")
+	Integer selectAvgPayment(@Param("cafeNum") int cafeNum);
 }

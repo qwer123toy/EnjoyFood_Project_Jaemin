@@ -55,13 +55,17 @@ public class CafeDetailsServlet extends HttpServlet {
 				CafeCategory cafeCategory = service.selectCategory(cafeCategoryNumList.get(i));
 				cafeCategoryList.add(cafeCategory);
 			}
-			
+
 			List<CafeTag> cafeTagList = service.selectCafeTag(cafeNum);
+
+			Integer customerPaymentAvg = service.selectAvgPayment(cafeNum);
 
 			req.setAttribute("cafeteria", cafeteria);
 			req.setAttribute("cafeReviewList", cafeReviewList);
 			req.setAttribute("cafeCategoryList", cafeCategoryList);
 			req.setAttribute("cafeTagList", cafeTagList);
+			if (customerPaymentAvg != null)
+				req.setAttribute("customerPaymentAvg", customerPaymentAvg);
 			req.setAttribute("score", score);
 //	        JSP 페이지(cafeDetails.jsp)로 전달하여 렌더링
 			req.getRequestDispatcher("/WEB-INF/view/cafeDetails.jsp").forward(req, resp);
