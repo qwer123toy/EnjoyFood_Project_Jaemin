@@ -92,7 +92,7 @@ public interface CafeteriaMapper {
 	@Insert("INSERT INTO cafe_pic (cafe_num, cafe_pic) VALUES (#{cafe_num}, #{cafe_pic})")
 	int insertPic(@Param("cafe_num") int cafeNum, @Param("cafe_pic") String cafePic);
 
-	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag}")
+	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag})")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
 
 	@Insert("INSERT INTO category_management (cafeNum, categoryNum) VALUES (#{cafeNum}, #{categoryNum})")
