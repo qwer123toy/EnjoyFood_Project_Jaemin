@@ -34,11 +34,11 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	public int insert(Cafeteria cafetria) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
-			int pk = mapper.insert(cafetria);
+			mapper.insert(cafetria);
 
 			sqlSession.commit();
 
-			return pk;
+			return cafetria.getCafeNum();
 		}
 	}
 

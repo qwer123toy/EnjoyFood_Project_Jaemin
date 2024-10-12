@@ -1,25 +1,28 @@
 package main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.jayway.jsonpath.JsonPath;
 
 import cafeteria.CafeCategory;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
 import config.WebUtil;
-import com.jayway.jsonpath.JsonPath;
 
 
 @WebServlet("/ownerPage")
+@MultipartConfig
 public class OwnerPage_basic extends HttpServlet {
 	private CafeteriaService service = CafeteriaServiceImple.getInstance();
 	
@@ -39,6 +42,8 @@ public class OwnerPage_basic extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+
 		WebUtil webUtil = new WebUtil();
 		String json = webUtil.readBody(req);
 		JsonMapper jsonMapper = new JsonMapper();
@@ -49,7 +54,7 @@ public class OwnerPage_basic extends HttpServlet {
 		String cafePhoneNumber = JsonPath.read(json, "$.cafePhoneNumber");
 		String cafePrice = JsonPath.read(json, "$.cafePrice");        
 		String cafeAddress = JsonPath.read(json, "$.cafeAddress");
-
+		
 		String cafeStartTime = JsonPath.read(json, "$.start-time");
 		String cafeEndTime = JsonPath.read(json, "$.end-time");
 
@@ -66,27 +71,44 @@ public class OwnerPage_basic extends HttpServlet {
 		String cafeOpenTime = cafeStartTime.concat(" - ").concat(cafeEndTime);
 
 		// 카테고리 값 추출
-		String cafeCategory = JsonPath.read(json, "$.cafeCategory");
+		String cafeCategoryStr = JsonPath.read(json, "$.cafeCategory");
+		int cafeCategory = Integer.parseInt(cafeCategoryStr);
 
+		List<String> cafeTagList = new ArrayList<>();
+
+//		int tagCount = Integer.parseInt(req.getParameter("tagCount"));
+
+		for (int i = 1; i <= 3; i++) {
+		    String tagParam = req.getParameter("tagInput-" + i);
+		    if (tagParam != null && !tagParam.isEmpty()) {
+		        cafeTagList.add(tagParam);
+		    }
+		}
+
+
+		System.out.println(json);
+		System.out.println(cafeTagList);
 		// JSON 형식으로 다시 String 생성
-		String resultJson = "{"
+		String resultJsonForCafeteria = "{"
 		        + "\"cafeName\": \"" + cafeName + "\","
 		        + "\"cafeExplain\": \"" + cafeExplain + "\","
 		        + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\","
 		        + "\"cafePrice\": \"" + cafePrice + "\","
 		        + "\"cafeAddress\": \"" + cafeAddress + "\","
-		        + "\"cafeOpenTime\": \"" + cafeOpenTime + "\","
-		        + "}";
+		        + "\"cafeOpenTime\": \"" + cafeOpenTime + "\""
+		        +  "}";
 
-		// 결과 확인
-		System.out.println(resultJson);
 
-//		Menu menu = jsonMapper.readValue(json, Menu.class);
-		Cafeteria cafeteria = jsonMapper.readValue(resultJson, Cafeteria.class);
+		Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
 		
 		
+		int cafeNum = service.insert(cafeteria);
+		service.insertCategoryM(cafeNum, cafeCategory);
 		
-		service.insert(cafeteria);
+		for(int i=0; i<3; i++) {
+			service.insertTag(cafeNum, cafeTagList.get(i));
+		}
+		
 		webUtil.setCodeAndMimeType(resp, 201, "json");
 		webUtil.writeBodyJson(resp, cafeteria);
 		

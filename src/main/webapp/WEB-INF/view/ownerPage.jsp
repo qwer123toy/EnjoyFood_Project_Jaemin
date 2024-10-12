@@ -196,11 +196,39 @@
 			
 			<!-- 태그 입력 -->
 			<div class="tag-input-container">
-				<label for="tagInput">태그 입력</label>
-				<input type="text" id="tagInput" name="tagInput" placeholder="태그 입력 (쉼표로 구분)">
-				<button type="submit">태그 추가</button>
-
+			    <label for="tagInput">태그 입력</label>
+			    <input type="text" id="tagInput-1" name="tagInput-1" placeholder="태그 입력">
+			    <button type="button" id="addTagBtn">태그 추가</button>
+			    <input type="hidden" id="tagCount" name="tagCount" value="1">
+			    
 			</div>
+			
+			<!-- 추가된 태그 입력 필드들이 여기에 추가됨 -->
+			<div id="tagContainer"></div> 
+			
+			<script>
+			    let tagCount = 1; // 태그 필드의 개수를 추적
+			
+			    document.getElementById('addTagBtn').addEventListener('click', function() {
+			        tagCount++; // 새 태그 필드를 추가할 때마다 카운트를 증가
+			
+			        // 새로운 태그 입력 필드를 생성
+			        const newTagInput = document.createElement('input');
+			        newTagInput.type = 'text';
+			        newTagInput.id = `tagInput-${tagCount}`;
+			        newTagInput.name = `tagInput-${tagCount}`; // Name을 form 전송에 사용
+			        newTagInput.placeholder = '태그 입력';
+			        newTagInput.classList.add('input-field'); // 클래스 추가 (스타일 일치)
+			
+			        // 새로운 태그 입력 필드를 form 내부의 tagContainer에 추가
+			        document.getElementById('tagContainer').appendChild(newTagInput);
+			    
+			        // 숨김 필드에 현재 태그 수를 업데이트
+			        document.getElementById('tagCount').value = tagCount;
+			    });
+			</script>
+
+
 
 			<script>
 				// 이미지 미리보기 기능 구현

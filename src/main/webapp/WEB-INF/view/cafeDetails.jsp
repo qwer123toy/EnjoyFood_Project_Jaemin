@@ -10,12 +10,12 @@
 <link rel="stylesheet" type="text/css"
 	href="/static/css/cafeDetails.css">
 
-<!-- 서버에서 넘겨준 address 값을 자바스크립트 변수로 전달 -->
+<!-- JSTL 사용 -->
 <script type="text/javascript">
-    var address = "<%=request.getAttribute("address")%>";
-    var cafeName = "<%=request.getAttribute("cafeName")%>
-	";
+    var address = "${cafeteria.cafeAddress}";
+    var cafeName = "${cafeteria.cafeName}";
 </script>
+
 </head>
 <body>
 	<!-- 상단 고정 바 -->

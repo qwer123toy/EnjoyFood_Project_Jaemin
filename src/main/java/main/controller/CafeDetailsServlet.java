@@ -64,8 +64,6 @@ public class CafeDetailsServlet extends HttpServlet {
 			System.out.println(score);
 
 			req.setAttribute("cafeteria", cafeteria);
-			req.setAttribute("address", cafeteria.getCafeAddress());
-			req.setAttribute("cafeName", cafeteria.getCafeName());
 			req.setAttribute("cafeReviewList", cafeReviewList);
 			req.setAttribute("score", score);
 //	            JSP 페이지(cafeDetails.jsp)로 전달하여 렌더링
