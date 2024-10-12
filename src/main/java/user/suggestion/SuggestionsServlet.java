@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
+import cafeteria.Cafeteria;
 import config.AppContextListener;
 
 @WebServlet("/suggestions")
@@ -19,13 +20,17 @@ public class SuggestionsServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Suggestion> listSuggestion = null;
+		List<Suggestion> list = (List<Suggestion>) req.getAttribute("list");
 
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			SuggestionMapper suggestionMapper = sqlSession.getMapper(SuggestionMapper.class);
-			listSuggestion = suggestionMapper.select();
+			list = suggestionMapper.select();
+
 		}
-		req.setAttribute("listSuggestion", listSuggestion);		
+		System.out.println("출력확인" + list);
+
+		req.setAttribute("listSuggestion", list);
 		req.getRequestDispatcher("/WEB-INF/view/admin-suggestions.jsp").forward(req, resp);
 	}
+
 }
