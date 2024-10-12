@@ -40,7 +40,7 @@ body {
 
 /* 입력 필드 스타일 */
 .input-field {
-    width: 200px;
+    width: 100%;
     height: 50px;
     border: 2px solid #007BFF;
     border-radius: 30px;
@@ -56,30 +56,6 @@ body {
     border-color: #0056b3;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    padding: 20px;
-}
-
-
-
-h2, h3 {
-    color: #333;
-}
-
-form {
-    margin-bottom: 20px;
-}
-
-input[type="file"] {
-    margin-right: 10px;
-}
-
-.image-display {
-    margin-top: 20px;
-}
-
 /* 업로드된 이미지 스타일 */
 .uploaded-image {
     max-width: 100%;
@@ -90,50 +66,30 @@ input[type="file"] {
 }
 
 /* 태그 입력 섹션 */
-/* 태그 입력 부분에 기본 정보 스타일을 적용 */
 .tag-input-container {
     display: flex;
     margin-bottom: 20px;
-    align-items: center;     /* 수평 중앙 정렬 */
+    align-items: center;
 }
 
 .tag-input-container input[type="text"] {
-	width: 500px;
-    height: 200px;
+    width: 100%;
+    height: 50px;
     padding: 10px;
-    border: 2px solid #00f;
+    border: 2px solid #007BFF;
     border-radius: 10px;
     font-size: 16px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
-/* 다음 버튼 스타일 */
-.next-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-}
-
-.next-button button {
-    width: 50px;
+/* 버튼 스타일 */
+button {
+    width: 100px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 25px;
     border: 2px solid #007BFF;
-    background-color: transparent;
-    font-size: 24px;
-    color: #007BFF;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.next-button button:hover {
     background-color: #007BFF;
     color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3
 }
