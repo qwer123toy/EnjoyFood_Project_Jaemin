@@ -20,7 +20,6 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         // 사용자 리스트를 가져오는 요청 처리
         List<User> userList = service.selectAll();
         req.setAttribute("userList", userList);
