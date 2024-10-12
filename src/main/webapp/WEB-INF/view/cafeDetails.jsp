@@ -138,8 +138,17 @@
 				<p>이곳은 맛집에 대한 간단한 설명을 보여줍니다.</p>
 				<p>상 호 명 : ${cafeteria.cafeName}</p>
 				<p>영업 시간 : ${cafeteria.cafeOpenTime}</p>
-				<p>가게 유형 :</p>
-				<p>가게 태그 :</p>
+				<p>가게 유형 :
+				<c:forEach var="category" items="${cafeCategoryList}">
+					${category.categoryName } 
+				</c:forEach>
+				</p>
+				<p>가게 태그 :
+				<c:forEach var="cafetag" items="${cafeTagList}">
+					${cafetag.cafeTag }
+				</c:forEach>
+				
+				</p>
 
 			</div>
 		</section>

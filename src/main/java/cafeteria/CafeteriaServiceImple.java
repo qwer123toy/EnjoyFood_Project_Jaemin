@@ -263,12 +263,12 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public List<CafeCategory> selectCategoryName(int categoryNum) {
+	public CafeCategory selectCategory(int categoryNum) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
 
-			List<CafeCategory> resultList = mapper.selectCategoryName(categoryNum);
-			return resultList;
+			CafeCategory result = mapper.selectCategory(categoryNum);
+			return result;
 		}
 	}
 

@@ -49,7 +49,7 @@ public interface CafeteriaService {
 	
 	List<Integer> selectCategoryNum(int cafeNum);
 	
-	List<CafeCategory> selectCategoryName(int categoryNum);
+	CafeCategory selectCategory(int categoryNum);
 	
 	List<CafeTag> selectCafeTag(int cafeNum);
 
