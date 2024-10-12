@@ -118,6 +118,9 @@
 						style="width: 300px; height: 300px; margin-right: 100px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 						<li>상호명: <strong>${cafeteria.cafeName}</strong></li>
 						<li>평균 금액: <strong>${cafeteria.cafePrice} 원</strong></li>
+							<c:if test="${not empty customerPaymentAvg}">
+						<li>실제 이용자 평균 금액: <strong>${customerPaymentAvg} 원</strong></li>						
+						</c:if>
 						<li>전화번호: <strong>${cafeteria.cafePhoneNumber}</strong></li>
 						<li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
 						<li id="score">평점: <strong>${score}</strong>
@@ -138,8 +141,17 @@
 				<p>이곳은 맛집에 대한 간단한 설명을 보여줍니다.</p>
 				<p>상 호 명 : ${cafeteria.cafeName}</p>
 				<p>영업 시간 : ${cafeteria.cafeOpenTime}</p>
-				<p>가게 유형 :</p>
-				<p>가게 태그 :</p>
+				<p>가게 유형 :
+				<c:forEach var="category" items="${cafeCategoryList}">
+					${category.categoryName } 
+				</c:forEach>
+				</p>
+				<p>가게 태그 :
+				<c:forEach var="cafetag" items="${cafeTagList}">
+					${cafetag.cafeTag }
+				</c:forEach>
+				
+				</p>
 
 			</div>
 		</section>
@@ -156,7 +168,11 @@
 							</c:if>
 						</div>
 						<p>
-							<strong>평점:</strong> ${review.cafeScore}
+						<strong>평점: ${review.cafeScore} </strong>
+							<div class="star-rating">
+							<div class="star-rating-filled"
+								style="width: calc(${review.cafeScore} * 20%)"></div>
+							</div>
 						</p>
 						<p>
 							<strong>리뷰 내용:</strong> ${review.cafeComment}

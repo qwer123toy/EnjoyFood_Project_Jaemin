@@ -11,27 +11,11 @@
 </head>
 <body>
 	<!-- 상단 고정 바 -->
-	<header>
-		<div class="logo">
-			<a href="mainpage">TASTE GPT</a>
-		</div>
-		<div class="search-container">
-			<a href="searchCategory" class="searchbtn">맛집 검색 🍽️</a> <a href="searchCategory">지역별 검색 🎮</a> <a href="searchCategory" class="btn-header">유형별 검색 🎮</a>
-
-		</div>
-		<div class="login">
-			<!-- 로그인 버튼 클릭 시 login.jsp로 이동 -->
-			<form action="/login" method="get">
-				<button class="btn">로그인</button>
-			</form>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<nav class="sidebar">
-		<button class="btn">리뷰 작성</button>
-		<button class="btn">고정바</button>
-	</nav>
+	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+
 
 	<!-- 메인 컨텐츠 -->
 	<main>
