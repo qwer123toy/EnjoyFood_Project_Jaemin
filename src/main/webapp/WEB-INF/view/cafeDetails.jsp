@@ -156,7 +156,11 @@
 							</c:if>
 						</div>
 						<p>
-							<strong>평점:</strong> ${review.cafeScore}
+						<strong>평점: ${review.cafeScore} </strong>
+							<div class="star-rating">
+							<div class="star-rating-filled"
+								style="width: calc(${review.cafeScore} * 20%)"></div>
+							</div>
 						</p>
 						<p>
 							<strong>리뷰 내용:</strong> ${review.cafeComment}
