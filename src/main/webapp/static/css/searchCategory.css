@@ -165,7 +165,7 @@ input[type="checkbox"]:checked+label .category {
 }
 
 #additional-category-input {
-    margin-left: 10px; /* 입력란과 체크박스 사이 간격 */
+	margin-left: 10px; /* 입력란과 체크박스 사이 간격 */
 }
 
 /* 한 줄에 3개의 아이템을 배치하고, 결과 수에 따라 중앙 정렬 */
@@ -193,8 +193,16 @@ input[type="checkbox"]:checked+label .category {
 	transform: translateY(-10px); /* 호버 시 아이템이 살짝 떠오르는 효과 */
 }
 
-
-
+/* 금액대 태그 검색시 태그가 맛집명 아래 위치하기 */
+/*
+.tag {
+	display: inline-block;
+	background-color: #e0e0e0;
+	border-radius: 3px;
+	padding: 5px;
+	margin-right: 5px;
+}
+*/
 
 .store-image {
 	background-color: #cfcfcf;
