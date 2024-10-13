@@ -21,18 +21,36 @@
 
 	<main>
 		<div class="user-info-container">
-			<h2>회원님의 정보</h2>
-			<ul>
-				<li id="userID"><strong>아이디: </strong></li>
-				<li id="userNickname"><strong>닉네임: </strong></li>
-				<li id="userPhoneNumber"><strong>전화번호: </strong></li>
-				<li id="userOwnerNumber" class="hidden"><strong>사업자
-						번호: </strong></li>
-			</ul>
-			<div style="display:flex; justify-content: center">
-				<button onclick="window.location='/userInfoChange'" class="button" style="">회원정보
-					수정</button>
-			</div>
+			<form>
+				<h2>회원님의 정보</h2>
+				<ul>
+					<li><strong>아이디: </strong><input type="text" id="userID"
+						disabled="disabled"></li>
+					<li><strong>닉네임: </strong><input type="text" id="userNickname">
+						<p class="error hidden" id="errorNickname">닉네임</p></li>
+					<li><strong>전화번호: </strong><input type="text"
+						id="userPhoneNumber">
+						<p class="error hidden" id="errorPhoneNumber">전화번호</p></li>
+					<li class="hidden"><strong>사업자 번호: </strong><input type="text"
+						id="userOwnerNumber" disabled="disabled"></li>
+				</ul>
+				<div style="display: flex; justify-content: center">
+					<button class="button" type="button" onclick="toggleInputPW()">비밀번호
+						수정</button>
+				</div>
+				<ul id="inputPW" class="hidden">
+					<li><strong>기존 비밀번호: </strong><input type="password"
+						id="prevPW"></li>
+					<li><strong>신규 비밀번호: </strong><input type="password"
+						id="userPW"></li>
+					<li><strong>비밀번호 확인: </strong><input type="password"
+						id="confirmPW">
+						<p class="error hidden" id="errorPW">비밀번호</p></li>
+				</ul>
+				<div style="display: flex; justify-content: center">
+					<button class="button" type="button">회원정보 수정</button>
+				</div>
+			</form>
 		</div>
 	</main>
 </body>

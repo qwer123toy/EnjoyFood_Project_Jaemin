@@ -57,20 +57,20 @@ public class CafeSQLProvider {
 		for (String address : addressList) {
 			String condition = Arrays.stream(address.split(" - ")).filter(part -> !part.equals("전체")).map(part -> {
 				if (part.equals("충북"))
-					return "충청북";
+					return "충청|충청북";
 				else if (part.equals("충남"))
-					return "충청남";
+					return "충청|충청남";
 				else if (part.equals("전북"))
-					return "전라북";
+					return "전라|전라북";
 				else if (part.equals("전남"))
-					return "전라남";
+					return "전라|전라남";
 				else if (part.equals("경북"))
-					return "경상북";
+					return "경북|경상북";
 				else if (part.equals("경남"))
-					return "경상남";
+					return "경남|경상남";
 				else
 					return part;
-			}).map(part -> "cafeAddress LIKE '%" + part + "%'").collect(Collectors.joining(" AND ", "(", ")"));
+			}).map(part -> "cafeAddress regexp '" + part + "'").collect(Collectors.joining(" AND ", "(", ")"));
 
 			addressConditions.add(condition);
 		}
@@ -79,7 +79,6 @@ public class CafeSQLProvider {
 		else {
 			sqlBuilder.replace(sqlBuilder.lastIndexOf("WHERE"), sqlBuilder.capacity(), "");
 		}
-
 		return sqlBuilder.toString();
 	}
 }

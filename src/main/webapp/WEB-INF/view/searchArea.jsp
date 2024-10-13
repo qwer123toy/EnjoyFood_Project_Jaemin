@@ -44,7 +44,6 @@
 		</div>
 
 
-		<%-- 				<p style="text-align: center;">검색 결과: ${fn:length(list)}건</p> --%>
 	</main>
 
 	<template id="template">

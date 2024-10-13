@@ -29,12 +29,12 @@ public class searchAreaServlet extends HttpServlet {
 		WebUtil webUtil = new WebUtil();
 
 		List<String> bodyJson = webUtil.readBodyJson(req, List.class);
-		System.out.println(bodyJson);
+//		System.out.println(bodyJson);
 		String cafesByAddress = CafeSQLProvider.getCafesByAddress(bodyJson);
-		System.out.println(cafesByAddress);
+//		System.out.println(cafesByAddress);
 
 		List<Cafeteria> list = service.selectByArea(bodyJson);
-		System.out.println(list);
+//		System.out.println(list);
 		webUtil.writeBodyJson(resp, list);
 		if (list != null) {
 			webUtil.setCodeAndMimeType(resp, 200, "json");
