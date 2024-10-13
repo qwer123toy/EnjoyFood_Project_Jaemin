@@ -83,7 +83,6 @@
 
 				</section>
 
-
 			</form>
 		</div>
 
@@ -100,7 +99,19 @@
 						<li>인당 평균 금액: ${cafeteria.cafePrice} 원</li>
 						<li>전화번호: ${cafeteria.cafePhoneNumber}</li>
 						<li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
+						<li> <c:choose>
+								<c:when test="${not empty cafeTagsMap[cafeteria.cafeNum]}">
+									<c:forEach var="tag" items="${cafeTagsMap[cafeteria.cafeNum]}">
+										# ${tag.cafeTag}
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									없음
+								</c:otherwise>
+							</c:choose>
+						</li>
 					</ul>
+
 				</div>
 			</c:forEach>
 		</div>

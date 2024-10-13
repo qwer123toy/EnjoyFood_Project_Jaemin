@@ -15,7 +15,7 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface CafeteriaMapper {
 
-	@Select("SELECT cafeNum, cafeName, cafeOpenTime, cafePhoneNumber, cafeAddress, cafePrice, cafeOwner FROM Cafeteria")
+	@Select("SELECT * FROM Cafeteria")
 	@Results(id = "cafeResults", value = {
 			@Result(column = "cafeNum", property = "cafeNum", jdbcType = JdbcType.INTEGER),
 			@Result(column = "cafeName", property = "cafeName", jdbcType = JdbcType.VARCHAR),

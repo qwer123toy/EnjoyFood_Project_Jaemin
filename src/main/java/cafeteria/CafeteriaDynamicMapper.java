@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 
 public interface CafeteriaDynamicMapper {
 	@SelectProvider(type = CafeSQLProvider.class, method = "getCafeByPrice")
-	@Results({ @Result(column = "cafeName", property = "cafeName"),
+	@Results({ @Result(column = "cafeNum", property = "cafeNum"), @Result(column = "cafeName", property = "cafeName"),
 			@Result(column = "cafePrice", property = "cafePrice"),
 			@Result(column = "cafeAddress", property = "cafeAddress"),
 			@Result(column = "cafePhoneNumber", property = "cafePhoneNumber"),
@@ -17,7 +17,7 @@ public interface CafeteriaDynamicMapper {
 	List<Cafeteria> getCafeByPrice(@Param("start") Integer start, @Param("end") Integer end);
 
 	@SelectProvider(type = CafeSQLProvider.class, method = "getCafeByPriceAndTags")
-	@Results({ @Result(column = "cafeName", property = "cafeName"),
+	@Results({ @Result(column = "cafeNum", property = "cafeNum"), @Result(column = "cafeName", property = "cafeName"),
 			@Result(column = "cafePrice", property = "cafePrice"),
 			@Result(column = "cafeAddress", property = "cafeAddress"),
 			@Result(column = "cafePhoneNumber", property = "cafePhoneNumber") })
