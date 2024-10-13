@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +38,49 @@ public class WebUtil {
 		}
 		return stringBuilder.toString();
 	}
+	
+//	public <T> T readBodyJsonForImg(HttpServletRequest req, Class<T> valueType) throws IOException {
+//		String body = readBodyForImg(req);
+//		JsonMapper mapper = new JsonMapper();
+//		T t = mapper.readValue(body, valueType);
+//		return t;
+//	}
+//
+//	 // 1. JSON 본문 읽기
+//    public String readBodyForImg(HttpServletRequest req) throws IOException {
+//        StringBuilder stringBuilder = new StringBuilder();
+//        BufferedReader bufferedReader = req.getReader();
+//        String line;
+//        
+//        while ((line = bufferedReader.readLine()) != null) {
+//            stringBuilder.append(line);
+//        }
+//        
+//        // 읽은 JSON 본문을 문자열로 반환
+//        String jsonBody = stringBuilder.toString();
+//
+//        System.out.println(extractImageUpload(jsonBody));
+//        // imageUpload 필드만 추출해서 반환
+//        return extractImageUpload(jsonBody);
+//    }
+//
+//    // 2. imageUpload 필드 추출 메서드
+//    private String extractImageUpload(String jsonBody) {
+//        // 정규표현식: "imageUpload" 필드의 중괄호 안 내용 매칭
+//        String regex = "\"cafePic\":\\{(.*?)\\}";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(jsonBody);
+//
+//        if (matcher.find()) {
+//            // 중괄호 포함한 내용 반환
+//            return "{" + matcher.group(1) + "}";
+//        } else {
+//            // imageUpload 필드가 없으면 빈 객체 반환
+//            return "{}";
+//        }
+//    }
+	
+	
 
 	public void writeBodyJson(HttpServletResponse resp, Object object) throws IOException {
 		JsonMapper mapper = new JsonMapper();

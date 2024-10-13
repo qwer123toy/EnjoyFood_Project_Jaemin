@@ -159,9 +159,9 @@
             <!-- 오른쪽 이미지 업로드 섹션 -->
             <div class="imageUpload">
                 <h2>대표 사진을 등록해 주세요.</h2>
-                <img id="imagePreview" class="uploaded-image" alt="이미지 미리보기" style="display: none;">
-                <input type="file" id="imageUpload" name="imageUpload" accept="image/*" class="input-field" >
-				<input type="hidden" id="menuNamepic" name="menuNamepic">
+                <img id="imagePreview" class="uploaded-image" name="menuInputpic" alt="이미지 미리보기" style="display: none;">
+                <input type="file" id="cafePic" name="cafePic" accept="image/*" class="input-field" >
+				<input type="hidden" id="cafePic64" name="cafePic64">
 
                 <div class="tag-input-container">
                     <label for="tagInput">태그 입력</label>
@@ -171,7 +171,7 @@
                 <div id="tagContainer"></div>
 
                 <script>
-				    document.getElementById('imageUpload').addEventListener('change', function(event) {
+				    document.getElementById('cafePic').addEventListener('change', function(event) {
 				        const file = event.target.files[0];
 				        const reader = new FileReader();
 				

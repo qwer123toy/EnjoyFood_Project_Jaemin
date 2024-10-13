@@ -89,8 +89,8 @@ public interface CafeteriaMapper {
 	@Select("SELECT * FROM cafecategory")
 	List<CafeCategory> selectCategoryAll();
 
-	@Insert("INSERT INTO cafe_pic (cafe_num, cafe_pic) VALUES (#{cafe_num}, #{cafe_pic})")
-	int insertPic(@Param("cafe_num") int cafeNum, @Param("cafe_pic") String cafePic);
+	@Insert("INSERT INTO cafePic (cafeNum, cafePic) VALUES (#{cafeNum}, #{cafePic})")
+	int insertPic(@Param("cafeNum") int cafeNum, @Param("cafePic") String cafePic);
 
 	@Insert("INSERT INTO cafeTag (cafeNum, cafeTag) VALUES (#{cafeNum}, #{cafeTag})")
 	int insertTag(@Param("cafeNum") int cafeNum, @Param("cafeTag") String cafeTag);
