@@ -46,19 +46,27 @@
 			</c:otherwise>
 		</c:choose>
 		<div class="store-list">
-			<c:forEach var="cafeteria" items="${list}">
+			<c:forEach var="cafeteriaWithPic" items="${mergedList}">
 				<div class="store-item"
-					onclick="location.href='cafeteria?cafeNum=${cafeteria.cafeNum}&cafeName=${cafeteria.cafeName}'">
-					<a href="/store-details/${cafeteria.cafeNum}"> <!--  <div class="store-image">이미지 넣을거임!</div> --></a>
+					onclick="location.href='cafeteria?cafeNum=${cafeteriaWithPic.cafeteria.cafeNum}&cafeName=${cafeteriaWithPic.cafeteria.cafeName}'">
+					<a
+						href="cafeteria?cafeNum=${cafeteriaWithPic.cafeteria.cafeNum}&cafeName=${cafeteriaWithPic.cafeteria.cafeName}">
+						<c:forEach var="pic" items="${cafeteriaWithPic.cafePics}">
+							<img src="${pic.cafePic}" alt="Cafeteria Picture"
+								style="width: 250px; height: 120px;">
+						</c:forEach>
+					</a>
 					<ul>
-						<li class="a">${cafeteria.cafeName}</li>
-						<li>평균 금액: ${cafeteria.cafePrice} 원</li>
-						<li>전화번호: ${cafeteria.cafePhoneNumber}</li>
-						<li class="a">주소: ${cafeteria.cafeAddress}</li>
+						<li>${cafeteriaWithPic.cafeteria.cafeName}</li>
+						<li>평균 금액: ${cafeteriaWithPic.cafeteria.cafePrice} 원</li>
+						<li>전화번호: ${cafeteriaWithPic.cafeteria.cafePhoneNumber}</li>
+						<li>주소: ${cafeteriaWithPic.cafeteria.cafeAddress}</li>
 					</ul>
 				</div>
 			</c:forEach>
 		</div>
+
+
 	</main>
 </body>
 </html>

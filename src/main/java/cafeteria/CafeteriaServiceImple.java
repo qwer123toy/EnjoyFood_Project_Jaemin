@@ -244,12 +244,12 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public List<String> selectCafePic(int cafeNum) {
+	public CafePic selectCafePic(int cafeNum) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
 
-			List<String> resultList = mapper.selectCafePic(cafeNum);
-			return resultList;
+			CafePic result = mapper.selectCafePic(cafeNum);
+			return result;
 		}
 	}
 
@@ -299,6 +299,36 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			CafeteriaDynamicMapper mapper = sqlSession.getMapper(CafeteriaDynamicMapper.class);
 
 			List<Cafeteria> resultList = mapper.getCafeByArea(addressList);
+
+			return resultList;
+		}
+	}
+
+	@Override
+	public List<Menu> selectMenu(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			List<Menu> resultList = mapper.selectMenu(cafeNum);
+			return resultList;
+		}
+	}
+
+	@Override
+	public List<CafePic> selectCafePicAll() {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<CafePic> resultList = mapper.selectCafePicAll();
+
+			return resultList;
+		}
+	}
+
+	@Override
+	public List<CafePic> selectPicsByCafeNum(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<CafePic> resultList = mapper.selectPicsByCafeNum(cafeNum);
 
 			return resultList;
 		}

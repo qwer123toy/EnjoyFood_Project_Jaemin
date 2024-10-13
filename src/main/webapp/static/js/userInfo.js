@@ -4,6 +4,12 @@ let userID;
 let userNickname;
 let userPhoneNumber;
 let userOwnerNumber;
+let changeBtn;
+let ownerPageBtn;
+let addMenuBtn;
+
+let prevNicknameValue;
+let prevPhoneNumberValue;
 
 let prevPW;
 let userPW;
@@ -20,6 +26,12 @@ function onload() {
 	userNickname = document.querySelector("#userNickname");
 	userPhoneNumber = document.querySelector("#userPhoneNumber");
 	userOwnerNumber = document.querySelector("#userOwnerNumber");
+	ownerPageBtn = document.querySelector("#ownerPageBtn");
+	addMenuBtn = document.querySelector("#addMenuBtn");
+	changeBtn = document.querySelector("#changeBtn");
+
+	changeBtn.addEventListener("click", changeUserInfo);
+
 
 	prevPW = document.querySelector("#prevPW");
 	userPW = document.querySelector("#userPW");
@@ -39,23 +51,48 @@ function onload() {
 	fetch(query)
 		.then((resp) => resp.json())
 		.then((user) => {
-			console.log(user);
 			userID.value = user.userID;
 			userNickname.value = user.userNickname;
+			prevNicknameValue = user.userNickname;
 			userPhoneNumber.value = user.userPhoneNumber;
+			prevPhoneNumberValue = user.userPhoneNumber;
 			if (user.userOwnerNumber != null) {
 				userOwnerNumber.value = user.userOwnerNumber;
 				userOwnerNumber.parentElement.classList.remove("hidden");
+				ownerPageBtn.classList.remove("hidden");
+				addMenuBtn.classList.remove("hidden");
+				// ownerPageBtn의 onclick 속성에 동적으로 userID를 추가
+				ownerPageBtn.onclick = function() {
+					window.location.href = `/ownerPage?userId=${user.userID}`;
+				};
+
+				addMenuBtn.onclick = function() {
+					window.location.href = `/addMenu?userId=${user.userID}`;
+				};
 			}
 		});
 }
 
 function toggleInputPW() {
 	let inputPW = document.querySelector("#inputPW");
-	if (inputPW.classList.contains("hidden"))
+	let togglePW = document.querySelector("#togglePW");
+	if (inputPW.classList.contains("hidden")) {
 		inputPW.classList.remove("hidden");
-	else
+		prevPW.setAttribute("required", "required");
+		userPW.setAttribute("required", "required");
+		confirmPW.setAttribute("required", "required");
+		togglePW.innerHTML = "비밀번호 변경 취소"
+	} else {
 		inputPW.classList.add("hidden");
+		prevPW.value = '';
+		userPW.value = '';
+		confirmPW.value = '';
+		prevPW.removeAttribute("required", "required");
+		userPW.removeAttribute("required", "required");
+		confirmPW.removeAttribute("required", "required");
+		togglePW.innerHTML = "비밀번호 변경";
+		errorPW.classList.add("hidden");
+	}
 }
 
 function chkPW() {
@@ -75,6 +112,10 @@ function chkPW() {
 
 function chkNickname() {
 	let nickname = userNickname.value;
+	if (prevNicknameValue == nickname) {
+		errorNickname.classList.add("hidden");
+		return;
+	}
 	if (!isValidNickname(nickname)) {
 		errorNickname.innerHTML = "닉네임은 영문, 숫자 4~20자여야 합니다.";
 		errorNickname.classList.remove("hidden");
@@ -93,6 +134,11 @@ function chkNickname() {
 
 function chkPhoneNumber() {
 	let phoneNumber = userPhoneNumber.value;
+	if (prevPhoneNumberValue == phoneNumber) {
+		errorPhoneNumber.classList.add("hidden");
+		return;
+	}
+
 	if (!isValidPhoneNumber(phoneNumber)) {
 		errorPhoneNumber.innerHTML = "전화번호 입력을 정확하게 해주세요.";
 		errorPhoneNumber.classList.remove("hidden");
@@ -158,4 +204,42 @@ function formatPhoneNumber() {
 	}
 
 	userPhoneNumber.value = value;
+}
+
+function changeUserInfo(e) {
+	e.preventDefault();
+	userNickname.focus();
+	userPhoneNumber.focus();
+	if (!inputPW.classList.contains("hidden")) {
+		if (prevPW.value == '') {
+			errorPW.innerHTML = "비밀번호를 입력해주세요.";
+			errorPW.classList.remove("hidden");
+			prevPW.focus();
+			return;
+		}
+		userPW.focus();
+	} else {
+		if (prevNicknameValue == userNickname.value && prevPhoneNumberValue == userPhoneNumber.value) {
+			changeBtn.focus();
+			return;
+		}
+	}
+	changeBtn.focus();
+	if (!errorPW.classList.contains("hidden")) {
+		userPW.focus();
+		return;
+	} else if (!errorNickname.classList.contains("hidden")) {
+		userNickname.focus();
+		return;
+	} else if (!errorPhoneNumber.classList.contains("hidden")) {
+		userPhoneNumber.focus();
+		return;
+	}
+	let form = document.querySelector("#userInfoForm");
+	let formData = new FormData(form);
+	console.log(Object.fromEntries(formData));
+	fetch(url, {
+		method: "put",
+		body: JSON.stringify(Object.fromEntries(formData))
+	});
 }

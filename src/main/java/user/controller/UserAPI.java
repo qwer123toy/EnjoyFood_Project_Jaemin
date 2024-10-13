@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jayway.jsonpath.JsonPath;
+
 import config.SessionManager;
 import config.WebUtil;
 import user.model.AuthRequest;
@@ -246,34 +248,14 @@ public class UserAPI extends HttpServlet {
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebUtil webUtil = new WebUtil();
 
-		AuthRequest authRequest = webUtil.readBodyJson(req, AuthRequest.class);
-
-		String action = authRequest.getAction();
-		User user = authRequest.getUser();
-
-		switch (action) {
-		case "changePW":
-			handleChangePW(resp, webUtil, user);
-			break;
-		default:
-			handleBadRequest(resp, webUtil);
-			break;
-		}
-	}
-
-	private void handleChangePW(HttpServletResponse resp, WebUtil webUtil, User user) throws IOException {
-		if (UserValidator.isValidPW(user.getUserPW())) {
-			if (service.changePW(user)) {
-				webUtil.setCodeAndMimeType(resp, 200, "json");
-				webUtil.writeBodyJson(resp, new AuthResponse(true, "비밀번호 변경 성공"));
-			} else {
-				webUtil.setCodeAndMimeType(resp, 400, "json");
-				webUtil.writeBodyJson(resp, new AuthResponse(false, "비밀번호 변경 에러"));
-			}
-		} else {
-			webUtil.setCodeAndMimeType(resp, 400, "json");
-			webUtil.writeBodyJson(resp, new AuthResponse(false, "잘못된 비밀번호 형식"));
-		}
+		String json = webUtil.readBody(req);
+		System.out.println(json);
+//		String userID = JsonPath.read(json, "$.userID");
+//		String userNickname = JsonPath.read(json, "$.userNickname");
+//		String userPhoneNumber = JsonPath.read(json, "$.userPhoneNumber");
+//		String prevPW = JsonPath.read(json, "$.prevPW");
+//		String userPW = JsonPath.read(json, "$.userPW");
+//		handleBadRequest(resp, webUtil);
 	}
 
 	@Override

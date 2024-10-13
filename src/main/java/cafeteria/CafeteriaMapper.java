@@ -27,7 +27,7 @@ public interface CafeteriaMapper {
 	List<Cafeteria> selectAll();
 
 	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 검색한 식당 리스트
-	@Select({ "SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
+	@Select({ "SELECT DISTINCT cafeNum, cafeName, cafeAddress, cafePhoneNumber, cafePrice FROM cafeteria",
 			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
 			"WHERE cafeNum IN (SELECT cafeNum FROM menu where menuName  LIKE CONCAT('%', #{menuName}, '%'))",
 			"OR categoryName=#{categoryName} OR cafetag LIKE CONCAT('%', #{cafetag}, '%')",
@@ -37,6 +37,17 @@ public interface CafeteriaMapper {
 			@Param("cafetag") String cafetag, @Param("cafeName") String cafeName,
 			@Param("cafeAddress") String cafeAddress);
 
+	// 메뉴명, 카테고리, 태그, 카페이름, 주소를 검색한 식당 리스트
+	@Select({ "SELECT DISTINCT cafeNum FROM cafeteria",
+			"NATURAL JOIN cafecategory NATURAL JOIN category_management NATURAL JOIN cafetag",
+			"WHERE cafeNum IN (SELECT cafeNum FROM menu where menuName  LIKE CONCAT('%', #{menuName}, '%'))",
+			"OR categoryName=#{categoryName} OR cafetag LIKE CONCAT('%', #{cafetag}, '%')",
+			"OR cafeName LIKE CONCAT('%', #{cafeName}, '%') OR cafeAddress LIKE CONCAT('%', #{cafeAddress}, '%')" })
+	@ResultMap("cafeResults")
+	List<Integer> searchCafeNumByAll(@Param("menuName") String menuName, @Param("categoryName") String categoryName,
+			@Param("cafetag") String cafetag, @Param("cafeName") String cafeName,
+			@Param("cafeAddress") String cafeAddress);
+	
 //	@Select({ "<script> SELECT DISTINCT cafeName, cafeAddress, cafePhoneNumber, cafePrice \r\n"
 //			+ "    FROM cafeteria\r\n"
 //			+ "    NATURAL JOIN cafecategory \r\n"
@@ -117,8 +128,8 @@ public interface CafeteriaMapper {
 	@Select("SELECT * from cafereview where cafeNum = #{cafeNum}")
 	List<CafeReview> selectCafeReview(@Param("cafeNum") int cafeNum);
 
-	@Select("SELECT cafePic FROM cafepic WHERE cafeNum = #{cafeNum}")
-	List<String> selectCafePic(@Param("cafeNum") int cafeNum);
+	@Select("SELECT * FROM cafepic WHERE cafeNum = #{cafeNum}")
+	CafePic selectCafePic(@Param("cafeNum") int cafeNum);
 	
 	@Select("SELECT categoryNum from category_management where cafeNum = #{cafeNum}")
 	List<Integer> selectCategoryNum(@Param("cafeNum") int cafeNum);
@@ -131,4 +142,14 @@ public interface CafeteriaMapper {
 	
 	@Select("SELECT AVG(userPayment) from cafereview where cafeNum = #{cafeNum} ")
 	Integer selectAvgPayment(@Param("cafeNum") int cafeNum);
+	
+	@Select("SELECT * from Menu where cafeNum = #{cafeNum}")
+	List<Menu> selectMenu(@Param("cafeNum") int cafeNum);
+	
+	@Select("SELECT * FROM cafepic")
+	List<CafePic> selectCafePicAll();
+	
+	@Select("SELECT * FROM cafepic WHERE cafeNum = #{cafeNum}")
+    List<CafePic> selectPicsByCafeNum(int cafeNum);
+
 }

@@ -50,7 +50,10 @@
 			<div class="store-infoDetail">
 				<div class="store-details">
 					<div class="store-image"
-						style="width: 300px; height: 300px; margin-right: 100px;">가게 이미지</div>
+						style="width: 300px; height: 300px; margin-right: 100px;">
+						        <img src="${cafePic}" alt="카페 사진" style="max-width: 300px; max-height: 300px;">
+						
+						</div>
 					<p style="margin-top: -12px">
 						<em class="link"> <a href="javascript:void(0);"
 							onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">

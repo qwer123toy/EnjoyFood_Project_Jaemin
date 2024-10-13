@@ -79,6 +79,7 @@
             <!-- 왼쪽 정보 입력 섹션 -->
             <div class="info-section">
                 <h2>기본 정보</h2>
+             <input type="hidden" id="cafeOwner" name="cafeOwner" value="${cafeOwner}" />   
                 <input type="text" id="cafeName" name="cafeName" placeholder="상호명 입력" class="input-field" />
                 <input type="text" id="cafeExplain" name="cafeExplain" placeholder="가게 소개 입력" class="input-field" />
                 <select class="input-field" name="cafeCategory">

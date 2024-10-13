@@ -50,7 +50,7 @@ public class SearchCateServlet extends HttpServlet {
 		req.setAttribute("userID", userID);
 
 		List<Cafeteria> list = (List<Cafeteria>) req.getAttribute("list");
-
+		
 		// 리스트가 없으면 전체 목록 조회
 		if (list == null) {
 			list = service.selectAll();

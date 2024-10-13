@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cafeteria.CafePic;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
+import cafeteria.CafeteriaWithPicDTO;
 import lombok.extern.slf4j.Slf4j;
 import user.model.User;
 import user.model.UserService;
@@ -26,7 +29,6 @@ public class MainServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		// action 파라미터로 로그아웃 요청 확인
 		String action = req.getParameter("action");
 
@@ -37,19 +39,16 @@ public class MainServlet extends HttpServlet {
 		}
 		initUserAttributes(req);
 
-		initCafeteriaList(req);
+		initCafeteriaList(req); // Cafeteria와 CafePic 리스트를 병합하여 설정
 		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
 	}
 
-	private void initCafeteriaList(HttpServletRequest req) {
-		List<Cafeteria> list = (List<Cafeteria>) req.getAttribute("list");
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		initUserAttributes(req);
 
-		// 리스트가 없으면 전체 목록 조회
-		if (list == null) {
-			list = service.selectAll();
-		}
-		// 리스트를 요청에 다시 설정하고 JSP로 포워드
-		req.setAttribute("list", list);
+		initSearchQuery(req); // 검색 쿼리 처리 후 병합된 리스트를 JSP로 전달
+		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
 	}
 
 	private void initUserAttributes(HttpServletRequest req) {
@@ -68,32 +67,53 @@ public class MainServlet extends HttpServlet {
 		resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		initUserAttributes(req);
+	private void initCafeteriaList(HttpServletRequest req) {
+		// Cafeteria와 CafePic 리스트 가져오기
+		List<Cafeteria> list = service.selectAll();
+		List<CafePic> cafePicList = service.selectCafePicAll();
 
-		initSearchQuery(req);
+		// Cafeteria와 CafePic 리스트 병합
+		List<CafeteriaWithPicDTO> mergedList = mergeCafeteriaAndPic(list);
 
-		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
+		// 병합된 리스트를 JSP로 전달
+		req.setAttribute("mergedList", mergedList);
 	}
 
 	private void initSearchQuery(HttpServletRequest req) {
-		String searchQuery = (String) req.getParameter("searchQuery");
-		// 로그 남기기 (검색어 확인)
+		String searchQuery = req.getParameter("searchQuery");
 		log.info("검색어: " + searchQuery);
 
-		// 검색어가 비어 있지 않은 경우, 검색 수행
 		List<Cafeteria> searchResults;
+
+		// 검색어가 있는 경우 검색 실행
 		if (searchQuery != null && !searchQuery.trim().isEmpty()) {
 			searchResults = service.searchByAll(searchQuery, searchQuery, searchQuery, searchQuery, searchQuery);
-			System.out.println(searchResults);
 		} else {
-			// 검색어가 없으면 전체 가게 목록을 출력
 			searchResults = service.selectAll();
 		}
 
+		// Cafeteria 결과에 맞는 CafePic 리스트를 개별적으로 가져오기
+		List<CafeteriaWithPicDTO> mergedList = new ArrayList<>();
+		for (Cafeteria cafeteria : searchResults) {
+			List<CafePic> cafePicList = service.selectPicsByCafeNum(cafeteria.getCafeNum());
+			mergedList.add(new CafeteriaWithPicDTO(cafeteria, cafePicList));
+		}
+
 		// 검색 결과를 JSP로 전달
-		req.setAttribute("list", searchResults);
+		req.setAttribute("mergedList", mergedList);
+	}
+
+	// Cafeteria와 CafePic을 병합하는 메서드
+	private List<CafeteriaWithPicDTO> mergeCafeteriaAndPic(List<Cafeteria> cafeteriaList) {
+		List<CafeteriaWithPicDTO> mergedList = new ArrayList<>();
+
+		for (Cafeteria cafeteria : cafeteriaList) {
+			// 해당 Cafeteria에 대한 모든 CafePic을 가져옴
+			List<CafePic> cafePics = service.selectPicsByCafeNum(cafeteria.getCafeNum());
+			mergedList.add(new CafeteriaWithPicDTO(cafeteria, cafePics));
+		}
+
+		return mergedList;
 	}
 
 }
