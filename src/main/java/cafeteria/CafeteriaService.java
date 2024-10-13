@@ -59,4 +59,9 @@ public interface CafeteriaService {
 
 	List<Menu> selectMenu( int cafeNum);
 
+	List<CafePic> selectCafePicAll();
+	
+    List<CafePic> selectPicsByCafeNum(int cafeNum);
+
+
 }

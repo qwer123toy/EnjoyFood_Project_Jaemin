@@ -313,4 +313,24 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			return resultList;
 		}
 	}
+
+	@Override
+	public List<CafePic> selectCafePicAll() {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<CafePic> resultList = mapper.selectCafePicAll();
+
+			return resultList;
+		}
+	}
+
+	@Override
+	public List<CafePic> selectPicsByCafeNum(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			List<CafePic> resultList = mapper.selectPicsByCafeNum(cafeNum);
+
+			return resultList;
+		}
+	}
 }
