@@ -15,109 +15,120 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.jayway.jsonpath.JsonPath;
 
 import cafeteria.CafeCategory;
+import cafeteria.CafePic;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
+import cafeteria.Menu;
 import config.WebUtil;
 
 @WebServlet("/ownerPage")
 @MultipartConfig
 public class OwnerPage_basic extends HttpServlet {
-    private CafeteriaService service = CafeteriaServiceImple.getInstance();
+	private CafeteriaService service = CafeteriaServiceImple.getInstance();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<CafeCategory> categoryList = service.selectCategoryAll();
-        req.setAttribute("categoryList", categoryList);
-        req.getRequestDispatcher("/WEB-INF/view/ownerPage.jsp").forward(req, resp);
-    }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<CafeCategory> categoryList = service.selectCategoryAll();
+		req.setAttribute("categoryList", categoryList);
+		req.getRequestDispatcher("/WEB-INF/view/ownerPage.jsp").forward(req, resp);
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
-        WebUtil webUtil = new WebUtil();
-        String json = webUtil.readBody(req);
-        JsonMapper jsonMapper = new JsonMapper();
+		WebUtil webUtil = new WebUtil();
+		String json = webUtil.readBody(req);
+		JsonMapper jsonMapper = new JsonMapper();
+		
+		System.out.println(json);
 
-        // JSON에서 값 추출
-        String cafeName = JsonPath.read(json, "$.cafeName");
-        String cafeExplain = JsonPath.read(json, "$.cafeExplain");
-        String cafePhoneNumber = JsonPath.read(json, "$.cafePhoneNumber");
-        String cafePrice = JsonPath.read(json, "$.cafePrice");        
-        String cafeAddress = JsonPath.read(json, "$.cafeAddress");
-        
-        String cafeStartTime = JsonPath.read(json, "$.start-time");
-        String cafeEndTime = JsonPath.read(json, "$.end-time");
+		// JSON에서 값 추출
+		String cafeName = JsonPath.read(json, "$.cafeName");
+		String cafeExplain = JsonPath.read(json, "$.cafeExplain");
+		String cafePhoneNumber = JsonPath.read(json, "$.cafePhoneNumber");
+		String cafePrice = JsonPath.read(json, "$.cafePrice");
+		String cafeAddress = JsonPath.read(json, "$.cafeAddress");
 
-        String tagCountStr = JsonPath.read(json, "$.tagCount");
+		String cafeStartTime = JsonPath.read(json, "$.start-time");
+		String cafeEndTime = JsonPath.read(json, "$.end-time");
 
-        // Custom 시간 처리
-        if (cafeStartTime.equals("custom-start")) {
-            cafeStartTime = JsonPath.read(json, "$.custom-start-time"); // custom-start-time 값으로 대체
-        }
+		String tagCountStr = JsonPath.read(json, "$.tagCount");
+		String cafePic64 = JsonPath.read(json, "$.cafePic64");
 
-        if (cafeEndTime.equals("custom-end")) {
-            cafeEndTime = JsonPath.read(json, "$.custom-end-time"); // custom-end-time 값으로 대체
-        }
+		// Custom 시간 처리
+		if (cafeStartTime.equals("custom-start")) {
+			cafeStartTime = JsonPath.read(json, "$.custom-start-time"); // custom-start-time 값으로 대체
+		}
 
-        // Start와 End Time을 연결하여 cafeOpenTime 구성
-        String cafeOpenTime = cafeStartTime.concat(" - ").concat(cafeEndTime);
+		if (cafeEndTime.equals("custom-end")) {
+			cafeEndTime = JsonPath.read(json, "$.custom-end-time"); // custom-end-time 값으로 대체
+		}
 
-        // 카테고리 값 추출
-        String cafeCategoryStr = JsonPath.read(json, "$.cafeCategory");
-        int cafeCategory = Integer.parseInt(cafeCategoryStr);
+		// Start와 End Time을 연결하여 cafeOpenTime 구성
+		String cafeOpenTime = cafeStartTime.concat(" - ").concat(cafeEndTime);
 
-        List<String> cafeTagList = new ArrayList<>();
+		// 카테고리 값 추출
+		String cafeCategoryStr = JsonPath.read(json, "$.cafeCategory");
+		int cafeCategory = Integer.parseInt(cafeCategoryStr);
 
-        // 태그 개수 받기
-        int tagCount = 0;
+		List<String> cafeTagList = new ArrayList<>();
 
-        if (tagCountStr != null && !tagCountStr.isEmpty()) {
-            tagCount = Integer.parseInt(tagCountStr); // null 또는 빈 문자열 체크
-        } else {
-            // 태그 카운트가 null일 경우, 기본값 설정 (0 또는 다른 적절한 값으로)
-            System.out.println("tagCount is null or empty");
-            tagCount = 0;
-        }
+		// 태그 개수 받기
+		int tagCount = 0;
 
-        // 태그 추가
-        for (int i = 1; i <= tagCount; i++) {  // 태그 카운트만큼 반복
-            String tagParam = JsonPath.read(json, "$.tagInput-"+i);
-            if (tagParam != null && !tagParam.isEmpty()) {
-                cafeTagList.add(tagParam);  // 유효한 태그만 추가
-            }
-        }
+		if (tagCountStr != null && !tagCountStr.isEmpty()) {
+			tagCount = Integer.parseInt(tagCountStr); // null 또는 빈 문자열 체크
+		} else {
+			// 태그 카운트가 null일 경우, 기본값 설정 (0 또는 다른 적절한 값으로)
+			System.out.println("tagCount is null or empty");
+			tagCount = 0;
+		}
 
-        // 태그 개수 제한 (혹시 모를 오류 대비)
-        if (cafeTagList.size() > 5) {
-            cafeTagList = cafeTagList.subList(0, 5);  // 처음 5개만 남김
-        }
+		// 태그 추가
+		for (int i = 1; i <= tagCount; i++) { // 태그 카운트만큼 반복
+			String tagParam = JsonPath.read(json, "$.tagInput-" + i);
+			if (tagParam != null && !tagParam.isEmpty()) {
+				cafeTagList.add(tagParam); // 유효한 태그만 추가
+			}
+		}
 
-//        System.out.println(json);
-        System.out.println("yaya"+cafeTagList);
+		// 태그 개수 제한 (혹시 모를 오류 대비)
+		if (cafeTagList.size() > 5) {
+			cafeTagList = cafeTagList.subList(0, 5); // 처음 5개만 남김
+		}
 
-        // JSON 형식으로 다시 String 생성
-        String resultJsonForCafeteria = "{"
-                + "\"cafeName\": \"" + cafeName + "\","
-                + "\"cafeExplain\": \"" + cafeExplain + "\","
-                + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\","
-                + "\"cafePrice\": \"" + cafePrice + "\","
-                + "\"cafeAddress\": \"" + cafeAddress + "\","
-                + "\"cafeOpenTime\": \"" + cafeOpenTime + "\""
-                + "}";
+		System.out.println(json);
 
-        Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
-        
-        int cafeNum = service.insert(cafeteria);
-        service.insertCategoryM(cafeNum, cafeCategory);
-        
-        // 태그 추가 부분에서 인덱스 범위 확인
-        for(int i=0; i<cafeTagList.size(); i++) {
-            service.insertTag(cafeNum, cafeTagList.get(i));
-        }
-        
-        webUtil.setCodeAndMimeType(resp, 201, "json");
-        webUtil.writeBodyJson(resp, cafeteria);
-    }
+		// JSON 형식으로 다시 String 생성
+		String resultJsonForCafeteria = "{" + "\"cafeName\": \"" + cafeName + "\"," + "\"cafeExplain\": \""
+				+ cafeExplain + "\"," + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\"," + "\"cafePrice\": \""
+				+ cafePrice + "\"," + "\"cafeAddress\": \"" + cafeAddress + "\"," + "\"cafeOpenTime\": \""
+				+ cafeOpenTime + "\"" + "}";
+
+		// Base64 이미지 추출
+//        String menuImageBase64 = JsonPath.read(json, "$.imageUpload");
+//        System.out.println(menuImageBase64);
+//        
+//        Object menuImageObj = JsonPath.read(json, "$.imageUpload");
+//        String menuImageBase64 = menuImageObj instanceof String ? (String) menuImageObj : null;
+//
+//        // Base64 이미지를 바이트 배열로 변환
+//        byte[] menuImageBytes = java.util.Base64.getDecoder().decode(menuImageBase64);
+//        
+		
+		Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
+		int cafeNum = service.insert(cafeteria);
+		service.insertCategoryM(cafeNum, cafeCategory);
+		// 태그 추가 부분에서 인덱스 범위 확인
+		for (int i = 0; i < cafeTagList.size(); i++) {
+			service.insertTag(cafeNum, cafeTagList.get(i));
+		}
+
+		System.out.println(cafePic64);
+		int result = service.insertPic(cafeNum, cafePic64);
+		webUtil.setCodeAndMimeType(resp, 201, "json");
+		webUtil.writeBodyJson(resp, cafeteria);
+	}
 }
