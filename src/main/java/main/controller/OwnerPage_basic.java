@@ -50,10 +50,8 @@ public class OwnerPage_basic extends HttpServlet {
 		String cafePhoneNumber = JsonPath.read(json, "$.cafePhoneNumber");
 		String cafePrice = JsonPath.read(json, "$.cafePrice");
 		String cafeAddress = JsonPath.read(json, "$.cafeAddress");
-
 		String cafeStartTime = JsonPath.read(json, "$.start-time");
 		String cafeEndTime = JsonPath.read(json, "$.end-time");
-
 		String tagCountStr = JsonPath.read(json, "$.tagCount");
 		String cafePic64 = JsonPath.read(json, "$.cafePic64");
 
@@ -72,7 +70,17 @@ public class OwnerPage_basic extends HttpServlet {
 		// 카테고리 값 추출
 		String cafeCategoryStr = JsonPath.read(json, "$.cafeCategory");
 		int cafeCategory = Integer.parseInt(cafeCategoryStr);
-
+	
+		// JSON 형식으로 다시 String 생성
+				String resultJsonForCafeteria = "{" + "\"cafeName\": \"" + cafeName + "\"," + "\"cafeExplain\": \""
+						+ cafeExplain + "\"," + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\"," + "\"cafePrice\": \""
+						+ cafePrice + "\"," + "\"cafeAddress\": \"" + cafeAddress + "\"," + "\"cafeOpenTime\": \""
+						+ cafeOpenTime + "\"" + "}";
+				
+				Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
+				int cafeNum = service.insert(cafeteria);
+				service.insertCategoryM(cafeNum, cafeCategory);
+		
 		List<String> cafeTagList = new ArrayList<>();
 
 		// 태그 개수 받기
@@ -98,35 +106,12 @@ public class OwnerPage_basic extends HttpServlet {
 		if (cafeTagList.size() > 5) {
 			cafeTagList = cafeTagList.subList(0, 5); // 처음 5개만 남김
 		}
-
-		System.out.println(json);
-
-		// JSON 형식으로 다시 String 생성
-		String resultJsonForCafeteria = "{" + "\"cafeName\": \"" + cafeName + "\"," + "\"cafeExplain\": \""
-				+ cafeExplain + "\"," + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\"," + "\"cafePrice\": \""
-				+ cafePrice + "\"," + "\"cafeAddress\": \"" + cafeAddress + "\"," + "\"cafeOpenTime\": \""
-				+ cafeOpenTime + "\"" + "}";
-
-		// Base64 이미지 추출
-//        String menuImageBase64 = JsonPath.read(json, "$.imageUpload");
-//        System.out.println(menuImageBase64);
-//        
-//        Object menuImageObj = JsonPath.read(json, "$.imageUpload");
-//        String menuImageBase64 = menuImageObj instanceof String ? (String) menuImageObj : null;
-//
-//        // Base64 이미지를 바이트 배열로 변환
-//        byte[] menuImageBytes = java.util.Base64.getDecoder().decode(menuImageBase64);
-//        
 		
-		Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
-		int cafeNum = service.insert(cafeteria);
-		service.insertCategoryM(cafeNum, cafeCategory);
 		// 태그 추가 부분에서 인덱스 범위 확인
 		for (int i = 0; i < cafeTagList.size(); i++) {
 			service.insertTag(cafeNum, cafeTagList.get(i));
 		}
 
-		System.out.println(cafePic64);
 		int result = service.insertPic(cafeNum, cafePic64);
 		webUtil.setCodeAndMimeType(resp, 201, "json");
 		webUtil.writeBodyJson(resp, cafeteria);
