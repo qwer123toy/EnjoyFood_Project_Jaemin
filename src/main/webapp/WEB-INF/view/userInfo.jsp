@@ -26,8 +26,13 @@
 				<li id="userID"><strong>아이디: </strong></li>
 				<li id="userNickname"><strong>닉네임: </strong></li>
 				<li id="userPhoneNumber"><strong>전화번호: </strong></li>
-				<li id="userOwnerNumber" class="hidden"><strong>사업자 번호: </strong></li>
+				<li id="userOwnerNumber" class="hidden"><strong>사업자
+						번호: </strong></li>
 			</ul>
+			<div style="display:flex; justify-content: center">
+				<button onclick="window.location='/userInfoChange'" class="button" style="">회원정보
+					수정</button>
+			</div>
 		</div>
 	</main>
 </body>

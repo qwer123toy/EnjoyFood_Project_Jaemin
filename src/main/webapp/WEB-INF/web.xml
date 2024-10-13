@@ -31,7 +31,7 @@
 		<servlet-name>SignupServlet</servlet-name>
 		<url-pattern>/signup</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>findIdServlet</servlet-name>
 		<jsp-file>/WEB-INF/view/findId.jsp</jsp-file>
@@ -41,7 +41,7 @@
 		<servlet-name>findIdServlet</servlet-name>
 		<url-pattern>/findId</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>findPwServlet</servlet-name>
 		<jsp-file>/WEB-INF/view/findPw.jsp</jsp-file>
@@ -51,7 +51,7 @@
 		<servlet-name>findPwServlet</servlet-name>
 		<url-pattern>/findPw</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>userInfoServlet</servlet-name>
 		<jsp-file>/WEB-INF/view/userInfo.jsp</jsp-file>
@@ -60,5 +60,15 @@
 	<servlet-mapping>
 		<servlet-name>userInfoServlet</servlet-name>
 		<url-pattern>/userInfo</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>userInfoChangeServlet</servlet-name>
+		<jsp-file>/WEB-INF/view/userInfoChange.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>userInfoChangeServlet</servlet-name>
+		<url-pattern>/userInfoChange</url-pattern>
 	</servlet-mapping>
 </web-app>
