@@ -24,12 +24,6 @@
 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
 
 
-	<!-- 왼쪽 고정 바 -->
-	<nav class="sidebar">
-		<button class="btn">가게 상세보기 화면2입니다.</button>
-		<button class="btn">고정바</button>
-	</nav>
-
 	<!-- 메인 컨텐츠 -->
 	<main>
 		<section class="store-info">
@@ -44,6 +38,10 @@
 					<div class="menu-item">메뉴 이미지 3</div>
 					<div class="menu-item">메뉴 이미지 4</div>
 					<div class="menu-item">메뉴 이미지 5</div>
+					<div class="menu-item">메뉴 이미지 6</div>
+					<div class="menu-item">메뉴 이미지 7</div>
+					<div class="menu-item">메뉴 이미지 8</div>
+					<div class="menu-item">메뉴 이미지 9</div>
 				</div>
 				<button class="btn-more-images">이미지 더보기 →</button>
 			</div>
