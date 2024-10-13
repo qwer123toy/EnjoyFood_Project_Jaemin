@@ -2,11 +2,12 @@
 
 body {
 	background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
+	font-family: 'Arial', sans-serif;
+	color: #333;
+	margin: 0;
+	padding: 0;
 }
+
 .info-section h1 {
 	font-size: 36px;
 	font-weight: bold;
@@ -19,12 +20,12 @@ body {
 }
 /* 입력 폼 전체 카드 스타일 */
 .card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    text-align: center;
+	background-color: white;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	width: 400px;
+	text-align: center;
 }
 
 .container {
@@ -114,49 +115,50 @@ textarea#menuDescription {
 
 input[type="text"], select, input[type="file"] {
 	margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #007BFF;
-    border-radius: 10px;
-    width: 80%;
-    font-size: 16px;
-    outline: none;
+	padding: 10px;
+	border: 1px solid #007BFF;
+	border-radius: 10px;
+	width: 80%;
+	font-size: 16px;
+	outline: none;
 }
+
 .right-buttons {
-    display: flex; /* 오른쪽 버튼들을 수평으로 나열 */
-    gap: 10px; /* 버튼 사이의 간격 */
+	display: flex; /* 오른쪽 버튼들을 수평으로 나열 */
+	gap: 10px; /* 버튼 사이의 간격 */
 }
 
 .left-button {
-    margin-right: auto; /* 이전 버튼을 왼쪽으로 정렬 */
+	margin-right: auto; /* 이전 버튼을 왼쪽으로 정렬 */
 }
+
 .buttons {
-    display: flex;
-    justify-content: space-between; /* 왼쪽과 오른쪽으로 배치 */
-    width: 100%; /* 부모 컨테이너의 너비를 100%로 설정 */
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-between; /* 왼쪽과 오른쪽으로 배치 */
+	width: 100%; /* 부모 컨테이너의 너비를 100%로 설정 */
+	margin-top: 20px;
 }
 
 .buttons button {
-    margin-left: 15px; /* 버튼들 사이에 약간의 간격 추가 */
-    background: linear-gradient(45deg, #FF69B4, #FF1493); /* 그라데이션 배경 */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 30px; /* 둥근 모서리 */
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
-    transition: background 0.3s, transform 0.3s; /* 부드러운 애니메이션 */
+	margin-left: 15px; /* 버튼들 사이에 약간의 간격 추가 */
+	background: linear-gradient(45deg, #FF69B4, #FF1493); /* 그라데이션 배경 */
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 30px; /* 둥근 모서리 */
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+	transition: background 0.3s, transform 0.3s; /* 부드러운 애니메이션 */
 }
 
 .buttons button:hover {
-    background: linear-gradient(45deg, #FF1493, #FF69B4); /* 호버 시 배경색 반전 */
-    transform: scale(1.05); /* 호버 시 약간 확대 */
+	background: linear-gradient(45deg, #FF1493, #FF69B4); /* 호버 시 배경색 반전 */
+	transform: scale(1.05); /* 호버 시 약간 확대 */
 }
 
 .buttons button:active {
-    background: linear-gradient(45deg, #FF1493, #C71585); /* 클릭 시 배경색 어둡게 */
-    transform: scale(0.98); /* 클릭 시 살짝 눌리는 효과 */
-
+	background: linear-gradient(45deg, #FF1493, #C71585); /* 클릭 시 배경색 어둡게 */
+	transform: scale(0.98); /* 클릭 시 살짝 눌리는 효과 */
 }

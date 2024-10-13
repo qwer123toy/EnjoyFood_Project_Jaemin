@@ -1,4 +1,5 @@
 package cafeteria;
+
 //
 import java.util.List;
 
@@ -289,6 +290,17 @@ public class CafeteriaServiceImple implements CafeteriaService {
 
 			Integer result = mapper.selectAvgPayment(cafeNum);
 			return result;
+		}
+	}
+
+	@Override
+	public List<Cafeteria> selectByArea(List<String> addressList) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaDynamicMapper mapper = sqlSession.getMapper(CafeteriaDynamicMapper.class);
+
+			List<Cafeteria> resultList = mapper.getCafeByArea(addressList);
+
+			return resultList;
 		}
 	}
 }

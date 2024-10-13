@@ -1,93 +1,148 @@
-@charset "UTF-8";
-
 body {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	background-color: #f0f4f8;
+}
+
+main {
+	margin-top: 100px;
+	margin-left: 30px;
+	width: 70%;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	width: 70%;
+	width: 70%;
+}
+
+h1, h2 {
+	text-align: center;
+	color: #333;
 }
 
 .container {
-	text-align: center;
-	background: white;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-	width: 80%;
-	max-width: 800px;
-}
-
-.hidden {
-	display: none;
-}
-
-.radio-label {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	padding: 10px;
+	justify-content: space-between;
+}
+
+.button-group {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	flex: 4; /* 시도 선택 비율 설정 */
+}
+
+.district-group {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	flex: 6; /* 시구군 선택 비율 설정 */
+}
+
+button {
 	margin: 5px;
-	border: 2px solid transparent;
+	padding: 12px 20px;
+	border: none;
 	border-radius: 5px;
-	border-color: silver;
-	transition: border-color 0.3s;
-	flex: 1 0 calc(16.65% - 10px); /* 5열 구성 */
-	box-sizing: border-box;
-	max-width: 122.8px; /* 최대 폭 설정 */
-}
-
-.radio-label:hover {
-	border-color: #007bff;
-}
-
-.radio-label.selected {
-    border-color: #007bff; /* 선택된 버튼 테두리 색 */
-}
-
-/* 라디오 버튼 숨김 */
-input[type="radio"] {
-	display: none;
-}
-
-h2, h3 {
-	color: #333;
-	text-align: left;
-	margin-left: 30px;
-}
-
-#cities {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	border: 2px solid transparent;
-	border-radius: 5px;
-	border-color: silver;
-	margin-bottom: 20px;
-}
-
-#districts {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	border: 2px solid transparent;
-	border-radius: 5px;
-	border-color: silver;
-}
-
-.search-button {
-	margin-top: 20px;
-	padding: 10px 20px;
-	font-size: 16px;
 	background-color: #007bff;
 	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+	background-color: #0056b3;
+	transform: scale(1.05);
+}
+
+.selected {
+	background-color: #4caf50;
+	color: white;
+}
+
+#selectedList {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+.selectedItem {
+	margin: 5px;
+	padding: 10px 15px;
+	background-color: #e2e2e2;
+	color: black;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-	transition: background-color 0.3s;
+	border: none;
 }
 
-.search-button:hover {
-	background-color: #0056b3;
+.selectedItem:hover {
+	background-color: #d0d0d0;
+}
+
+.vertical {
+	display: flex;
+	flex-direction: column;
+}
+
+#clearAllButton, #searchButton {
+	width: 100px; /* 버튼 가로 크기 설정 */
+}
+
+.store-list {
+	display: flex; /* flexbox로 레이아웃 설정 */
+	flex-wrap: wrap; /* 넘치면 자동으로 다음 줄로 넘어감 */
+	padding: 20px; /* 내부 여백 설정 */
+	gap: 20px; /* 아이템 간격 설정 */
+	justify-content: center;
+}
+
+.store-item {
+	background-color: white; /* 아이템 배경 색상 설정 */
+	padding: 20px; /* 아이템 내부 여백 설정 */
+	margin: 10px; /* 아이템 간격 설정 */
+	border-radius: 15px; /* 둥근 모서리 설정 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
+	transition: transform 0.3s ease; /* 호버 시 애니메이션 설정 */
+	width: calc(45% - 40px); /* 한 줄에 3개의 아이템이 들어가도록 너비 계산 (마진 포함) */
+}
+
+.store-item:hover {
+	transform: translateY(-10px); /* 호버 시 아이템이 살짝 떠오르는 효과 */
+}
+
+.result {
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: #f0f0f0;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+ul li {
+	margin: 5px 0;
+}
+
+.a {
+	color: #6a1b9a;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.a:hover {
+	text-decoration: underline;
 }

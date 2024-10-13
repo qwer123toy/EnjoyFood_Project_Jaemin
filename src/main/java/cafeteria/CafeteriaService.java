@@ -1,4 +1,5 @@
 package cafeteria;
+
 //
 import java.util.List;
 
@@ -33,26 +34,27 @@ public interface CafeteriaService {
 	List<Menu> showCafeMenu(int cafeNum);
 
 	int insertReview(CafeReview cafeReview);
-	
+
 	List<CafeReview> selectCafeReview(int cafeNum);
-	
+
 	List<CafeCategory> selectCategoryAll();
 
-	
 	int insertCategoryM(int cafeNum, int categoryNum);
 
-	int insertPic( int cafeNum, String cafePic);
+	int insertPic(int cafeNum, String cafePic);
 
-	int insertTag(int cafeNum,  String cafeTag);
+	int insertTag(int cafeNum, String cafeTag);
 
 	List<String> selectCafePic(int cafeNum);
-	
+
 	List<Integer> selectCategoryNum(int cafeNum);
-	
+
 	CafeCategory selectCategory(int categoryNum);
-	
+
 	List<CafeTag> selectCafeTag(int cafeNum);
 
 	Integer selectAvgPayment(int cafeNum);
+
+	List<Cafeteria> selectByArea(List<String> addressList);
 
 }
