@@ -117,8 +117,8 @@ public interface CafeteriaMapper {
 	@Select("SELECT * from cafereview where cafeNum = #{cafeNum}")
 	List<CafeReview> selectCafeReview(@Param("cafeNum") int cafeNum);
 
-	@Select("SELECT cafePic FROM cafepic WHERE cafeNum = #{cafeNum}")
-	List<String> selectCafePic(@Param("cafeNum") int cafeNum);
+	@Select("SELECT * FROM cafepic WHERE cafeNum = #{cafeNum}")
+	CafePic selectCafePic(@Param("cafeNum") int cafeNum);
 	
 	@Select("SELECT categoryNum from category_management where cafeNum = #{cafeNum}")
 	List<Integer> selectCategoryNum(@Param("cafeNum") int cafeNum);
@@ -131,4 +131,7 @@ public interface CafeteriaMapper {
 	
 	@Select("SELECT AVG(userPayment) from cafereview where cafeNum = #{cafeNum} ")
 	Integer selectAvgPayment(@Param("cafeNum") int cafeNum);
+	
+	@Select("SELECT * from Menu where cafeNum = #{cafeNum}")
+	List<Menu> selectMenu(@Param("cafeNum") int cafeNum);
 }

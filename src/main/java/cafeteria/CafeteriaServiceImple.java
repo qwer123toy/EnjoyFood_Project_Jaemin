@@ -244,12 +244,12 @@ public class CafeteriaServiceImple implements CafeteriaService {
 	}
 
 	@Override
-	public List<String> selectCafePic(int cafeNum) {
+	public CafePic selectCafePic(int cafeNum) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
 			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
 
-			List<String> resultList = mapper.selectCafePic(cafeNum);
-			return resultList;
+			CafePic result = mapper.selectCafePic(cafeNum);
+			return result;
 		}
 	}
 
@@ -300,6 +300,16 @@ public class CafeteriaServiceImple implements CafeteriaService {
 
 			List<Cafeteria> resultList = mapper.getCafeByArea(addressList);
 
+			return resultList;
+		}
+	}
+
+	@Override
+	public List<Menu> selectMenu(int cafeNum) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession();) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+
+			List<Menu> resultList = mapper.selectMenu(cafeNum);
 			return resultList;
 		}
 	}

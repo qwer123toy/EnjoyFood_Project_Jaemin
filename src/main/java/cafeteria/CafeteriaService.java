@@ -45,7 +45,7 @@ public interface CafeteriaService {
 
 	int insertTag(int cafeNum, String cafeTag);
 
-	List<String> selectCafePic(int cafeNum);
+	CafePic selectCafePic(int cafeNum);
 
 	List<Integer> selectCategoryNum(int cafeNum);
 
@@ -56,5 +56,7 @@ public interface CafeteriaService {
 	Integer selectAvgPayment(int cafeNum);
 
 	List<Cafeteria> selectByArea(List<String> addressList);
+
+	List<Menu> selectMenu( int cafeNum);
 
 }

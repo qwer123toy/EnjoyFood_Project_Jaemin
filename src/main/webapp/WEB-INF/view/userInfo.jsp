@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,12 +28,13 @@
 				<li id="userID"><strong>아이디: </strong></li>
 				<li id="userNickname"><strong>닉네임: </strong></li>
 				<li id="userPhoneNumber"><strong>전화번호: </strong></li>
-				<li id="userOwnerNumber" class="hidden"><strong>사업자
-						번호: </strong></li>
+				<li id="userOwnerNumber" class="hidden"><strong>사업자번호: </strong></li>
 			</ul>
 			<div style="display:flex; justify-content: center">
-				<button onclick="window.location='/userInfoChange'" class="button" style="">회원정보
-					수정</button>
+				<button onclick="window.location='/userInfoChange'" class="button" style="">회원정보 수정</button>
+				<button id = "ownerPageBtn" class=" button hidden">가게정보 추가</button>
+				<button id = "addMenuBtn" class="button hidden" >가게메뉴 추가</button>
+				
 			</div>
 		</div>
 	</main>

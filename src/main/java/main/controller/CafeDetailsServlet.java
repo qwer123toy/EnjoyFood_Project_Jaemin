@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cafeteria.CafeCategory;
+import cafeteria.CafePic;
 import cafeteria.CafeReview;
 import cafeteria.CafeTag;
 import cafeteria.Cafeteria;
@@ -42,7 +43,6 @@ public class CafeDetailsServlet extends HttpServlet {
 			String cafeName = req.getParameter("cafeName");
 			Cafeteria cafeteria = service.selectByName(cafeName);
 			int cafeNum = cafeteria.getCafeNum();
-			List<String> cafePic = service.selectCafePic(cafeteria.getCafeNum());
 
 			List<CafeReview> cafeReviewList = service.selectCafeReview(cafeteria.getCafeNum());
 			double score = service.selectAvg(cafeNum);
@@ -57,9 +57,11 @@ public class CafeDetailsServlet extends HttpServlet {
 			}
 
 			List<CafeTag> cafeTagList = service.selectCafeTag(cafeNum);
-
+			
+			CafePic cafePic = service.selectCafePic(cafeNum);
+			
 			Integer customerPaymentAvg = service.selectAvgPayment(cafeNum);
-
+			req.setAttribute("cafePic", cafePic.getCafePic());
 			req.setAttribute("cafeteria", cafeteria);
 			req.setAttribute("cafeReviewList", cafeReviewList);
 			req.setAttribute("cafeCategoryList", cafeCategoryList);
