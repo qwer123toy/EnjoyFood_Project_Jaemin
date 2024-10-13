@@ -31,18 +31,22 @@ public class OwnerPage_basic extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<CafeCategory> categoryList = service.selectCategoryAll();
 		req.setAttribute("categoryList", categoryList);
+		 String cafeOwner = req.getParameter("userId");
+		req.setAttribute("cafeOwner", cafeOwner);
 		req.getRequestDispatcher("/WEB-INF/view/ownerPage.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
+//		 String cafeOwner = req.getParameter("cafeOwner");
+//        String cafeOwner = (String) req.getAttribute("cafeOwner");
+//        System.out.println(cafeOwner);
 		WebUtil webUtil = new WebUtil();
 		String json = webUtil.readBody(req);
 		JsonMapper jsonMapper = new JsonMapper();
 		
-		System.out.println(json);
+//		System.out.println(json);
 
 		// JSON에서 값 추출
 		String cafeName = JsonPath.read(json, "$.cafeName");
@@ -54,7 +58,8 @@ public class OwnerPage_basic extends HttpServlet {
 		String cafeEndTime = JsonPath.read(json, "$.end-time");
 		String tagCountStr = JsonPath.read(json, "$.tagCount");
 		String cafePic64 = JsonPath.read(json, "$.cafePic64");
-
+		String cafeOwner = JsonPath.read(json, "$.cafeOwner");
+		
 		// Custom 시간 처리
 		if (cafeStartTime.equals("custom-start")) {
 			cafeStartTime = JsonPath.read(json, "$.custom-start-time"); // custom-start-time 값으로 대체
@@ -75,7 +80,8 @@ public class OwnerPage_basic extends HttpServlet {
 				String resultJsonForCafeteria = "{" + "\"cafeName\": \"" + cafeName + "\"," + "\"cafeExplain\": \""
 						+ cafeExplain + "\"," + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\"," + "\"cafePrice\": \""
 						+ cafePrice + "\"," + "\"cafeAddress\": \"" + cafeAddress + "\"," + "\"cafeOpenTime\": \""
-						+ cafeOpenTime + "\"" + "}";
+						+ cafeOpenTime + "\"," + "\"cafeOwner\": \"" + cafeOwner + "\"" +
+						"}";
 				
 				Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
 				int cafeNum = service.insert(cafeteria);
