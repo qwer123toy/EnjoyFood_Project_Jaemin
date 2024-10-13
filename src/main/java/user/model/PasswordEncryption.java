@@ -26,6 +26,6 @@ public class PasswordEncryption {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(encryptPassword("asdfqwer1`"));
+		System.out.println(encryptPassword("0000"));
 	}
 }
