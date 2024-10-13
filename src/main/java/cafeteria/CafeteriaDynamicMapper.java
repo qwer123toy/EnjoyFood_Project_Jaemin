@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 public interface CafeteriaDynamicMapper {
     @SelectProvider(type = CafeSQLProvider.class, method = "getCafeByPrice")
     @Results({ 
+    	@Result(column = "cafeNum", property = "cafeNum"),
         @Result(column = "cafeName", property = "cafeName"),
         @Result(column = "cafePrice", property = "cafePrice"),
         @Result(column = "cafeAddress", property = "cafeAddress"),
@@ -21,6 +22,7 @@ public interface CafeteriaDynamicMapper {
     
     @SelectProvider(type = CafeSQLProvider.class, method = "getCafeByPriceAndTags")
     @Results({ 
+    	@Result(column = "cafeNum", property = "cafeNum"),
         @Result(column = "cafeName", property = "cafeName"),
         @Result(column = "cafePrice", property = "cafePrice"),
         @Result(column = "cafeAddress", property = "cafeAddress"),

@@ -24,7 +24,7 @@ public class CafeSQLProvider {
 	
 	public static String getCafeByPriceAndTags(@Param("cafePrice") int cafePrice, @Param("cafetag") List<String> cafetags) {
 	    StringBuilder sql = new StringBuilder();
-	    sql.append("SELECT DISTINCT c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice ");
+	    sql.append("SELECT DISTINCT c.cafeNum, c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice ");
 	    sql.append("FROM cafeteria c ");
 	    sql.append("NATURAL JOIN cafecategory cc ");
 	    sql.append("NATURAL JOIN category_management cm ");
@@ -45,7 +45,5 @@ public class CafeSQLProvider {
 
 	    return sql.toString();
 	}
-
-
 
 }
