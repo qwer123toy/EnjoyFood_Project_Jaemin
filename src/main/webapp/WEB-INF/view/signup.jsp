@@ -9,13 +9,14 @@
 <link rel="stylesheet" type="text/css" href="/static/css/default.css">
 <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
 <script src="/static/js/signup.js" defer></script>
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
  	<!-- 상단 고정 바 -->
     <jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
     
 	<!-- 왼쪽 고정 바 -->
-   	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+<%--    	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
    	
 	<main class="main">
 		<h1>회원가입</h1>

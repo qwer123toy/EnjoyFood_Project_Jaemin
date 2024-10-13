@@ -12,7 +12,7 @@ public class CafeSQLProvider {
 	public static String getCafeByPrice(@Param("start") Integer start, @Param("end") Integer end) {
 		return new SQL() {
 			{
-				SELECT("c.cafeName, c.cafePrice, c.cafeAddress, c.cafePhoneNumber, t.cafeTag, cat.cafeCategory");
+				SELECT("c.cafeNum, c.cafeName, c.cafePrice, c.cafeAddress, c.cafePhoneNumber, t.cafeTag, cat.cafeCategory");
 				FROM("cafeteria c");
 				JOIN("menu m ON c.cafeNum = m.cafeNum");
 				JOIN("cafeTag t ON c.cafeNum = t.cafeNum");
@@ -28,7 +28,7 @@ public class CafeSQLProvider {
 	public static String getCafeByPriceAndTags(@Param("cafePrice") int cafePrice,
 			@Param("cafetag") List<String> cafetags) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT DISTINCT c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice ");
+		sql.append("SELECT DISTINCT c.cafeNum, c.cafeName, c.cafeAddress, c.cafePhoneNumber, c.cafePrice ");
 		sql.append("FROM cafeteria c ");
 		sql.append("NATURAL JOIN cafecategory cc ");
 		sql.append("NATURAL JOIN category_management cm ");

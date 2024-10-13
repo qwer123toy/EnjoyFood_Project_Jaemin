@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가게 상세보기</title>
 <link rel="stylesheet" type="text/css" href="/static/css/cafeDetails.css">
+<link rel="icon" href="/static/ico/favicon.ico">
 
 <!-- JSTL 사용 -->
 <script type="text/javascript">
@@ -21,7 +22,7 @@
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 
 
 	<!-- 메인 컨텐츠 -->

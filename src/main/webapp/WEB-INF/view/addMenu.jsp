@@ -5,6 +5,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/static/css/addMenu.css">
 <script src="/static/js/addMenu.js" defer></script>
+<link rel="icon" href="/static/ico/favicon.ico">
 
 <style>
 

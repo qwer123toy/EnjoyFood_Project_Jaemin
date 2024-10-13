@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 			User selectById = mapper.selectById(user.getUserID());
+			user.setUserPW(PasswordEncryption.encryptPassword(user.getUserPW()));
 			if (selectById == null)
 				return null;
 			if (selectById.getUserPW().equals(user.getUserPW())) {
@@ -48,6 +49,7 @@ public class UserServiceImpl implements UserService {
 	public boolean signup(User user) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			user.setUserPW(PasswordEncryption.encryptPassword(user.getUserPW()));
 			int result = mapper.insert(user);
 			sqlSession.commit();
 			return result == 1;
@@ -100,11 +102,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean update(User user) {
+	public boolean updateAll(User user) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-			int result = mapper.update(user);
-			return result == 1;
+			user.setUserPW(PasswordEncryption.encryptPassword(user.getUserPW()));
+			boolean result = mapper.updateAll(user) == 1;
+			if (result) {
+				sqlSession.commit();
+			}
+			return result;
+		}
+	}
+
+	@Override
+	public boolean updatePNAndNN(User user) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			boolean result = mapper.updatePNAndNN(user) == 1;
+			if (result) {
+				sqlSession.commit();
+			}
+			return result;
 		}
 	}
 
@@ -112,6 +130,7 @@ public class UserServiceImpl implements UserService {
 	public boolean changePW(User user) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+			user.setUserPW(PasswordEncryption.encryptPassword(user.getUserPW()));
 			int result = mapper.updatePW(user);
 			sqlSession.commit();
 			return result == 1;
@@ -140,7 +159,7 @@ public class UserServiceImpl implements UserService {
 	public int updateActivationStatus(String id, int active) {
 		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
 			UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-			int result = mapper.updateActivationStatus(id,active);
+			int result = mapper.updateActivationStatus(id, active);
 			sqlSession.commit();
 			return result;
 		}

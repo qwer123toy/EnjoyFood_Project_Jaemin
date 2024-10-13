@@ -237,9 +237,15 @@ function changeUserInfo(e) {
 	}
 	let form = document.querySelector("#userInfoForm");
 	let formData = new FormData(form);
+
 	console.log(Object.fromEntries(formData));
 	fetch(url, {
 		method: "put",
 		body: JSON.stringify(Object.fromEntries(formData))
-	});
+	}).then((resp) => resp.json())
+		.then((authResponse) => {
+			alert(authResponse.message);
+			if (authResponse.success)
+				location.href = "/userInfo";
+		});
 }

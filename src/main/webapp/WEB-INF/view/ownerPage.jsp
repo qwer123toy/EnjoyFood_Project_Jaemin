@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 기본 페이지</title>
     <link rel="stylesheet" type="text/css" href="/static/css/ownerPage.css">
+<link rel="icon" href="/static/ico/favicon.ico">
     <script src="/static/js/ownerPage_basic.js"></script>
 
     <style>

@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/static/css/searchCategory.css">
 <script src="/static/js/searchCategory.js"></script>
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
 
@@ -18,13 +19,7 @@
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
-
-	<!-- 왼쪽 고정 바 -->
-	<nav class="sidebar">
-		<button>유형별 검색</button>
-
-	</nav>
+	<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 
 	<!-- 검색 입력란 -->
 	<main>
@@ -99,7 +94,7 @@
 						<li>인당 평균 금액: ${cafeteria.cafePrice} 원</li>
 						<li>전화번호: ${cafeteria.cafePhoneNumber}</li>
 						<li><a href="#">주소: ${cafeteria.cafeAddress}</a></li>
-						<li> <c:choose>
+						<li><c:choose>
 								<c:when test="${not empty cafeTagsMap[cafeteria.cafeNum]}">
 									<c:forEach var="tag" items="${cafeTagsMap[cafeteria.cafeNum]}">
 										# ${tag.cafeTag}
@@ -108,8 +103,7 @@
 								<c:otherwise>
 									없음
 								</c:otherwise>
-							</c:choose>
-						</li>
+							</c:choose></li>
 					</ul>
 
 				</div>

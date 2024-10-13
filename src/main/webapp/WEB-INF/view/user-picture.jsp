@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사업자등록증 보기</title>
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
     <h1>사업자 등록증</h1>

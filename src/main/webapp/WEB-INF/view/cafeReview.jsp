@@ -8,13 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>리뷰 작성</title>
 <link rel="stylesheet" type="text/css" href="/static/css/cafeReview.css">
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
 	<!-- 상단 고정 바 -->
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 
 
 	<!-- 메인 컨텐츠 -->

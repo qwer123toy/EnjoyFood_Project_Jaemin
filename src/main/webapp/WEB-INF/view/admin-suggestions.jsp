@@ -10,6 +10,7 @@
 <title>건의 사항</title>
 <link rel="stylesheet" type="text/css"
 	href="/static/css/admin-suggestions.css">
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
 	<header>

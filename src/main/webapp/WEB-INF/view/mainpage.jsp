@@ -22,7 +22,7 @@
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 
 	<!-- 메인 컨텐츠 -->
 	<main>
@@ -38,11 +38,11 @@
 		<!-- 가게 리스트 -->
 		<!-- 데이터베이스에서 검색 결과를 불러와서 JSTL로 반복 출력 -->
 		<c:choose>
-			<c:when test="${empty list}">
+			<c:when test="${empty mergedList}">
 				<p style="text-align: center; width: 100%">검색 결과가 없습니다</p>
 			</c:when>
 			<c:otherwise>
-				<p style="text-align: center;">검색 결과: ${fn:length(list)}건</p>
+				<p style="text-align: center;">검색 결과: ${fn:length(mergedList)}건</p>
 			</c:otherwise>
 		</c:choose>
 		<div class="store-list">

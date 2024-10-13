@@ -12,13 +12,14 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css">
 <link rel="stylesheet" type="text/css" href="/static/css/searchArea.css">
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
 	<!-- 상단 고정 바 -->
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 	<main>
 		<h1>지역별 검색</h1>
 		<div class="container">

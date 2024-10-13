@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원 관리</title>
 <link rel="stylesheet" type="text/css" href="/static/css/admin-users.css">
+<link rel="icon" href="/static/ico/favicon.ico">
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const viewButtons = document.querySelectorAll('.view-button');

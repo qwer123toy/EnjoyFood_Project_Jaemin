@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.jayway.jsonpath.JsonPath;
 
 import config.SessionManager;
@@ -249,13 +251,99 @@ public class UserAPI extends HttpServlet {
 		WebUtil webUtil = new WebUtil();
 
 		String json = webUtil.readBody(req);
-		System.out.println(json);
-//		String userID = JsonPath.read(json, "$.userID");
-//		String userNickname = JsonPath.read(json, "$.userNickname");
-//		String userPhoneNumber = JsonPath.read(json, "$.userPhoneNumber");
-//		String prevPW = JsonPath.read(json, "$.prevPW");
-//		String userPW = JsonPath.read(json, "$.userPW");
+		JsonMapper mapper = new JsonMapper();
+
+		if (json.contains("changePW")) {
+			AuthRequest authRequest = mapper.readValue(json, AuthRequest.class);
+			handleChangePW(resp, webUtil, authRequest.getUser());
+		} else {
+			handleUpdateUserInfo(resp, webUtil, json);
+		}
+
 //		handleBadRequest(resp, webUtil);
+	}
+
+	private void handleUpdateUserInfo(HttpServletResponse resp, WebUtil webUtil, String json) throws IOException {
+		Map<String, String> map = new HashMap<String, String>();
+		tryUpdateUserInfo(json, map);
+
+		if (map.containsKey("success")) {
+			webUtil.setCodeAndMimeType(resp, 200, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(true, "변경 성공"));
+		} else {
+			webUtil.setCodeAndMimeType(resp, 400, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(false, map.get("error")));
+		}
+	}
+
+	private void tryUpdateUserInfo(String json, Map<String, String> map) {
+		String userID = JsonPath.read(json, "$.userID");
+		String userNickname = JsonPath.read(json, "$.userNickname");
+		String userPhoneNumber = JsonPath.read(json, "$.userPhoneNumber");
+		String prevPW = JsonPath.read(json, "$.prevPW");
+		String userPW = JsonPath.read(json, "$.userPW");
+
+		User prevUser = service.userInfo(userID);
+		prevUser.setUserPW(prevPW);
+		User newUser = User.builder().userID(userID).userNickname(userNickname).userPhoneNumber(userPhoneNumber)
+				.userPW(userPW).build();
+		if (!prevUser.getUserNickname().equals(userNickname)) {
+			if (!UserValidator.isValidNickname(userNickname)) {
+				map.put("error", "유효하지 않은 닉네임");
+				return;
+			}
+			if (service.isNicknameDuplicate(userNickname)) {
+				map.put("error", "중복된 닉네임");
+				return;
+			}
+		}
+		if (!prevUser.getUserPhoneNumber().equals(userPhoneNumber)) {
+			if (!UserValidator.isValidPhoneNumber(userPhoneNumber)) {
+				map.put("error", "유효하지 않은 전화번호");
+				return;
+			}
+			if (service.isPhoneNumberDuplicate(userPhoneNumber)) {
+				map.put("error", "중복된 전화번호");
+				return;
+			}
+		}
+		if (prevPW.length() > 0) {
+			if (service.login(prevUser) != null) {
+				if (!UserValidator.isValidPW(userPW)) {
+					map.put("error", "유효하지 않은 비밀번호");
+				} else {
+					if (service.updateAll(newUser)) {
+						map.put("success", "변경 성공");
+					} else {
+						map.put("error", "업데이트 중 에러 발생");
+					}
+				}
+			} else {
+				map.put("error", "비밀번호가 틀렸습니다.");
+				return;
+			}
+		} else {
+			if (service.updatePNAndNN(newUser)) {
+				map.put("success", "변경 성공");
+			} else {
+				map.put("error", "업데이트 중 에러 발생");
+			}
+		}
+	}
+
+	private void handleChangePW(HttpServletResponse resp, WebUtil webUtil, User user) throws IOException {
+		if (UserValidator.isValidPW(user.getUserPW())) {
+			if (service.changePW(user)) {
+				webUtil.setCodeAndMimeType(resp, 200, "json");
+				webUtil.writeBodyJson(resp, new AuthResponse(true, "비밀번호 변경 성공"));
+			} else {
+				webUtil.setCodeAndMimeType(resp, 400, "json");
+				webUtil.writeBodyJson(resp, new AuthResponse(false, "비밀번호 변경 에러"));
+			}
+		} else {
+			webUtil.setCodeAndMimeType(resp, 400, "json");
+			webUtil.writeBodyJson(resp, new AuthResponse(false, "잘못된 비밀번호 형식"));
+		}
 	}
 
 	@Override

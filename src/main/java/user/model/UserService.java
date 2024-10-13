@@ -22,16 +22,16 @@ public interface UserService {
 
 	User findUser(String phoneNumber);
 
-	boolean update(User user);
+	boolean updateAll(User user);
+
+	boolean updatePNAndNN(User user);
 
 	boolean changePW(User user);
-	
+
 	List<User> selectAll();
 
 	List<User> selectAllById(String id);
-	
+
 	int updateActivationStatus(String id, int active);
-
-
 
 }

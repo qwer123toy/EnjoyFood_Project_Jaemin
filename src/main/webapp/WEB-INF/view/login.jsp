@@ -11,13 +11,14 @@
 <link rel="stylesheet" type="text/css" href="/static/css/default.css">
 <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 <script src="/static/js/login.js"></script>
+<link rel="icon" href="/static/ico/favicon.ico">
 </head>
 <body>
 	<!-- 상단 고정 바 -->
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 
 	<main class="main">
 		<h1>로그인</h1>

@@ -24,18 +24,18 @@ public interface UserMapper {
 			@Result(column = "userOwnerNumber", property = "userOwnerNumber", jdbcType = JdbcType.VARCHAR),
 			@Result(column = "userPicture", property = "userPicture", jdbcType = JdbcType.BLOB) })
 	User selectById(@Param("id") String id);
-	
+
 	@Select("SELECT * FROM user")
 	@ResultMap(value = "userResults")
 	List<User> selectAll();
-	
+
 	@Select("SELECT * FROM user WHERE userID=#{id}")
 	@ResultMap(value = "userResults")
 	List<User> selectAllById(@Param("id") String id);
 
 	@Update("UPDATE user SET active=#{active} where userID = #{id}")
 	int updateActivationStatus(@Param("id") String id, @Param("active") int active);
-	
+
 	@Select("SELECT * FROM user WHERE userPhoneNumber=#{phoneNumber}")
 	@ResultMap(value = "userResults")
 	User selectByPhoneNumber(@Param("phoneNumber") String phoneNumber);
@@ -55,17 +55,17 @@ public interface UserMapper {
 	@Select("SELECT count(*) FROM user WHERE userOwnerNumber=#{ownerNumber}")
 	int countByOwnerNumber(@Param("ownerNumber") String ownerNumber);
 
-//	@Update({ "UPDATE Book", "SET title=#{title}, author=#{author}, publisher=#{publisher}, price=#{price}",
-//			"WHERE bookid=#{bookId}" })
-//	int update(Book book);
+	@Update({
+			"UPDATE user SET userPW=#{userPW}, userPhoneNumber=#{userPhoneNumber}, userNickname=#{userNickname} WHERE userID=#{userID}" })
+	int updateAll(User user);
 
-	@Update({ "UPDATE user SET userPW=#{userPW}, userPhoneNumber=#{userPhoneNumber}, userNickname=#{userNickname},",
-			"userOwnerNumber=#{userOwnerNumber}, userPicture=#{userPicture} WHERE userID=#{userID}" })
-	int update(User user);
-
-	@Delete("DELETE FROM user WHERE userID = #{userId}")
-	int delete(@Param("id") String id);
+	@Update({
+			"UPDATE user SET userPhoneNumber=#{userPhoneNumber}, userNickname=#{userNickname} WHERE userID=#{userID}" })
+	int updatePNAndNN(User user);
 
 	@Update("UPDATE user SET userPW=#{userPW} WHERE userID=#{userID}")
 	int updatePW(User user);
+
+	@Delete("DELETE FROM user WHERE userID = #{userId}")
+	int delete(@Param("id") String id);
 }
