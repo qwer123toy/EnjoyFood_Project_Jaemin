@@ -58,7 +58,7 @@
 		<h1>메뉴 추가 화면</h1>
 	</div>
 	<div class="info-section">
-		<h2>메뉴 추가</h2>
+		<h2></h2>
 	</div>
 	
 	<form method="post" id="addMenuForm" action="/addMenu" enctype="multipart/form-data">
@@ -82,11 +82,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="buttons">
-    <button class="button left-button" type="button" id="backBtn">이전</button>
+	<div class="buttons-container">
+    <div class="left-button-container">
+        <button class="left-button" type="button" id="backBtn">이전</button>
+    </div>
     <div class="right-buttons">
-        <button class="button" type="submit" id="plusMenuBtn">메뉴추가</button>
-        <button class="button" type="submit" id="addMenuBtn">최종저장</button>
+        <button class="button" type="submit" id="plusMenuBtn">메뉴 추가</button>
+        <button class="button" type="submit" id="addMenuBtn">최종 저장</button>
     </div>
 </div>
 	</form>
