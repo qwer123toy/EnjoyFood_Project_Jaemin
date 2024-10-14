@@ -26,10 +26,28 @@ public class SuggestionsServlet extends HttpServlet {
 			list = suggestionMapper.select();
 
 		}
-		System.out.println("출력확인" + list);
 
 		req.setAttribute("listSuggestion", list);
 		req.getRequestDispatcher("/WEB-INF/view/admin-suggestions.jsp").forward(req, resp);
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<Suggestion> list = service.select();
+
+		 // 활성화 상태 업데이트
+       for (Suggestion suggestion : list) {
+           String activeParam = req.getParameter("active_" + suggestion.getSuggestionId());
+           int active = Integer.parseInt(activeParam);
+           service.updateSuggestionStatus(suggestion.getSuggestionId(), active);
+       }
+       
+       List<Suggestion> listAfterActive = service.select();;
+
+		req.setAttribute("listSuggestion", listAfterActive);
+		req.getRequestDispatcher("/WEB-INF/view/admin-suggestions.jsp").forward(req, resp);
+	}
+	
+	
 
 }

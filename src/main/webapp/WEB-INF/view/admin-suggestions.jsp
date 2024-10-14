@@ -24,6 +24,8 @@
 		</form>
 	</header>
 
+	<form method="post" action="/suggestions">
+
 	<table class="suggestions">
 		<thead>
 			<tr>
@@ -45,9 +47,9 @@
 					<td>${suggestion.uploadTime}</td>
 				
 				
-					<td><select name="active_${suggestion.chkProcess}">
-								<option value="1" <c:if test="${user.active == 1}">selected</c:if>>처리중</option>
-								<option value="0" <c:if test="${user.active == 0}">selected</c:if>>완료</option>
+					<td><select name="active_${suggestion.suggestionId}">
+								<option value="0" <c:if test="${suggestion.chkProcess == 0}">selected</c:if>>처리중</option>
+								<option value="1" <c:if test="${suggestion.chkProcess == 1}">selected</c:if>>완료</option>
 						</select></td>
 				
 				
@@ -55,5 +57,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</form>
 </body>
 </html>
