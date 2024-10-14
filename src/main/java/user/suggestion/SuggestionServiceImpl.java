@@ -41,4 +41,14 @@ public class SuggestionServiceImpl implements SuggestionService {
 		}
 	}
 
+	@Override
+	public int updateSuggestionStatus(int suggestionId, int chkProcess) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			SuggestionMapper mapper = sqlSession.getMapper(SuggestionMapper.class);
+			int result = mapper.updateSuggestionStatus(suggestionId,chkProcess);
+			sqlSession.commit();
+			return result;
+		}
+	}
+
 }
