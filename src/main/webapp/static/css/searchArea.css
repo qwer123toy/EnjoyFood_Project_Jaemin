@@ -43,7 +43,7 @@ h1, h2 {
 	flex: 6; /* 시구군 선택 비율 설정 */
 }
 
-button {
+.button {
 	margin: 5px;
 	padding: 12px 20px;
 	border: none;
@@ -54,7 +54,7 @@ button {
 	transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
+.button:hover {
 	background-color: #0056b3;
 	transform: scale(1.05);
 }
@@ -100,9 +100,14 @@ button:hover {
 .store-list {
 	display: flex; /* flexbox로 레이아웃 설정 */
 	flex-wrap: wrap; /* 넘치면 자동으로 다음 줄로 넘어감 */
+	margin-left: auto; /* 중앙 정렬을 위해 자동 여백 사용 */
+	margin-right: auto; /* 중앙 정렬을 위해 자동 여백 사용 */
+	justify-content: flex-start;
 	padding: 20px; /* 내부 여백 설정 */
 	gap: 20px; /* 아이템 간격 설정 */
-	justify-content: center;
+	min-width: 910px;
+	max-width: 910px;
+	padding: 20px; /* 전체 너비 고정 (원하는 너비로 조정) */
 }
 
 .store-item {
@@ -113,7 +118,7 @@ button:hover {
 	text-align: center; /* 텍스트 중앙 정렬 */
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
 	transition: transform 0.3s ease; /* 호버 시 애니메이션 설정 */
-	width: calc(45% - 40px); /* 한 줄에 3개의 아이템이 들어가도록 너비 계산 (마진 포함) */
+	width: calc(250px - 20px); /* 한 줄에 3개의 아이템이 들어가도록 너비 계산 (마진 포함) */
 }
 
 .store-item:hover {

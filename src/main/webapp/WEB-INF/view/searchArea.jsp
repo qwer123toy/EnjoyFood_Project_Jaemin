@@ -19,7 +19,7 @@
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
+	<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 	<main>
 		<h1>지역별 검색</h1>
 		<div class="container">
@@ -36,8 +36,8 @@
 			<div id="selectedList"></div>
 		</div>
 		<div style="display: flex; justify-content: center;">
-			<button id="clearAllButton">전체 취소</button>
-			<button type="submit" id="searchButton">검색</button>
+			<button class="button" id="clearAllButton">전체 취소</button>
+			<button class="button" type="submit" id="searchButton">검색</button>
 		</div>
 		<div class="result">
 			<p id="searchResult" style="text-align: center; width: 100%">지역을 선택해주세요</p>

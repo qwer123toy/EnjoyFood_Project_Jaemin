@@ -26,6 +26,7 @@ function createRegionButtons() {
 	const regionButtons = document.getElementById('regionButtons');
 	for (const region in districts) {
 		const button = document.createElement('button');
+		button.classList.add("button");
 		button.textContent = region;
 		button.onclick = () => selectRegion(region, button);
 		regionButtons.appendChild(button);
@@ -39,6 +40,7 @@ function createDistrictButtons() {
 	if (selectedRegion) {
 		districts[selectedRegion].forEach(district => {
 			const button = document.createElement('button');
+			button.classList.add("button");
 			button.textContent = district;
 			button.onclick = () => selectDistrict(district, button);
 			districtButtons.appendChild(button);
