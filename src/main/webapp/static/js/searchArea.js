@@ -196,7 +196,7 @@ document.getElementById('searchButton').onclick = function() {
 
 				searchResult.innerHTML = "검색결과 : " + result.length + " 건";
 				storeList.innerHTML = '';
-				result.map((cafeteria) => createCard(cafeteria)
+				result.map((cafeteriaWithPic) => createCard(cafeteriaWithPic)
 				).forEach((elem) => {
 					storeList.append(elem);
 				})
@@ -206,16 +206,18 @@ document.getElementById('searchButton').onclick = function() {
 		});
 };
 
-function createCard(cafeteria) {
+function createCard(cafeteriaWithPic) {
 	let template = document.querySelector("#template");
 	let clone = document.importNode(template.content, true);
 	clone.querySelector(".store-item").onclick = () => {
-		location.href = "cafeteria?cafeNum=" + cafeteria.cafeNum + "&cafeName=" + cafeteria.cafeName;
+		location.href = "cafeteria?cafeNum=" + cafeteriaWithPic.cafeteria.cafeNum + "&cafeName=" + cafeteriaWithPic.cafeteria.cafeName;
 	};
-	clone.querySelector("ul > li:nth-child(1)").innerText = cafeteria.cafeName;
-	clone.querySelector("ul > li:nth-child(2)").innerText = "평균 금액: " + cafeteria.cafePrice + " 원";
-	clone.querySelector("ul > li:nth-child(3)").innerText = "전화번호: " + cafeteria.cafePhoneNumber;
-	clone.querySelector("ul > li:nth-child(4)").innerText = "주소: " + cafeteria.cafeAddress;
+	if (cafeteriaWithPic.cafePics && cafeteriaWithPic.cafePics[0] && cafeteriaWithPic.cafePics[0].cafePic)
+		clone.querySelector("img").src = cafeteriaWithPic.cafePics[0].cafePic;
+	clone.querySelector("ul > li:nth-child(1)").innerText = cafeteriaWithPic.cafeteria.cafeName;
+	clone.querySelector("ul > li:nth-child(2)").innerText = "평균 금액: " + cafeteriaWithPic.cafeteria.cafePrice + " 원";
+	clone.querySelector("ul > li:nth-child(3)").innerText = "전화번호: " + cafeteriaWithPic.cafeteria.cafePhoneNumber;
+	clone.querySelector("ul > li:nth-child(4)").innerText = "주소: " + cafeteriaWithPic.cafeteria.cafeAddress;
 	return clone;
 }
 

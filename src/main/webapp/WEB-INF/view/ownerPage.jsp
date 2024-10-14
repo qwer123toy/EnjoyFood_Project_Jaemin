@@ -29,13 +29,13 @@
 					class="input-field" />
 				<input type="text" id="cafeExplain" name="cafeExplain"
 					placeholder="가게 소개 입력" class="input-field" />
-				<select class="input-field" name="cafeCategory">
+				<select class="input-field" id="cafeCategory" name="cafeCategory">
 					<option value="">식당 카테고리 선택</option>
 					<c:forEach var="category" items="${categoryList}">
 						<option value="${category.categoryNum}">${category.categoryName}</option>
 					</c:forEach>
 				</select>
-				<input type="text" id="cafePrice" name="cafePrice"
+				<input type="number" id="cafePrice" name="cafePrice"
 					placeholder="1인 기준 예상 금액 입력" class="input-field" />
 
 				<div class="time-container">
@@ -66,7 +66,7 @@
 							<option value="19:00">19:00</option>
 							<option value="20:00">20:00</option>
 							<option value="21:00">21:00</option>
-							<option value="custom-start">직접 입력</option>
+<!-- 							<option value="custom-start">직접 입력</option> -->
 						</select>
 						<input type="text" id="custom-start-time" name="custom-start-time"
 							placeholder="영업 시작 시간 입력" class="input-field" style="display: none;" />
@@ -92,7 +92,7 @@
 							<option value="03:00">03:00</option>
 							<option value="04:00">04:00</option>
 							<option value="05:00">05:00</option>
-							<option value="custom-end">직접 입력</option>
+<!-- 							<option value="custom-end">직접 입력</option> -->
 						</select>
 						<input type="text" id="custom-end-time" name="custom-end-time"
 							placeholder="영업 종료 시간 입력" class="input-field" style="display: none;" />
@@ -101,8 +101,12 @@
 
 				<input type="text" id="cafePhoneNumber" name="cafePhoneNumber"
 					placeholder="전화번호" class="input-field" />
-				<input type="text" id="cafeAddress" name="cafeAddress" placeholder="주소"
-					class="input-field" />
+				<div style="display: flex; width: 100%;">
+					<input type="text" id="cafeAddress" name="cafeAddress" placeholder="주소"
+						class="input-field" style="width: 80%;" readonly />
+					<button class="button" type="button" style="width: 20%" onclick="goPopup()">주소
+						검색</button>
+				</div>
 			</div>
 
 			<input type="hidden" id="tagCount" name="tagCount" value="1">

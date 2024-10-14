@@ -49,18 +49,15 @@
 			<c:forEach var="cafeteriaWithPic" items="${mergedList}">
 				<div class="store-item"
 					onclick="location.href='cafeteria?cafeNum=${cafeteriaWithPic.cafeteria.cafeNum}&cafeName=${cafeteriaWithPic.cafeteria.cafeName}'">
-					<a
-						href="cafeteria?cafeNum=${cafeteriaWithPic.cafeteria.cafeNum}&cafeName=${cafeteriaWithPic.cafeteria.cafeName}">
-						<c:forEach var="pic" items="${cafeteriaWithPic.cafePics}">
-							<img src="${pic.cafePic}" alt="Cafeteria Picture"
-								style="width: 230px; height: 150px;">
-						</c:forEach>
-					</a>
+					<c:forEach var="pic" items="${cafeteriaWithPic.cafePics}">
+						<img src="${pic.cafePic}" alt="Cafeteria Picture"
+							style="width: 230px; height: 150px;">
+					</c:forEach>
 					<ul>
-						<li>${cafeteriaWithPic.cafeteria.cafeName}</li>
+						<li class="a">${cafeteriaWithPic.cafeteria.cafeName}</li>
 						<li>평균 금액: ${cafeteriaWithPic.cafeteria.cafePrice} 원</li>
 						<li>전화번호: ${cafeteriaWithPic.cafeteria.cafePhoneNumber}</li>
-						<li>주소: ${cafeteriaWithPic.cafeteria.cafeAddress}</li>
+						<li class="a">주소: ${cafeteriaWithPic.cafeteria.cafeAddress}</li>
 						<li><c:choose>
 								<c:when
 									test="${not empty cafeTagsMap[cafeteriaWithPic.cafeteria.cafeNum]}">

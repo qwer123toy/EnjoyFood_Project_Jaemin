@@ -31,7 +31,7 @@ public class OwnerPage_basic extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<CafeCategory> categoryList = service.selectCategoryAll();
 		req.setAttribute("categoryList", categoryList);
-		 String cafeOwner = req.getParameter("userId");
+		String cafeOwner = req.getParameter("userId");
 		req.setAttribute("cafeOwner", cafeOwner);
 		req.getRequestDispatcher("/WEB-INF/view/ownerPage.jsp").forward(req, resp);
 	}
@@ -45,7 +45,7 @@ public class OwnerPage_basic extends HttpServlet {
 		WebUtil webUtil = new WebUtil();
 		String json = webUtil.readBody(req);
 		JsonMapper jsonMapper = new JsonMapper();
-		
+
 //		System.out.println(json);
 
 		// JSON에서 값 추출
@@ -59,7 +59,7 @@ public class OwnerPage_basic extends HttpServlet {
 		String tagCountStr = JsonPath.read(json, "$.tagCount");
 		String cafePic64 = JsonPath.read(json, "$.cafePic64");
 		String cafeOwner = JsonPath.read(json, "$.cafeOwner");
-		
+
 		// Custom 시간 처리
 		if (cafeStartTime.equals("custom-start")) {
 			cafeStartTime = JsonPath.read(json, "$.custom-start-time"); // custom-start-time 값으로 대체
@@ -75,18 +75,17 @@ public class OwnerPage_basic extends HttpServlet {
 		// 카테고리 값 추출
 		String cafeCategoryStr = JsonPath.read(json, "$.cafeCategory");
 		int cafeCategory = Integer.parseInt(cafeCategoryStr);
-	
+
 		// JSON 형식으로 다시 String 생성
-				String resultJsonForCafeteria = "{" + "\"cafeName\": \"" + cafeName + "\"," + "\"cafeExplain\": \""
-						+ cafeExplain + "\"," + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\"," + "\"cafePrice\": \""
-						+ cafePrice + "\"," + "\"cafeAddress\": \"" + cafeAddress + "\"," + "\"cafeOpenTime\": \""
-						+ cafeOpenTime + "\"," + "\"cafeOwner\": \"" + cafeOwner + "\"" +
-						"}";
-				
-				Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
-				int cafeNum = service.insert(cafeteria);
-				service.insertCategoryM(cafeNum, cafeCategory);
-		
+		String resultJsonForCafeteria = "{" + "\"cafeName\": \"" + cafeName + "\"," + "\"cafeExplain\": \""
+				+ cafeExplain + "\"," + "\"cafePhoneNumber\": \"" + cafePhoneNumber + "\"," + "\"cafePrice\": \""
+				+ cafePrice + "\"," + "\"cafeAddress\": \"" + cafeAddress + "\"," + "\"cafeOpenTime\": \""
+				+ cafeOpenTime + "\"," + "\"cafeOwner\": \"" + cafeOwner + "\"" + "}";
+
+		Cafeteria cafeteria = jsonMapper.readValue(resultJsonForCafeteria, Cafeteria.class);
+		int cafeNum = service.insert(cafeteria);
+		service.insertCategoryM(cafeNum, cafeCategory);
+
 		List<String> cafeTagList = new ArrayList<>();
 
 		// 태그 개수 받기
@@ -112,7 +111,7 @@ public class OwnerPage_basic extends HttpServlet {
 		if (cafeTagList.size() > 5) {
 			cafeTagList = cafeTagList.subList(0, 5); // 처음 5개만 남김
 		}
-		
+
 		// 태그 추가 부분에서 인덱스 범위 확인
 		for (int i = 0; i < cafeTagList.size(); i++) {
 			service.insertTag(cafeNum, cafeTagList.get(i));
@@ -120,6 +119,6 @@ public class OwnerPage_basic extends HttpServlet {
 
 		int result = service.insertPic(cafeNum, cafePic64);
 		webUtil.setCodeAndMimeType(resp, 201, "json");
-		webUtil.writeBodyJson(resp, cafeteria);
+		webUtil.writeBodyJson(resp, "됨");
 	}
 }

@@ -214,12 +214,12 @@ ul li {
 	margin: 5px 0;
 }
 
-ul li a {
+.a {
 	color: #6a1b9a;
 	text-decoration: none;
 	font-weight: bold;
 }
 
-ul li a:hover {
+.a:hover {
 	text-decoration: underline;
 }

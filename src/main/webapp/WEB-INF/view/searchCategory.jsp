@@ -100,10 +100,10 @@
 						</c:forEach>
 					</a>
 					<ul>
-						<li>${cafeteriaWithPic.cafeteria.cafeName}</li>
+						<li class="a">${cafeteriaWithPic.cafeteria.cafeName}</li>
 						<li>평균 금액: ${cafeteriaWithPic.cafeteria.cafePrice} 원</li>
 						<li>전화번호: ${cafeteriaWithPic.cafeteria.cafePhoneNumber}</li>
-						<li>주소: ${cafeteriaWithPic.cafeteria.cafeAddress}</li>
+						<li class="a">주소: ${cafeteriaWithPic.cafeteria.cafeAddress}</li>
 						<li><c:choose>
 								<c:when
 									test="${not empty cafeTagsMap[cafeteriaWithPic.cafeteria.cafeNum]}">

@@ -21,7 +21,6 @@
 	<!-- 왼쪽 고정 바 -->
 	<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 	<main>
-		<h1>지역별 검색</h1>
 		<div class="container">
 			<div class="button-group">
 				<div id="regionButtons"></div>
@@ -49,7 +48,8 @@
 
 	<template id="template">
 		<div class="store-item">
-			<!--  <div class="store-image">이미지 넣을거임!</div> -->
+				<img src="" alt="Cafeteria Picture"
+					style="width: 230px; height: 150px;">
 			<ul>
 				<li class="a"></li>
 				<li></li>
