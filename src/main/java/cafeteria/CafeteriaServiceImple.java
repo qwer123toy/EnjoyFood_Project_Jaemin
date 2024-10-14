@@ -333,4 +333,14 @@ public class CafeteriaServiceImple implements CafeteriaService {
 			return resultList;
 		}
 	}
+
+	@Override
+	public int selectCafeNumBycafeOwner(String cafeOwner) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaMapper mapper = sqlSession.getMapper(CafeteriaMapper.class);
+			int result = mapper.selectCafeNumBycafeOwner(cafeOwner);
+
+			return result;
+		}
+	}
 }

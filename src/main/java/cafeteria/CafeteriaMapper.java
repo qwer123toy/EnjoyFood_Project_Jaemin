@@ -109,8 +109,8 @@ public interface CafeteriaMapper {
 	@Insert("INSERT INTO category_management (cafeNum, categoryNum) VALUES (#{cafeNum}, #{categoryNum})")
 	int insertCategoryM(@Param("cafeNum") int cafeNum, @Param("categoryNum") int categoryNum);
 
-	@Insert({ "INSERT INTO menu (cafeNum, menuNum, menuName, menuPrice, menuNamepic, menuExplain) ",
-			"VALUES (#{cafeNum}, #{menuNum}, #{menuName}, #{menuPrice}, #{menuNamepic}, #{menuExplain})" })
+	@Insert({ "INSERT INTO menu (cafeNum, menuName, menuPrice, menuNamepic, menuExplain) ",
+			"VALUES (#{cafeNum}, #{menuName}, #{menuPrice}, #{menuNamepic}, #{menuExplain})" })
 	int insertMenu(Menu menu);
 
 	@Select("SELECT avg(cafeScore) FROM cafeReview WHERE cafeNum=#{cafeNum}")
@@ -151,5 +151,8 @@ public interface CafeteriaMapper {
 	
 	@Select("SELECT * FROM cafepic WHERE cafeNum = #{cafeNum}")
     List<CafePic> selectPicsByCafeNum(int cafeNum);
-
+	
+	@Select("SELECT cafeNum FROM cafeteria WHERE cafeOwner = #{cafeOwner}")
+    int selectCafeNumBycafeOwner(@Param("cafeOwner") String cafeOwner);
+	
 }

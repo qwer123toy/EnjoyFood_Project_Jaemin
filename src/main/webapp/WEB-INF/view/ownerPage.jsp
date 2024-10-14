@@ -17,22 +17,63 @@
     <script src="/static/js/ownerPage_basic.js"></script>
 
     <style>
+        /* 전체 레이아웃 설정 */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Nanum Gothic', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(90deg, #FFFACD, #FFB6C1);
         }
+
+        /* 컨테이너: 화면 중앙 배치 */
         .container {
             display: flex;
+            justify-content: space-between;
             gap: 20px;
+            width: 70%;
+            height: 80%;
+            background-color: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* 정보 입력 섹션 */
         .info-section {
-            flex: 1; /* 왼쪽 섹션이 더 넓게 차지하도록 설정 */
-            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex: 2;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            color: #007BFF;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* 입력 필드 스타일 */
+        .input-field {
+            width: 100%;
+            height: 50px;
+            margin: 10px 0;
+            padding-left: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 30px;
+            font-size: 18px;
+            color: #007BFF;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #0056b3;
         }
         .imageUpload {
             flex-basis: 300px; /* 오른쪽 섹션의 넓이 설정 */
@@ -60,16 +101,57 @@
         .tag-input-container {
             margin-top: 20px;
         }
+       /* 오른쪽 이미지 업로드 섹션 */
+        .imageUpload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            background-color: #f7f7f7;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .uploaded-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 태그 입력 섹션 */
+        .tag-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* 버튼 스타일 */
         .button {
-            padding: 10px 15px;
+            width: 120px;
+            height: 50px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 25px;
             background-color: #007BFF;
             color: white;
-            border: none;
-            border-radius: 4px;
+            font-size: 18px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
         .button:hover {
             background-color: #0056b3;
+        }
+
+        /* 하단 버튼 정렬 */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -209,6 +291,7 @@
 
             </div>
         </div>
+    <button class="button" type="button" id="backBtn">이전</button>
 
         <button type="submit" class="button">카페 정보 저장</button>
     </form>

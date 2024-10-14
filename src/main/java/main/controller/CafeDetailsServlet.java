@@ -18,6 +18,7 @@ import cafeteria.CafeTag;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
+import cafeteria.Menu;
 import enjoyfood.MapService;
 import enjoyfood.MapServiceImple;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,7 @@ public class CafeDetailsServlet extends HttpServlet {
 			String cafeName = req.getParameter("cafeName");
 			Cafeteria cafeteria = service.selectByName(cafeName);
 			int cafeNum = cafeteria.getCafeNum();
+            List<Menu> menuList = service.selectMenu(cafeNum);
 
 			List<CafeReview> cafeReviewList = service.selectCafeReview(cafeteria.getCafeNum());
 			double score = service.selectAvg(cafeNum);
@@ -62,6 +64,7 @@ public class CafeDetailsServlet extends HttpServlet {
 			
 			Integer customerPaymentAvg = service.selectAvgPayment(cafeNum);
 			req.setAttribute("cafePic", cafePic.getCafePic());
+			req.setAttribute("menuList", menuList);
 			req.setAttribute("cafeteria", cafeteria);
 			req.setAttribute("cafeReviewList", cafeReviewList);
 			req.setAttribute("cafeCategoryList", cafeCategoryList);

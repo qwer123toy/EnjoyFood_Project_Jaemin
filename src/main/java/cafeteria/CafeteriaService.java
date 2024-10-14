@@ -63,5 +63,7 @@ public interface CafeteriaService {
 	
     List<CafePic> selectPicsByCafeNum(int cafeNum);
 
+    int selectCafeNumBycafeOwner( String cafeOwner);
+
 
 }

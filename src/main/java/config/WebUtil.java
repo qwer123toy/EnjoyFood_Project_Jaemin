@@ -39,6 +39,12 @@ public class WebUtil {
 		return stringBuilder.toString();
 	}
 	
+	public <T> T readBodyJsonForMenu(String json, Class<T> valueType) throws IOException {
+		JsonMapper mapper = new JsonMapper();
+		T t = mapper.readValue(json, valueType);
+		return t;
+	}
+	
 //	public <T> T readBodyJsonForImg(HttpServletRequest req, Class<T> valueType) throws IOException {
 //		String body = readBodyForImg(req);
 //		JsonMapper mapper = new JsonMapper();
