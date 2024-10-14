@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cafeteria.Cafeteria;
 import config.AppContextListener;
 
 @WebServlet("/suggestions")
