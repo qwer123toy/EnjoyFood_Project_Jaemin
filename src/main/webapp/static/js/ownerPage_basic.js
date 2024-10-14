@@ -5,6 +5,8 @@ let cafePic64;
 let imagePreview;
 let addMenuBtn;
 let confirmStoreBtn;
+let backBtn;
+
 
 function onload() {
 	cafePic = document.querySelector("#cafePic");
@@ -13,8 +15,15 @@ function onload() {
 	imagePreview = document.querySelector("#imagePreview");
 	confirmStoreBtn = document.querySelector("#ownerPage");
 	confirmStoreBtn.addEventListener("submit", addCafeteria);
-
+	backBtn = document.querySelector("#backBtn");
+	backBtn.addEventListener("click", back);
 }
+
+function back(e) {
+	e.preventDefault(); // 기본 동작 방지 (예: 폼 제출)
+	window.location.href = "http://localhost:8080/userInfo"; // 이전 페이지로 이동
+}
+
 
 function addCafeteria(e) {
 	e.preventDefault();
@@ -26,31 +35,31 @@ function addCafeteria(e) {
 }
 
 function validateFile(e) {
-		
-		const file = e.target.files[0];
-			if (file) {
-				const maxSize = 10 * 1024 * 1024;
-				const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-				if (file.size > maxSize) {
-					cafePic64.value = "";
-					imagePreview.src = "";
-					imagePreview.alt = "파일 크기가 10MB를 초과합니다.";
-					return;
-				}
+	const file = e.target.files[0];
+	if (file) {
+		const maxSize = 10 * 1024 * 1024;
+		const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-				if (!validTypes.includes(file.type)) {
-					cafePic64.value = "";
-					imagePreview.src = "";
-					imagePreview.alt = "파일 형식이 유효하지 않습니다.";
-					return;
-				}
+		if (file.size > maxSize) {
+			cafePic64.value = "";
+			imagePreview.src = "";
+			imagePreview.alt = "파일 크기가 10MB를 초과합니다.";
+			return;
+		}
 
-				const reader = new FileReader();
-				reader.onload = function(e) {
-					cafePic64.value = e.target.result;
-					imagePreview.src = e.target.result;
-				};
-				reader.readAsDataURL(file);
-			}
+		if (!validTypes.includes(file.type)) {
+			cafePic64.value = "";
+			imagePreview.src = "";
+			imagePreview.alt = "파일 형식이 유효하지 않습니다.";
+			return;
+		}
+
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			cafePic64.value = e.target.result;
+			imagePreview.src = e.target.result;
+		};
+		reader.readAsDataURL(file);
+	}
 }

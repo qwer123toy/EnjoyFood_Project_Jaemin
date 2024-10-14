@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,8 +11,8 @@
 
 <!-- JSTL 사용 -->
 <script type="text/javascript">
-    var address = "${cafeteria.cafeAddress}";
-    var cafeName = "${cafeteria.cafeName}";
+	var address = "${cafeteria.cafeAddress}";
+	var cafeName = "${cafeteria.cafeName}";
 </script>
 
 </head>
@@ -34,15 +33,13 @@
 			<!-- 메뉴 이미지 슬라이더 -->
 			<div class="menu-images-wrapper">
 				<div class="menu-images">
-					<div class="menu-item">메뉴 이미지 1</div>
-					<div class="menu-item">메뉴 이미지 2</div>
-					<div class="menu-item">메뉴 이미지 3</div>
-					<div class="menu-item">메뉴 이미지 4</div>
-					<div class="menu-item">메뉴 이미지 5</div>
-					<div class="menu-item">메뉴 이미지 6</div>
-					<div class="menu-item">메뉴 이미지 7</div>
-					<div class="menu-item">메뉴 이미지 8</div>
-					<div class="menu-item">메뉴 이미지 9</div>
+					<c:forEach var="menu" items="${menuList}">
+						<div class="menu-item">
+							<img src="${menu.menuNamepic }" style="width: 200px; height: 200px;">
+						</div>
+
+					</c:forEach>
+
 				</div>
 				<button class="btn-more-images">이미지 더보기 →</button>
 			</div>
@@ -50,23 +47,18 @@
 			<!-- 가게 정보 -->
 			<div class="store-infoDetail">
 				<div class="store-details">
-					<div class="store-image"
-						style="width: 300px; height: 300px; margin-right: 100px;">
-						        <img src="${cafePic}" alt="카페 사진" style="max-width: 300px; max-height: 300px;">
-						
-						</div>
+					<div class="store-image" style="width: 300px; height: 300px; margin-right: 100px;">
+						<img src="${cafePic}" alt="카페 사진" style="max-width: 300px; max-height: 300px;">
+
+					</div>
 					<p style="margin-top: -12px">
-						<em class="link"> <a href="javascript:void(0);"
-							onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-						</a>
+						<em class="link"> <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')"> </a>
 						</em>
 					</p>
-					<div id="store-map"
-						style="width: 300px; height: 300px; margin-right: 100px"></div>
+					<div id="store-map" style="width: 300px; height: 300px; margin-right: 100px"></div>
 
 
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b35dc634ac3bd42d8c421860d626613&libraries=services"></script>
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b35dc634ac3bd42d8c421860d626613&libraries=services"></script>
 					<script>
 						var mapContainer = document.getElementById('store-map'), // 지도를 표시할 div 
 						mapOption = {
@@ -116,12 +108,11 @@
 											}
 										});
 					</script>
-					<ul class="store-info-list"
-						style="width: 300px; height: 300px; margin-right: 100px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+					<ul class="store-info-list" style="width: 300px; height: 300px; margin-right: 100px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 						<li>상호명: <strong>${cafeteria.cafeName}</strong></li>
 						<li>평균 금액: <strong>${cafeteria.cafePrice} 원</strong></li>
-							<c:if test="${not empty customerPaymentAvg}">
-						<li>실제 이용자 평균 금액: <strong>${customerPaymentAvg} 원</strong></li>						
+						<c:if test="${not empty customerPaymentAvg}">
+							<li>실제 이용자 평균 금액: <strong>${customerPaymentAvg} 원</strong></li>
 						</c:if>
 						<li>전화번호: <strong>${cafeteria.cafePhoneNumber}</strong></li>
 						<li>주소: <strong>${cafeteria.cafeAddress}</strong></li>
@@ -143,19 +134,35 @@
 				<p>이곳은 맛집에 대한 간단한 설명을 보여줍니다.</p>
 				<p>상 호 명 : ${cafeteria.cafeName}</p>
 				<p>영업 시간 : ${cafeteria.cafeOpenTime}</p>
-				<p>가게 유형 :
-				<c:forEach var="category" items="${cafeCategoryList}">
+				<p>
+					가게 유형 :
+					<c:forEach var="category" items="${cafeCategoryList}">
 					${category.categoryName } 
 				</c:forEach>
 				</p>
-				<p>가게 태그 :
-				<c:forEach var="cafetag" items="${cafeTagList}">
+				<p>
+					가게 태그 :
+					<c:forEach var="cafetag" items="${cafeTagList}">
 					${cafetag.cafeTag }
 				</c:forEach>
-				
+
 				</p>
 
 			</div>
+
+			<!-- 간단한 메뉴 소개 -->
+			<div class="store-description">
+				<h2>메뉴</h2>
+				<c:forEach var="menu" items="${menuList}">
+					<img src="${menu.menuNamepic }" style="width: 150px; height: 150px">
+
+					<p>메뉴명 : ${menu.menuName}</p>
+					<p>가격 : ${menu.menuPrice}</p>
+					<p>메뉴 소개 : ${menu.menuExplain }</p>
+				</c:forEach>
+
+			</div>
+
 		</section>
 
 		<!-- 추가된 리뷰 섹션 -->
@@ -170,11 +177,10 @@
 							</c:if>
 						</div>
 						<p>
-						<strong>평점: ${review.cafeScore} </strong>
-							<div class="star-rating">
-							<div class="star-rating-filled"
-								style="width: calc(${review.cafeScore} * 20%)"></div>
-							</div>
+							<strong>평점: ${review.cafeScore} </strong>
+						<div class="star-rating">
+							<div class="star-rating-filled" style="width: calc(${review.cafeScore} * 20%)"></div>
+						</div>
 						</p>
 						<p>
 							<strong>리뷰 내용:</strong> ${review.cafeComment}

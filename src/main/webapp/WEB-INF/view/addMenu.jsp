@@ -65,18 +65,20 @@
 		<div class="menu-container">
 			<div class="column">
 				<div class="image-display">
+            <input type="hidden" id="menuCount" name="menuCount" value="1"> <!-- 숨겨진 필드로 태그 카운트 저장 -->
+             <input type="hidden" id="cafeOwner" name="cafeOwner" value="${cafeOwner}" />   
 
 					<input type="hidden" id="cafeNum" name="cafeNum" value="1">
-					<input type="text" id="menuName" name="menuName" placeholder="메뉴명 입력">
-					<input type="text" id="menuPrice" name="menuPrice" placeholder="메뉴 금액 입력">
+					<input type="text" id="menuName1" name="menuName1" placeholder="메뉴명 입력">
+					<input type="text" id="menuPrice1" name="menuPrice1" placeholder="메뉴 금액 입력">
 					<!-- 이미지 업로드 입력 -->
 
 					<h2>메뉴 사진을 선택해 주세요.</h2>
-					<img id="imagePreview" class="uploaded-image" name="menuInputpic" alt="이미지 미리보기">
-					<input type="file" id="menuInputpic" name="menuInputpic" accept="image/*">
-					<input type="hidden" id="menuNamepic" name="menuNamepic">
+					<img id="imagePreview1" class="uploaded-image" name="menuInputpic1" alt="이미지 미리보기">
+					<input type="file" id="menuInputpic1" name="menuInputpic1" accept="image/*">
+					<input type="hidden" id="menuNamepic1" name="menuNamepic1">
 					<!-- Base64 인코딩된 이미지 저장 -->
-					<input type="text" placeholder="메뉴 설명을 입력해 주세요" name="menuExplain" id="menuExplain">
+					<input type="text" placeholder="메뉴 설명을 입력해 주세요" name="menuExplain1" id="menuExplain1">
 				</div>
 			</div>
 		</div>
