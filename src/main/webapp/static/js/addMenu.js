@@ -81,6 +81,7 @@ function addMenu(e) {
 		.then((response) => {
 			if (response.ok) {
 				alert("메뉴가 성공적으로 저장되었습니다!");
+				location.href="/mainpage";
 			} else {
 				alert("메뉴 저장에 실패했습니다.");
 			}
