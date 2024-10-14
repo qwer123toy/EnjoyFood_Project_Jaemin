@@ -2,7 +2,9 @@ package main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cafeteria.CafePic;
+import cafeteria.CafeTag;
 import cafeteria.Cafeteria;
 import cafeteria.CafeteriaService;
 import cafeteria.CafeteriaServiceImple;
@@ -70,13 +73,14 @@ public class MainServlet extends HttpServlet {
 	private void initCafeteriaList(HttpServletRequest req) {
 		// Cafeteria와 CafePic 리스트 가져오기
 		List<Cafeteria> list = service.selectAll();
-		List<CafePic> cafePicList = service.selectCafePicAll();
 
 		// Cafeteria와 CafePic 리스트 병합
 		List<CafeteriaWithPicDTO> mergedList = mergeCafeteriaAndPic(list);
 
 		// 병합된 리스트를 JSP로 전달
 		req.setAttribute("mergedList", mergedList);
+
+		initTags(req, list);
 	}
 
 	private void initSearchQuery(HttpServletRequest req) {
@@ -101,6 +105,8 @@ public class MainServlet extends HttpServlet {
 
 		// 검색 결과를 JSP로 전달
 		req.setAttribute("mergedList", mergedList);
+
+		initTags(req, searchResults);
 	}
 
 	// Cafeteria와 CafePic을 병합하는 메서드
@@ -114,6 +120,20 @@ public class MainServlet extends HttpServlet {
 		}
 
 		return mergedList;
+	}
+
+	private void initTags(HttpServletRequest req, List<Cafeteria> searchResults) {
+		// 카페에 대한 태그를 저장할 리스트
+		Map<Integer, List<CafeTag>> cafeTagsMap = new HashMap<>();
+
+		// 각 카페에 대해 태그를 조회
+		for (Cafeteria cafeteria : searchResults) {
+			List<CafeTag> tags = service.selectCafeTag(cafeteria.getCafeNum());
+			cafeTagsMap.put(cafeteria.getCafeNum(), tags);
+		}
+
+		// 태그 정보를 요청 속성으로 설정
+		req.setAttribute("cafeTagsMap", cafeTagsMap);
 	}
 
 }

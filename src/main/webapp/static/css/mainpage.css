@@ -27,10 +27,13 @@
 .store-list {
 	display: flex; /* flexbox로 레이아웃 설정 */
 	flex-wrap: wrap; /* 넘치면 자동으로 다음 줄로 넘어감 */
-	margin-left: 300px; /* 사이드바와 겹치지 않도록 왼쪽 여백 설정 */
-	margin-right: 300px; /* 사이드바와 겹치지 않도록 오른쪽 여백 설정 */
+	margin-left: auto; /* 사이드바와 겹치지 않도록 왼쪽 여백 설정 */
+	margin-right: auto; /* 사이드바와 겹치지 않도록 오른쪽 여백 설정 */
+	min-width: 910px; max-width : 910px;
+	justify-content: flex-start;
 	padding: 20px; /* 내부 여백 설정 */
-	gap: 20px; /* 아이템 간격 설정 */
+	gap: 20px;
+	max-width: 910px; /* 아이템 간격 설정 */
 }
 
 .store-item {
@@ -41,7 +44,7 @@
 	text-align: center; /* 텍스트 중앙 정렬 */
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
 	transition: transform 0.3s ease; /* 호버 시 애니메이션 설정 */
-	width: calc(45% - 40px); /* 한 줄에 3개의 아이템이 들어가도록 너비 계산 (마진 포함) */
+	width: 230px;
 }
 
 .store-item:hover {

@@ -22,7 +22,7 @@
 	<jsp:include page="/WEB-INF/module/header.jsp"></jsp:include>
 
 	<!-- 왼쪽 고정 바 -->
-<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
+	<%-- 	<jsp:include page="/WEB-INF/module/sidebar.jsp"></jsp:include> --%>
 
 	<!-- 메인 컨텐츠 -->
 	<main>
@@ -53,7 +53,7 @@
 						href="cafeteria?cafeNum=${cafeteriaWithPic.cafeteria.cafeNum}&cafeName=${cafeteriaWithPic.cafeteria.cafeName}">
 						<c:forEach var="pic" items="${cafeteriaWithPic.cafePics}">
 							<img src="${pic.cafePic}" alt="Cafeteria Picture"
-								style="width: 250px; height: 120px;">
+								style="width: 230px; height: 150px;">
 						</c:forEach>
 					</a>
 					<ul>
@@ -61,6 +61,18 @@
 						<li>평균 금액: ${cafeteriaWithPic.cafeteria.cafePrice} 원</li>
 						<li>전화번호: ${cafeteriaWithPic.cafeteria.cafePhoneNumber}</li>
 						<li>주소: ${cafeteriaWithPic.cafeteria.cafeAddress}</li>
+						<li><c:choose>
+								<c:when
+									test="${not empty cafeTagsMap[cafeteriaWithPic.cafeteria.cafeNum]}">
+									<c:forEach var="tag"
+										items="${cafeTagsMap[cafeteriaWithPic.cafeteria.cafeNum]}">
+										# ${tag.cafeTag}
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									없음
+								</c:otherwise>
+							</c:choose></li>
 					</ul>
 				</div>
 			</c:forEach>
