@@ -17,8 +17,11 @@
 ---
 
 ## 기능 설명
-[메인페이지](src/main/java/kr/co/greenart/java/main/controller)
-[메인페이지](src/main/java/kr/co/greenart/web)
+[메인페이지](src/main/java/main/controller)
+ - 초기화면 페이지 및 각 페이지 별 서블릿 연결
+ -  
+[유저페이지](src/main/java/user)
+ - 
 
 <p align="center">
   <h2>Built With</h2>
