@@ -17,6 +17,9 @@
 
 ## 기능 설명
 [메인 서블릿](src/main/java/main/controller)
+<a href="src/main/java/main/controller">
+  <img src="https://flat.badgen.net/badge/%EB%A7%81%ED%81%AC/%EC%9D%B4%EB%8F%99/">
+</a>
  - 초기화면 페이지 및 각 페이지 별 서블릿 연결
  - 애플리케이션 전체 설정 관리
    
