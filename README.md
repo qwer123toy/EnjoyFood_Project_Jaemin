@@ -20,7 +20,7 @@
 <p align="left">
   <a href="#what-is">What is?</a>  <br>
   <a href="#key-features">Key Features</a> <br>
-  <a href="#how-to-use--development-setup">How To Use</a> <br>
+  <a href="#development-setup--database-design">Development Setup</a> <br>
   <a href="#repository-structure">Repository Structure</a> <br>
   <a href="#authors">Authors</a>
 </p>
@@ -50,19 +50,14 @@
  - 리뷰에 따른 평점 변경
 
 [페이지 화면 구성](src/main/webapp/WEB-INF/views)
-
  - 페이지별 구성된 화면 모음
    
 [페이지 화면 구성(모듈)](src/main/webapp/WEB-INF/module)
  - 가게 페이지 부분 중 모듈화 된 부분
- - heaer와 footer를 통해 
+ - header 부분을 모든 검색 페이지에서 나타내기 위해 모듈화
 
 [페이지 화면 관리](src/main/webapp/static)
  - 페이지 별 css, js 관리
- - 
-<a href="src/main/webapp/static">
-  <img src="https://flat.badgen.net/badge/%EB%A7%81%ED%81%AC/%EC%9D%B4%EB%8F%99/">
-</a>
 
 ## What is
 
@@ -103,33 +98,35 @@
 | **OwnerPageServlet**    | 사업주로 등록된 사용자가 가게 정보를 등록하고 DB에 저장 <br> - 페이지에서 가게 정보를 입력하고 전송. GET 요청으로 카테고리 목록과 소유자 ID를 제공하며, POST 요청에서는 JSON 데이터를 읽고 가게 정보, 태그, 이미지를 데이터베이스에 저장                |
 | **AdminServlet**               | 관리자가 가입된 사용자들의 정보와 사업자등록증 등 확인 및 제재 가능 <br> DB에서 사용자 리스트를 조회하여 가져오며, 사업주의 경우 사업자등록증 확인 가능. 아이디별로 활성화/비활성화 가능                                                        |
 
-## How To Use / Development setup
+## Development setup / Database Design
 
-* 사용 환경과 사용법 설명
-* 또는 개발을 위한 개발환경 구축 설명하기
+* 본 프로젝트는 사용자들이 다양한 맛집 정보를 쉽게 검색하고 이용할 수 있도록 설계된 웹 사이트
+* 이를 통해 사용자는 다양한 카페와 음식점 정보를 직관적으로 탐색하고, 리뷰를 통해 다른 사용자와 경험을 공유할 수 있는 플랫폼을 목표로 하여 개발
 
-> To clone and run this application,
-> you'll need [Git](https://git-scm.com)
-> and [download Maven](https://maven.apache.org/download.cgi)
-> Maven is a Java tool, so you must have Java installed in order to proceed. Set the JAVA_HOME environment variable pointing to your JDK installation or have the java executable on your PATH.
->
-> From your command line:
+* **프로젝트 구조**
+  - 이 웹 어플리케이션은 Maven을 기반으로 구성되었으며, 서블릿과 JSP를 활용하여 동적인 웹사이트를 구현
+  - 다양한 라이브러리(JSTL, DBCP2, Lombok, MyBatis, JSON 등)를 통해 기능을 확장하고 데이터 처리를 최적화. 특히, MyBatis를 사용하여 SQL 쿼리와 객체 지향 프로그래밍의 통합을 용이하게 하였고, DBCP2를 통해 데이터베이스 연결 풀링을 적용하여 성능 개선
+  - 본 프로젝트는 팀 프로젝트로 진행되었으며, 각 팀원들은 맡은 역할에 따라 분담하여 효율적인 작업 분배와 전문성 확보
 
-```bash
-# Clone this repository
-$ git clone https://github.com/username/app-repository
+* **개발 과정**
+  - 초기 단계에서는 홈페이지의 기본 기능을 설계하였고, 이를 바탕으로 유스케이스 다이어그램과 데이터베이스 스키마를 작성하여 사용자 요구사항을 명확히 반영할 수 있도록 준비
+  - Git을 통해 지속적인 병합 및 역할 분담을 관리하며, 코드 변경 사항을 체계적으로 관리하여 팀원 간의 원활한 협업 진행
+  - 예외 처리 및 유효성 검사를 철저히 실시하여 최대한 오류를 줄이는 데 집중하였음
 
-# Go into the repository
-$ cd app-repository
+* **내 역할**
+  - JSP, CSS, JS, 서블릿을 이용하여 전체 페이지 레이아웃 구축. 사용자 친화적인 인터페이스 구현을 위해 사용자 경험을 고려하여 레이아웃과 디자인 세심하게 조정
+  - 데이터베이스 연결 및 검색 기능 구현하여 사용자가 필요한 정보를 신속하게 찾을 수 있도록 함. 이를 위해 SQL 쿼리를 최적화하고, MyBatis 활용하여 데이터 처리를 효율적으로 진행
+  - 카페의 세부 페이지 개발하며, 카카오 API 연동하여 사용자가 실제 위치를 확인할 수 있도록 지도 기능 추가. 이로 인해 사용자에게 보다 직관적이고 실용적인 정보 제공
+  - 사용자 리뷰에 따른 평점 변화 기능 구현하여 사용자가 다른 사용자의 평가를 쉽게 확인할 수 있도록 함. 이를 통해 플랫폼의 신뢰성 증대
 
-# Install dependencies
-$ maven package
+본 프로젝트는 사용자 친화적인 플랫폼 개발을 목표로 하여, 다양한 맛집 정보를 효과적으로 제공하고 사용자 간의 소통 촉진에 중점을 둠. 앞으로도 지속적인 기능 개선과 사용자 피드백 반영을 통해 더 나은 서비스 제공을 계획.
 
-# Run the app
-$ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
-```
+<br>
 
-> **Note** > [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or use OpenJDK.
+> **DB 설계**
+> 
+> ![image](https://github.com/user-attachments/assets/fd987022-10ad-4bc3-b789-a96cc839d7db)
+<br>
 
 ## Repository Structure
 
@@ -187,12 +184,6 @@ $ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
   <h2>Built With</h2>
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
-
-
-## Download
-
-* 릴리즈 링크 있으면 첨부 가능
-* [download]() the latest installable version of for Windows, macOS and Linux.
 
 ## ToDo
 
