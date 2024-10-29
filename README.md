@@ -1,7 +1,9 @@
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/af9d5e29-3cc0-4eff-8108-264a710483c9" width="600" height="300">
+<img src="https://github.com/user-attachments/assets/4f7ef988-02be-4410-acf4-1d1dd6c8423b">
 </div>
+
+
 <h1 align="center">
   맛GPT
 </h1>
@@ -30,8 +32,6 @@
  - 건의사항 작성 및 관리
  - 사용자 인증 및 세션 관리
 
-
-   
 [지도 서블릿](src/main/java/enjoyfood)
  - 지도 페이지
  - 카카오 맵 API를 사용하기 위한 맵 관리 페이지
@@ -57,23 +57,12 @@
   <h2>Built With</h2>
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
-  
-  <p>위와 같은 배지로 표현할 수도 있어요. 아래 링크로 스태틱 배지를 활용해보세요</p>
-</p>
-<a href="https://flat.badgen.net">
-  <img src="https://flat.badgen.net/badge/%EB%A7%81%ED%81%AC/%EC%9D%B4%EB%8F%99/">
-</a>
-<a href="https://shields.io/badges/static-badge">
-  <img alt="Static Badge" src="https://img.shields.io/badge/%EB%A7%81%ED%81%AC-%EC%9D%B4%EB%8F%99-red">
-</a>
-
-[![링크 - 클릭](https://img.shields.io/badge/링크-클릭-2ea44f)](https://michaelcurrin.github.io/badge-generator/#/generic)
-[![링크](https://img.shields.io/badge/%EB%A7%81%ED%81%AC-%ED%81%B4%EB%A6%AD-green?style=flat)](https://badgesgenerator.com/)
 
 ## Contents
 
 <p align="center">hash fragment를 활용한 이동 링크 예시</p>
 <p align="center">
+  <a href="#what-is?">What is?</a> |
   <a href="#key-features">Key Features</a> |
   <a href="#how-to-use--development-setup">How To Use</a> |
   <a href="#authors">Authors</a>
