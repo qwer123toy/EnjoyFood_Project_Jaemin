@@ -17,6 +17,18 @@
 
 ---
 
+## Contents
+
+<p align="left">목차</p>
+<p align="left">
+  <a href="#what-is">What is?</a>  <br>
+  <a href="#key-features">Key Features</a> <br>
+  <a href="#how-to-use--development-setup">How To Use</a> <br>
+  <a href="#authors">Authors</a>
+</p>
+<br>
+
+
 ## 기능 설명
 [메인 서블릿](src/main/java/main/controller)
 <a href="src/main/java/main/controller">
@@ -58,17 +70,9 @@
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
 
-## Contents
 
-<p align="center">hash fragment를 활용한 이동 링크 예시</p>
-<p align="center">
-  <a href="#what-is?">What is?</a> |
-  <a href="#key-features">Key Features</a> |
-  <a href="#how-to-use--development-setup">How To Use</a> |
-  <a href="#authors">Authors</a>
-</p>
 
-## What is?
+## What is
 
 1. 개요 및 목적
 
