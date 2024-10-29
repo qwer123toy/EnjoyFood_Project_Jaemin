@@ -1,19 +1,24 @@
-<img src="https://github.com/SYacuCLoud/Readme-Template/assets/4344575/1eb2b764-a426-4792-a08c-9589fc58e9a7" width="400">
-<img src="https://github.com/SYacuCLoud/Readme-Template/assets/4344575/09eff249-5268-4599-bf5c-0db5f9df2f06" width="400">
+
+<div align="center">
+<img src="https://github.com/user-attachments/assets/af9d5e29-3cc0-4eff-8108-264a710483c9" width="500" height="300">
+<img src="https://github.com/user-attachments/assets/811ca5cf-448b-40da-8935-07f0505c3902"  width="500" height="300">
+</div>
 <h1 align="center">
   맛GPT
 </h1>
 <p align="center">맛집 소개 사이트</p>
-<p align="center">직접 마크업(HTML 사용가능), 마크다운을 작성하거나</p>
-<p align="center">(1. Github 활용 2. VS Code와 preview 확장 활용)</p>
-<br>
-<p align="center">또는 생성기를 활용한 방법도 있답니다 =>
+<p align="center">기본적인 맛집 소개 사이트의 기능과 <br>
+  예산에 따라 맛집을 조회할 수 있는 기능을 제공하여 <br>
+  사용자가 예산 내에서 최적의 맛집을 찾을 수 있는 사이트</p>
+<p align="center">
   <a href="https://github.com/kefranabg/readme-md-generator">생성기로 이동 (npm 필요)</a>
 </p>
 
 ---
+
 ## 기능 설명
-[링크 텍스트 스프링부트 어노테이션 설명](src/main/java/kr/co/greenart/web)
+[메인페이지](src/main/java/kr/co/greenart/java/main/controller)
+[메인페이지](src/main/java/kr/co/greenart/web)
 
 <p align="center">
   <h2>Built With</h2>
