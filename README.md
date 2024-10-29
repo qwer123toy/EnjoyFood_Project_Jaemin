@@ -1,7 +1,6 @@
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/af9d5e29-3cc0-4eff-8108-264a710483c9" width="500" height="300">
-<img src="https://github.com/user-attachments/assets/811ca5cf-448b-40da-8935-07f0505c3902"  width="500" height="300">
+<img src="https://github.com/user-attachments/assets/af9d5e29-3cc0-4eff-8108-264a710483c9" width="600" height="300">
 </div>
 <h1 align="center">
   맛GPT
@@ -17,12 +16,40 @@
 ---
 
 ## 기능 설명
-[메인페이지](src/main/java/main/controller)
+[메인 서블릿](src/main/java/main/controller)
  - 초기화면 페이지 및 각 페이지 별 서블릿 연결
- -  
-[유저페이지](src/main/java/user)
+ - 애플리케이션 전체 설정 관리
+   
+[유저 관리 서블릿](src/main/java/user)
+ - 유저 관리 페이지
+ - 회원가입과 예외처리, 유효성 확인
+ - 로그인 및 일반회원, 사업주, 관리자 구분
+ - 건의사항 작성 및 관리
+ - 사용자 인증 및 세션 관리
+
+
+   
+[지도 서블릿](src/main/java/enjoyfood)
+ - 지도 페이지
+ - 카카오 맵 API를 사용하기 위한 맵 관리 페이지
  - 
 
+[가게관리 서블릿](src/main/java/cafeteria)
+ - 가게 정보 등록
+ - 가게의 메뉴 관리 및 리뷰 확인
+ - 리뷰에 따른 평점 변경
+
+[페이지 화면 구성](src/main/webapp/WEB-INF/views)
+ - 페이지별 구성된 화면 모음
+ - 
+   
+[페이지 화면 구성(모듈)](src/main/webapp/WEB-INF/module)
+ - 가게
+ - asd
+
+[페이지 화면 관리](src/main/webapp/static)
+ - 페이지 별 css, js 관리
+ - 
 <p align="center">
   <h2>Built With</h2>
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
