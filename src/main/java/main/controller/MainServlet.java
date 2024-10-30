@@ -24,117 +24,151 @@ import user.model.User;
 import user.model.UserService;
 import user.model.UserServiceImpl;
 
-//devU01TX0FVVEgyMDI0MTAxNDEyMDk1ODExNTE1Mjg=
 @WebServlet("/mainpage")
 @Slf4j
 public class MainServlet extends HttpServlet {
-	private CafeteriaService service = CafeteriaServiceImple.getInstance();
-	private final UserService userService = UserServiceImpl.getInstance();
+    // Cafeteria와 User 서비스를 초기화
+    private final CafeteriaService service = CafeteriaServiceImple.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// action 파라미터로 로그아웃 요청 확인
-		String action = req.getParameter("action");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // "action" 파라미터를 통해 로그아웃 요청을 확인
+        String action = req.getParameter("action");
 
-		// 로그아웃 처리
-		if ("logout".equals(action)) {
-			handleLogout(req, resp);
-			return;
-		}
-		initUserAttributes(req);
+        // 로그아웃 요청이 있으면 해당 메서드로 이동
+        if ("logout".equals(action)) {
+            handleLogout(req, resp);
+            return;
+        }
 
-		initCafeteriaList(req); // Cafeteria와 CafePic 리스트를 병합하여 설정
-		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
-	}
+        // 사용자의 세션 정보와 페이지 속성 초기화
+        initUserAttributes(req);
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		initUserAttributes(req);
+        // 모든 식당 목록과 이미지를 합친 DTO 리스트 생성 후 설정
+        initCafeteriaList(req);
 
-		initSearchQuery(req); // 검색 쿼리 처리 후 병합된 리스트를 JSP로 전달
-		req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
-	}
+        // mainpage.jsp로 포워딩하여 데이터를 전달
+        req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
+    }
 
-	private void initUserAttributes(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		String userSessionID = (String) session.getAttribute("userID");
-		String userID = (String) req.getAttribute("userID");
-		if (userSessionID != null) {
-			User user = (User) userService.userInfo(userSessionID);
-			req.setAttribute("userType", user.getUserType());
-		}
-		req.setAttribute("userID", userID);
-	}
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 사용자 정보를 초기화하고 설정
+        initUserAttributes(req);
 
-	private void handleLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		req.getSession().invalidate(); // 세션 무효화
-		resp.sendRedirect("mainpage"); // 로그인 페이지로 리다이렉트
-	}
+        // 검색 쿼리를 초기화하고 결과를 병합하여 설정
+        initSearchQuery(req);
 
-	private void initCafeteriaList(HttpServletRequest req) {
-		// Cafeteria와 CafePic 리스트 가져오기
-		List<Cafeteria> list = service.selectAll();
+        // mainpage.jsp로 포워딩하여 데이터를 전달
+        req.getRequestDispatcher("/WEB-INF/view/mainpage.jsp").forward(req, resp);
+    }
 
-		// Cafeteria와 CafePic 리스트 병합
-		List<CafeteriaWithPicDTO> mergedList = mergeCafeteriaAndPic(list);
+    /**
+     * 사용자의 세션 정보 및 속성을 초기화합니다. 세션에 있는 userID를 통해 
+     * 사용자 정보를 가져오고 요청에 속성으로 userType을 추가하여 설정합니다.
+     */
+    private void initUserAttributes(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String userSessionID = (String) session.getAttribute("userID");
+        String userID = (String) req.getAttribute("userID");
 
-		// 병합된 리스트를 JSP로 전달
-		req.setAttribute("mergedList", mergedList);
+        if (userSessionID != null) {
+            // 세션에 userID가 존재하면 UserService에서 사용자 정보 가져옴
+            User user = userService.userInfo(userSessionID);
+            req.setAttribute("userType", user.getUserType()); // userType 속성 설정
+        }
+        req.setAttribute("userID", userID); // userID 속성 설정
+    }
 
-		initTags(req, list);
-	}
+    /**
+     * 로그아웃 요청을 처리하는 메서드로, 세션을 무효화하여 모든 세션 속성을 삭제하고 
+     * 메인 페이지로 리다이렉트합니다.
+     */
+    private void handleLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getSession().invalidate(); // 세션 무효화
+        resp.sendRedirect("mainpage"); // 메인 페이지로 리다이렉트
+    }
 
-	private void initSearchQuery(HttpServletRequest req) {
-		String searchQuery = req.getParameter("searchQuery");
-		log.info("검색어: " + searchQuery);
+    /**
+     * 모든 식당 목록을 가져와 Cafeteria와 CafePic을 병합한 DTO 리스트를 초기화하고 
+     * 요청 속성에 설정합니다.
+     */
+    private void initCafeteriaList(HttpServletRequest req) {
+        List<Cafeteria> list = service.selectAll(); // 모든 식당 리스트 가져오기
 
-		List<Cafeteria> searchResults;
+        // Cafeteria와 CafePic 리스트 병합
+        List<CafeteriaWithPicDTO> mergedList = mergeCafeteriaAndPic(list);
 
-		// 검색어가 있는 경우 검색 실행
-		if (searchQuery != null && !searchQuery.trim().isEmpty()) {
-			searchResults = service.searchByAll(searchQuery, searchQuery, searchQuery, searchQuery, searchQuery);
-		} else {
-			searchResults = service.selectAll();
-		}
+        // 병합된 리스트를 요청 속성에 설정하여 JSP로 전달
+        req.setAttribute("mergedList", mergedList);
 
-		// Cafeteria 결과에 맞는 CafePic 리스트를 개별적으로 가져오기
-		List<CafeteriaWithPicDTO> mergedList = new ArrayList<>();
-		for (Cafeteria cafeteria : searchResults) {
-			List<CafePic> cafePicList = service.selectPicsByCafeNum(cafeteria.getCafeNum());
-			mergedList.add(new CafeteriaWithPicDTO(cafeteria, cafePicList));
-		}
+        // 태그 정보 초기화 및 설정
+        initTags(req, list);
+    }
 
-		// 검색 결과를 JSP로 전달
-		req.setAttribute("mergedList", mergedList);
+    /**
+     * 검색 쿼리를 초기화하고 검색된 Cafeteria와 CafePic을 병합하여 
+     * 요청 속성으로 설정합니다.
+     */
+    private void initSearchQuery(HttpServletRequest req) {
+        String searchQuery = req.getParameter("searchQuery");
+        log.info("검색어: " + searchQuery);
 
-		initTags(req, searchResults);
-	}
+        List<Cafeteria> searchResults;
 
-	// Cafeteria와 CafePic을 병합하는 메서드
-	private List<CafeteriaWithPicDTO> mergeCafeteriaAndPic(List<Cafeteria> cafeteriaList) {
-		List<CafeteriaWithPicDTO> mergedList = new ArrayList<>();
+        // 검색어가 존재할 경우 검색 실행, 없으면 전체 목록을 반환
+        if (searchQuery != null && !searchQuery.trim().isEmpty()) {
+            searchResults = service.searchByAll(searchQuery, searchQuery, searchQuery, searchQuery, searchQuery);
+        } else {
+            searchResults = service.selectAll(); // 검색어가 없으면 전체 목록 반환
+        }
 
-		for (Cafeteria cafeteria : cafeteriaList) {
-			// 해당 Cafeteria에 대한 모든 CafePic을 가져옴
-			List<CafePic> cafePics = service.selectPicsByCafeNum(cafeteria.getCafeNum());
-			mergedList.add(new CafeteriaWithPicDTO(cafeteria, cafePics));
-		}
+        // 검색된 Cafeteria 결과에 맞는 CafePic 리스트와 병합
+        List<CafeteriaWithPicDTO> mergedList = new ArrayList<>();
+        for (Cafeteria cafeteria : searchResults) {
+            List<CafePic> cafePicList = service.selectPicsByCafeNum(cafeteria.getCafeNum());
+            mergedList.add(new CafeteriaWithPicDTO(cafeteria, cafePicList));
+        }
 
-		return mergedList;
-	}
+        // 병합된 리스트를 요청 속성으로 설정하여 JSP로 전달
+        req.setAttribute("mergedList", mergedList);
 
-	private void initTags(HttpServletRequest req, List<Cafeteria> searchResults) {
-		// 카페에 대한 태그를 저장할 리스트
-		Map<Integer, List<CafeTag>> cafeTagsMap = new HashMap<>();
+        // 태그 정보 초기화
+        initTags(req, searchResults);
+    }
 
-		// 각 카페에 대해 태그를 조회
-		for (Cafeteria cafeteria : searchResults) {
-			List<CafeTag> tags = service.selectCafeTag(cafeteria.getCafeNum());
-			cafeTagsMap.put(cafeteria.getCafeNum(), tags);
-		}
+    /**
+     * 주어진 Cafeteria 리스트와 각 Cafeteria의 CafePic 리스트를 병합하여 
+     * CafeteriaWithPicDTO 리스트로 반환합니다.
+     */
+    private List<CafeteriaWithPicDTO> mergeCafeteriaAndPic(List<Cafeteria> cafeteriaList) {
+        List<CafeteriaWithPicDTO> mergedList = new ArrayList<>();
 
-		// 태그 정보를 요청 속성으로 설정
-		req.setAttribute("cafeTagsMap", cafeTagsMap);
-	}
+        // 각 Cafeteria에 대해 CafePic 리스트를 가져와 DTO 리스트에 추가
+        for (Cafeteria cafeteria : cafeteriaList) {
+            List<CafePic> cafePics = service.selectPicsByCafeNum(cafeteria.getCafeNum());
+            mergedList.add(new CafeteriaWithPicDTO(cafeteria, cafePics));
+        }
+
+        return mergedList;
+    }
+
+    /**
+     * Cafeteria의 태그 정보를 초기화하고 각 Cafeteria의 ID별로 리스트를 생성하여 
+     * 요청 속성으로 설정합니다.
+     */
+    private void initTags(HttpServletRequest req, List<Cafeteria> searchResults) {
+        Map<Integer, List<CafeTag>> cafeTagsMap = new HashMap<>(); // 카페별 태그를 저장할 맵 생성
+
+        // 각 Cafeteria에 대해 태그 리스트 가져와 맵에 추가
+        for (Cafeteria cafeteria : searchResults) {
+            List<CafeTag> tags = service.selectCafeTag(cafeteria.getCafeNum());
+            cafeTagsMap.put(cafeteria.getCafeNum(), tags);
+        }
+
+        // 태그 맵을 요청 속성으로 설정하여 JSP로 전달
+        req.setAttribute("cafeTagsMap", cafeTagsMap);
+    }
 
 }
