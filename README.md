@@ -50,7 +50,7 @@
  - 가게의 메뉴 관리 및 리뷰 확인
  - 리뷰에 따른 평점 변경
 
-[페이지 화면 구성](src/main/webapp/WEB-INF/views)
+[페이지 화면 구성](src/main/webapp/WEB-INF/view)
  - 페이지별 구성된 화면 모음
    
 [페이지 화면 구성(모듈)](src/main/webapp/WEB-INF/module)
