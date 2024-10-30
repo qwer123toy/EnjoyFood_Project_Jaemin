@@ -1,23 +1,28 @@
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/af9d5e29-3cc0-4eff-8108-264a710483c9" width="600" height="300">
+<img src="https://github.com/user-attachments/assets/f55a3a05-7254-4463-9fc1-21ece90625b6">
+
 </div>
 <h1 align="center">
-  맛GPT
+  MainController
 </h1>
-<p align="center">맛집 관리 서블릿 </p>
-<p align="center">기본적인 맛집 소개 사이트의 기능과 <br>
-  예산에 따라 맛집을 조회할 수 있는 기능을 제공하여 <br>
-  사용자가 예산 내에서 최적의 맛집을 찾을 수 있는 사이트</p>
+<p align="center">맛집 등록, 검색/정보 관리/관리자 페이지 서블릿 </p>
+<p align="center">회원의 맛집 등록과 정보 저장, 검색, 관리자 페이지 등의 <br>
+  데이터를 관리하고 DB에 저장하여 사용자에게 보여주는 서블릿</p>
 
----
+--- 
 
-## 기능 설명
-[메인 서블릿](src/main/java/main/controller)
+## 클래스 설명
+[MainServlet.java](src/main/java/main/controller/MainServlet.java)
  - 초기화면 페이지 및 각 페이지 별 서블릿 연결
  - 애플리케이션 전체 설정 관리
 
-   
+[AddMenuServlet.java](src/main/java/main/controller/AddMenuServlet.java)
+   - 유저로부터 메뉴 데이터를 받아 카페 번호를 확인한 뒤, 해당 카페에 여러 메뉴를 등록하는 작업을 처리
+   - 메뉴 데이터는 JSON 형식으로 전달되며, 각 메뉴 정보는 별도로 추출 및 삽입
+   -  메뉴 삽입 작업은 데이터베이스에 저장
+
+     
 <a href="https://flat.badgen.net">
   <img src="https://flat.badgen.net/badge/%EB%A7%81%ED%81%AC/%EC%9D%B4%EB%8F%99/">
 </a>
