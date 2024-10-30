@@ -13,11 +13,11 @@
 --- 
 
 ## 클래스 설명
-[MainServlet.java](src/main/java/main/controller/MainServlet.java)
+[MainServlet.java](MainServlet.java)
  - 초기화면 페이지 및 각 페이지 별 서블릿 연결
  - 애플리케이션 전체 설정 관리
 
-[AddMenuServlet.java](src/main/java/main/controller/AddMenuServlet.java)
+[AddMenuServlet.java](AddMenuServlet.java)
    - 유저로부터 메뉴 데이터를 받아 카페 번호를 확인한 뒤, 해당 카페에 여러 메뉴를 등록하는 작업을 처리
    - 메뉴 데이터는 JSON 형식으로 전달되며, 각 메뉴 정보는 별도로 추출 및 삽입
    -  메뉴 삽입 작업은 데이터베이스에 저장
