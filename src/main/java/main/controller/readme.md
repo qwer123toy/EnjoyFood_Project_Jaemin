@@ -12,58 +12,80 @@
 
 --- 
 
+## Contents
+
+<p align="center">목 차</p>
+<p align="center">
+  <a href="#클래스-설명">클래스 설명</a> |
+  <a href="#주요-코드">주요 코드</a> |
+  <a href="#how-to-use--development-setup">How To Use</a> |
+  <a href="#authors">Authors</a>
+</p>
+
+---
+
 ## 클래스 설명
 [MainServlet.java](MainServlet.java)
  - 초기화면 페이지 및 각 페이지 별 서블릿 연결
  - 애플리케이션 전체 설정 관리
+
+[SearchCateServlet.java](SearchCateServlet.java)
+   - 사용자와 카페의 정보를 초기화하고, 카테고리와 가격 조건에 맞는 카페 리스트를 검색하여 JSP 페이지로 전달
+   - 검색된 카페에 대한 사진 및 태그 정보를 병합하여 결과를 제공
+
+[searchAreaServlet.java](searchAreaServlet.java)
+   - 요청된 지역에 맞는 카페 목록을 검색하고, 해당 카페와 관련된 이미지 정보를 병합하여 JSON 형식으로 응답
+   - 응답 상태 코드를 설정하여 성공 또는 실패를 클라이언트에 전달
+
+[CafeDetailsServlet.java](CafeDetailsServlet.java)
+   -  특정 카페의 세부 정보를 조회하여, 가게 정보, 메뉴 목록, 리뷰, 평균 평점, 카테고리, 태그 및 이미지를 JSP에 전달
+   -  사용자 세션에서 정보를 가져와 사용자의 타입을 설정하며, 예외 발생 시 에러 페이지로 포워딩
+
+[OwnerPage_basic.java](OwnerPage_basic.java)
+   - 가게 소유자가 자신의 페이지에서 가게 정보를 입력하고 전송
+   - GET 요청으로 카테고리 목록과 소유자 ID를 제공
+   - POST 요청에서는 JSON 데이터를 읽고 가게 정보, 태그, 이미지를 데이터베이스에 저장
 
 [AddMenuServlet.java](AddMenuServlet.java)
    - 유저로부터 메뉴 데이터를 받아 카페 번호를 확인한 뒤, 해당 카페에 여러 메뉴를 등록하는 작업을 처리
    - 메뉴 데이터는 JSON 형식으로 전달되며, 각 메뉴 정보는 별도로 추출 및 삽입
    -  메뉴 삽입 작업은 데이터베이스에 저장
 
-     
-<a href="https://flat.badgen.net">
-  <img src="https://flat.badgen.net/badge/%EB%A7%81%ED%81%AC/%EC%9D%B4%EB%8F%99/">
-</a>
-<a href="https://shields.io/badges/static-badge">
-  <img alt="Static Badge" src="https://img.shields.io/badge/%EB%A7%81%ED%81%AC-%EC%9D%B4%EB%8F%99-red">
-</a>
+[AdminServlet.java](AdminServlet.java)
+   - 모든 사용자 리스트를 가져와 admin-users.jsp에 전달
+   - 사용자가 입력한 ID로 검색하여 사용자 활성화 상태를 업데이트한 후, 최신 사용자 리스트를 admin-users.jsp로 전달
 
-[![링크 - 클릭](https://img.shields.io/badge/링크-클릭-2ea44f)](https://michaelcurrin.github.io/badge-generator/#/generic)
-[![링크](https://img.shields.io/badge/%EB%A7%81%ED%81%AC-%ED%81%B4%EB%A6%AD-green?style=flat)](https://badgesgenerator.com/)
+[CafeReviewServlet.java](CafeReviewServlet.java)
+   - 사용자 세션을 확인하여 특정 카페의 메뉴 및 리뷰 정보를 조회하고, 로그인한 사용자만 리뷰를 작성할 수 있도록 처리
+   - doGet 메서드는 메뉴 리스트와 사용자 정보를 조회
+   - doPost 메서드는 리뷰 데이터를 데이터베이스에 저장하는 기능을 수행
 
-## Contents
+[SuggestionServlet.java](SuggestionServlet.java)
+   - 사용자 제안 페이지로 이동하고 제안 내용을 처리
+   - doGet 메서드는 건의사항 페이지로 포워딩
+   - doPost 메서드는 로그인한 사용자의 건의사항을 데이터베이스에 저장하고, 성공 여부에 따라 메인 페이지 또는 건의사항 페이지로 리다이렉트
 
-<p align="center">hash fragment를 활용한 이동 링크 예시</p>
-<p align="center">
-  <a href="#key-features">Key Features</a> |
-  <a href="#how-to-use--development-setup">How To Use</a> |
-  <a href="#authors">Authors</a>
-</p>
+[UserPictureServlet.java](UserPictureServlet.java)
+   - 사용자 ID로 검색된 사용자의 프로필 이미지를 가져와 반환
+   - doGet 메서드는 요청된 사용자의 Base64 인코딩된 이미지를 디코딩하여 JPEG 형식으로 출력 스트림에 전달
 
-## What is?
+## 주요 코드
 
-1. 개요 및 목적
-
-  • 개요 : 맛집 정보를 제공하는 웹사이트로, 기존 맛집 소개 사이트와 유사한 기능을 제공하면서도 차별화된 기능을 추가하고자 함
-
-  • 목적 :
-
-   - 주요 목표는 예산에 따라 맛집을 조회할 수 있는 기능을 제공하여 사용자가 예산 내에서 최적의 맛집을 찾을 수 있도록 돕는 것
-   - 예를 들어, 커플이 5만 원의 예산으로 데이트를 하고 싶을 때, 1인당 평균 25,000원의 비용이 드는 맛집을 검색할 수 있는 기능을 구현
+1. ㄻㄴ
 
 
-2. 프로젝트 배경 및 적용 기술
 
- • 핵심 가치와 비즈니스적 영향 : 예산별 검색 기능은 기존 맛집 사이트에서 제공하지 않는 독창적인 기능으로, 사용자 경험을 향상시키고 사용자 맞춤형 검색 결과를 제공함으로써 차별화된 가치를 제공
+2. ㅁㄴㅇ
 
-  • 사용자 및 사용 환경 : 사용자는 연령, 취향, 예산에 따라 다를 수 있으며, 주로 데이트나 가족 모임 등 특정 상황에 맞는 맛집 검색이 필요
+3. ㅁㄴㅇ
 
-  • 기존 시스템의 문제점 및 새로운 시스템의 차별점 : 기존 맛집 사이트는 지역별, 음식 종류별 검색에 중점을 두었지만, 예산에 맞는 추천 기능이 잘 없어, 사용자의 예산 범위 내에서 최적의 맛집을 추천하는 기능을 추가
+4. ㅁㄴㅇ
 
-  • JSP와 서블릿을 사용하여 동적인 웹 페이지를 구현하고, 카카오 맵 API를 활용하여 지도를 연동하였으며, Git을 통해 협업 및 버전 관리 수행
-  
+5. ㅁㄴㅇ
+
+
+6. ㅁㄴㅇ
+
 ## Key Features
 
 - 핵심 기능 서술하기 위해 텍스트, 하이퍼링크와 스크린샷, 도표 등을 첨부해주세요.
@@ -77,64 +99,8 @@
 
 > 도표 생성 문법이 어렵다면 생성기를 활용하세요 => [MD Table Generator](https://www.tablesgenerator.com/markdown_tables)
 
-## How To Use / Development setup
 
-* 사용 환경과 사용법 설명
-* 또는 개발을 위한 개발환경 구축 설명하기
 
-> To clone and run this application,
-> you'll need [Git](https://git-scm.com)
-> and [download Maven](https://maven.apache.org/download.cgi)
-> Maven is a Java tool, so you must have Java installed in order to proceed. Set the JAVA_HOME environment variable pointing to your JDK installation or have the java executable on your PATH.
->
-> From your command line:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/username/app-repository
-
-# Go into the repository
-$ cd app-repository
-
-# Install dependencies
-$ maven package
-
-# Run the app
-$ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
-```
-
-> **Note** > [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or use OpenJDK.
-
-## Repository Structure
-
-```sh
-└──Project
-    ├─README.md
-    ├─.gitignore
-    ├─src
-    │  ├─main
-    │  │  ├─java
-    │  │  │  ├─...
-    │  │  │  └─packages
-    │  │  ├─resource
-    │  │  └─webapp
-    │  │      ├─META-INF
-    │  │      ├─static
-    │  │      └─WEB-INF
-    │  │          ├─lib
-    │  │          └─views
-    │  └─test
-    │      └─java
-    └─pom.xml
-```
-
-- 위와 같은 폴더 구조 텍스트는 => [폴더 트리 구조 생성 사이트](https://ascii-tree-generator.com/) 를 활용하거나
-- 또는 윈도우 환경에서는 _`cmd /c tree`_ 명령어를 해당 폴더에서 실행해보세요
-
-## Download
-
-* 릴리즈 링크 있으면 첨부 가능
-* [download]() the latest installable version of for Windows, macOS and Linux.
 
 ## ToDo
 
@@ -155,16 +121,3 @@ $ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
   </dl>
 </details>
     
-## Authors
-
-* GitHub [@깃허브 프로필 페이지](https://github.com/SYacuCLoud) | Twitter [@SNS 등](https://twitter.com/)
-
-> 다음과 같은 profile을 사용하고자 한다면 아래 링크들을 활용해보세요
->
-> [GitHub stats](https://github.com/anuraghazra/github-readme-stats)
->
-> [Profile generator](https://gprm.itsvg.in/)
-
-[![GitHub stats](https://github-readme-stats.vercel.app/api?username=SYacuCLoud)](https://github.com/SYacuCLoud)
-
-
