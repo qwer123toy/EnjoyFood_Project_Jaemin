@@ -15,9 +15,9 @@
 ## Contents
 
 <p align="center">목 차</p>
-<p align="center">
-  <a href="#클래스-설명">클래스 설명</a> |
-  <a href="#주요-코드">주요 코드</a> |
+<p align="left">
+  <a href="#클래스-설명">클래스 설명</a> <br>
+  <a href="#주요-코드">주요 코드</a> 
 </p>
 
 ---
