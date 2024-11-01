@@ -158,16 +158,6 @@
   │  │  │  ├─ WEB-INF/
   │  │  │  │  ├─ module/
   │  │  │  │  ├─ view/
-  ├─ java/
-  │  │  │  ├─ main/
-  │  │  │  │  ├─ controller/
-  │  │  │  ├─ cafeteria/
-  │  │  │  ├─ config/
-  │  │  │  ├─ enjoyfood/
-  │  │  │  ├─ user/
-  │  │  │  │  ├─ controller/
-  │  │  │  │  ├─ model/
-  │  │  │  │  ├─ suggestion/
   ├─ webapp/
   │  │  │  ├─ META-INF/
   │  │  │  ├─ popup/
