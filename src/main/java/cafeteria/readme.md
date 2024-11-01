@@ -138,7 +138,16 @@ public static String getCafeByPriceAndTags(@Param("cafePrice") int cafePrice,
  -  카페에 대한 카테고리와 태그 정보를 처리하며, 최대 5개의 태그만 유지하여 삽입
  -  응답 코드와 메시지를 설정하여 클라이언트에 결과를 반환
 ```
+@Override
+	public List<Cafeteria> getCafeByPriceAndTags(int cafePrice, List<String> cafetags) {
+		try (SqlSession sqlSession = AppContextListener.getSqlSession()) {
+			CafeteriaDynamicMapper mapper = sqlSession.getMapper(CafeteriaDynamicMapper.class);
 
+			List<Cafeteria> resultList = mapper.getCafeByPriceAndTags(cafePrice, cafetags);
+
+			return resultList;
+		}
+	}
 ```
 <br>
 
