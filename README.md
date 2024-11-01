@@ -186,15 +186,7 @@
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
 
-## ToDo
 
--   로드맵 서술. 체크 박스 등 활용
-
-*   [x] Add Changelog
-*   [x] Add back to top links
-*   [ ] Multi-language Support
-    -   [ ] English
-  
 ## Authors
 > 프로필 
 >
