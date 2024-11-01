@@ -125,8 +125,9 @@
 <br>
 
 > **DB 설계**
-> 
-> ![image](https://github.com/user-attachments/assets/fd987022-10ad-4bc3-b789-a96cc839d7db)
+>
+> ![image](https://github.com/user-attachments/assets/9f9682cc-ba05-46ec-83e4-f85d2f6e8510)
+
 <br>
 
 ## Repository Structure
