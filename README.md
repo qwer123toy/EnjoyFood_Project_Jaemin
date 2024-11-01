@@ -41,14 +41,14 @@
  - 건의사항 작성 및 관리
  - 사용자 인증 및 세션 관리
 
-[지도 서블릿](src/main/java/enjoyfood)
- - 지도 페이지
- - 카카오 맵 API를 사용하기 위한 맵 관리 페이지
-
 [가게관리 서블릿](src/main/java/cafeteria)
  - 가게 정보 등록
  - 가게의 메뉴 관리 및 리뷰 확인
  - 리뷰에 따른 평점 변경
+
+[지도 서블릿](src/main/java/enjoyfood)
+ - 지도 페이지
+ - 카카오 맵 API를 사용하기 위한 맵 관리 페이지
 
 [페이지 화면 구성](src/main/webapp/WEB-INF/view)
  - 페이지별 구성된 화면 모음
