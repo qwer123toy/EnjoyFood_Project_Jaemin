@@ -39,25 +39,25 @@
 
 | 클래스명                | 설명                                                                                                                                                       |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[User.java](/model/User.java)**     |    ● 유저 데이터를 선언하는 클래스 <br> -  DB와 동일한 필드값을 보유한 유저 클래스                          |
-| **[UserMapper.java](UserMapper.java)**           |    ● 사용자 데이터베이스에 접근하여 CRUD와 관련된 다양한 쿼리를 실행하는 인터페이스 <br> -  MyBatis를 사용하여 사용자 정보 조회, 생성, 수정, 삭제 작업을 수행하는 메서드를 정의 <br> - 각 메서드는 특정 SQL 쿼리를 실행하여 User 객체를 반환하거나 영향을 받은 행 수를 리턴                                                 |
-| **[UserService.java](UserService.java)**      |   ● 사용자 정보에 대한 로직을 처리하고, 데이터베이스와의 연동을 위해 UserMapper를 호출하는 메서드를 정의 <br> - 로그인, 회원가입, 중복 확인, 사용자 정보 조회 및 수정 등 사용자 관련 기능을 제공 <br> - UserMapper 메서드를 활용하여 데이터베이스와 상호작용하며, 사용자 데이터의 비즈니스 로직을 구현하는 역할      |
-| **[UserServiceImpl.java](UserServiceImpl.java)**        |   ● UserService 인터페이스의 메서드를 구현하여 사용자 데이터와 관련된 비즈니스 로직을 수행하고, UserMapper와의 상호작용을 통해 데이터베이스 작업을 처리 <br> - 로그인, 회원가입, 중복 확인, 사용자 정보 수정 등 사용자와 관련된 기능을 구현하여 사용자 정보의 검증과 암호화를 포함한 비즈니스 로직을 관리 <br> -  각 메서드는 SqlSession을 통해 UserMapper를 호출하고 데이터베이스에 쿼리를 실행하며, 필요 시 세션을 커밋하여 변경 사항을 반영    |
-| **[UserValidator.java](UserValidator.java)**    |    ●  <br> -  <br> -      |
-| **[AuthRequest.java](AuthRequest.java)**               |   ●  <br> -  <br> -      |
-| **[AuthResponse.java](AuthResponse.java)**               |   ●  <br> -  <br> -      |
-| **[PasswordEncryption.java](PasswordEncryption.java)**               |   ●  <br> -  <br> -      |
+| **[User.java](model/User.java)**     |    ● 유저 데이터를 선언하는 클래스 <br> -  DB와 동일한 필드값을 보유한 유저 클래스                          |
+| **[UserMapper.java](model/UserMapper.java)**           |    ● 사용자 데이터베이스에 접근하여 CRUD와 관련된 다양한 쿼리를 실행하는 인터페이스 <br> -  MyBatis를 사용하여 사용자 정보 조회, 생성, 수정, 삭제 작업을 수행하는 메서드를 정의 <br> - 각 메서드는 특정 SQL 쿼리를 실행하여 User 객체를 반환하거나 영향을 받은 행 수를 리턴                                                 |
+| **[UserService.java](model/UserService.java)**      |   ● 사용자 정보에 대한 로직을 처리하고, 데이터베이스와의 연동을 위해 UserMapper를 호출하는 메서드를 정의 <br> - 로그인, 회원가입, 중복 확인, 사용자 정보 조회 및 수정 등 사용자 관련 기능을 제공 <br> - UserMapper 메서드를 활용하여 데이터베이스와 상호작용하며, 사용자 데이터의 비즈니스 로직을 구현하는 역할      |
+| **[UserServiceImpl.java](model/UserServiceImpl.java)**        |   ● UserService 인터페이스의 메서드를 구현하여 사용자 데이터와 관련된 비즈니스 로직을 수행하고, UserMapper와의 상호작용을 통해 데이터베이스 작업을 처리 <br> - 로그인, 회원가입, 중복 확인, 사용자 정보 수정 등 사용자와 관련된 기능을 구현하여 사용자 정보의 검증과 암호화를 포함한 비즈니스 로직을 관리 <br> -  각 메서드는 SqlSession을 통해 UserMapper를 호출하고 데이터베이스에 쿼리를 실행하며, 필요 시 세션을 커밋하여 변경 사항을 반영    |
+| **[UserValidator.java](model/UserValidator.java)**    |    ● User 객체의 필드 유효성을 검사하는 메서드를 제공하여 사용자 입력의 형식적 유효성을 확인 <br> -  ID, 비밀번호, 닉네임, 전화번호, 사업자 번호 등의 유효성을 개별 메서드로 검사하고, 모든 검사 결과를 종합하여 오류 또는 유효성 메시지를 반환  <br> - 각 유효성 검사는 정규 표현식이나 조건을 사용하며, 비밀번호는 대소문자, 숫자, 특수문자의 포함 여부를 기준으로 확인     |
+| **[AuthRequest.java](model/AuthRequest.java)**               |   ● 사용자 인증 요청에 필요한 데이터를 캡슐화 <br> - 특정 인증 요청의 동작을 정의     |
+| **[AuthResponse.java](model/AuthResponse.java)**               |   ● 사용자 인증 요청의 결과를 전달하는 응답 정보를 포함 <br> - 인증 성공 여부를 나타내는 success 필드와 관련 메시지를 포함    |
+| **[PasswordEncryption.java](model/PasswordEncryption.java)**               |   ● 주어진 비밀번호를 SHA-256 해시 함수로 암호화하는 기능을 제공 <br> - encryptPassword 메서드는 비밀번호를 SHA-256으로 해시한 후, 결과를 16진수 문자열로 변환하여 반환   |
 <br>
 
 ### Suggestion
 
 | 클래스명                | 설명                                                                                                                                                       |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[UserServiceImpl.java](UserServiceImpl.java)**        |   ●  <br> -  <br> -      |
-| **[UserValidator.java](UserValidator.java)**    |    ●  <br> -  <br> -      |
-| **[AuthRequest.java](AuthRequest.java)**               |   ●  <br> -  <br> -      |
-| **[AuthResponse.java](AuthResponse.java)**               |   ●  <br> -  <br> -      |
-| **[PasswordEncryption.java](PasswordEncryption.java)**               |   ●  <br> -  <br> -      |
+| **[Suggestion.java](suggestion/Suggestion.java)**        |   ● 사용자 제안의 정보를 나타내는 데이터 모델로, 제안 ID, 사용자 ID, 제목, 제안 내용, 처리 상태 및 업로드 시간을 포함   |
+| **[SuggestionMapper.java](suggestion/SuggestionMapper.java)**    |    ● 사용자의 제안을 데이터베이스에 접근하기 위한 MyBatis 매퍼로, 제안 조회, 추가, 업데이트 기능을 제공하는 인터페이스 <br> - SQL 쿼리를 사용하여 user_suggestion 테이블의 모든 건의사항 조회, 추가, 상태 전환 메서드를 정의      |
+| **[SuggestionService.java](suggestion/SuggestionService.java)**               |   ● 사용자 제안에 대한 서비스 레이어로, 제안의 추가, 조회, 및 상태 업데이트 기능을 제공 <br> - 제안 데이터를 추가하는 insert 메서드, 모든 제안을 조회하는 select 메서드, 그리고 특정 제안의 처리 상태를 업데이트하는 updateSuggestionStatus 메서드를 정의      |
+| **[SuggestionServiceImpl.java](suggestion/SuggestionServiceImpl.java)**               |   ●  SuggestionService 인터페이스를 구현하여 사용자 건의사항의 추가, 조회 및 상태 업데이트 기능을 제공 <br> - 싱글톤 패턴을 사용하여 인스턴스를 관리하며, insert 메서드는 건의사항을 데이터베이스에 추가하고, 조회, 삽입, 수정 진행   |
+| **[SuggestionsServlet.java](suggestion/SuggestionsServlet.java)**               |   ● 사용자 건의사항을 조회하고 처리 상태를 업데이트하는 서블릿 <br> - 데이터베이스에서 모든 제안 목록을 조회하여 JSP 페이지로 전달하고, 제출된 요청을 기반으로 각 제안의 활성화 상태를 업데이트한 후 업데이트된 목록을 JSP 페이지에 다시 전달     |
 <br>
 
 ## 주요 코드
