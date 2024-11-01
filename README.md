@@ -134,41 +134,31 @@
 
 ```sh
 └──EnjoyFood_Project/
-  ├─README.md
-  ├─.gitignore
+  ├─ README.md
+  ├─ .gitignore
   ├─ pom.xml/
-  ├─ src/
-  │  ├─ main/
-  │  │  ├─ java/
-  │  │  │  ├─ main/
-  │  │  │  │  ├─ controller/
-  │  │  │  ├─ cafeteria/
-  │  │  │  ├─ config/
-  │  │  │  ├─ enjoyfood/
-  │  │  │  ├─ user/
-  │  │  │  │  ├─ controller/
-  │  │  │  │  ├─ model/
-  │  │  │  │  ├─ suggestion/
-  │  │  ├─ webapp/
-  │  │  │  ├─ META-INF/
-  │  │  │  ├─ popup/
-  │  │  │  ├─ static/
-  │  │  │  │  ├─ css/
-  │  │  │  │  ├─ ico/
-  │  │  │  │  ├─ js/
-  │  │  │  ├─ WEB-INF/
-  │  │  │  │  ├─ module/
-  │  │  │  │  ├─ view/
-  ├─ webapp/
-  │  │  │  ├─ META-INF/
-  │  │  │  ├─ popup/
-  │  │  │  ├─ static/
-  │  │  │  │  ├─ css/
-  │  │  │  │  ├─ ico/
-  │  │  │  │  ├─ js/
-  │  │  │  ├─ WEB-INF/
-  │  │  │  │  ├─ module/
-  │  │  │  │  ├─ view/
+  └─ src/
+     ├─ main/
+     ├─ java/
+     │  ├─ main/
+     │  │  └─ controller/
+     │  ├─ cafeteria/
+     │  ├─ config/
+     │  ├─ enjoyfood/
+     │  └─ user/
+     │     ├─ controller/
+     │     ├─ model/
+     │     └─ suggestion/
+     └─ webapp/
+        ├─ META-INF/
+        ├─ popup/
+        ├─ static/
+        │  ├─ css/
+        │  ├─ ico/
+        │  └─ js/
+        └─ WEB-INF/
+           ├─ module/
+           └─ view/
 
 ```
 
